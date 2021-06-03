@@ -90,6 +90,24 @@ public class EtudiantService {
      return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
     }
 
+    public int getLastIndex(){
+        int index = 0;
+
+        String SQL = "SELECT MAX(idproduit) FROM produit" ;
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)){
+            rs.next();
+            index = rs.getInt(1);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return index+1;
+    }
+
     public void insertEtudiantDB(Etudiant etudiant){
         String SQL = "INSERT INTO client(cip, courriel, nom, adresse, prenom, id_fonction)" + " VALUES(?,?,?,?,?,?)" ;
 
@@ -143,11 +161,13 @@ public class EtudiantService {
         int visibilite = parseInt(visibiliteS);
         int etat = parseInt(etatS);
 
+        int index = getLastIndex();
+
         try (Connection conn = connect();
              PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, nom);
-            stmt.setInt(2, 2);
+            stmt.setInt(2, index);
             stmt.setString(3, description);
             stmt.setInt(4, prix);
             stmt.setString(5, taille);
