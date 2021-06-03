@@ -145,6 +145,25 @@ public class EtudiantService {
         }
     }
 
+
+    @GET
+    @Path("remove_admin")
+    public void removeAdminDB(){
+        String SQL = "UPDATE client " + "SET id_fonction = 2" + "WHERE cip = ?";
+
+        String cip = httpServletRequest.getParameter("cip");
+
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setString(2, cip);
+
+            stmt.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
     @GET
     @Path("insert_produit")
     public void insertProduitDB() {
@@ -174,6 +193,31 @@ public class EtudiantService {
             stmt.setString(6, couleur);
             stmt.setInt(7, visibilite);
             stmt.setInt(8, etat);
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @GET
+    @Path("remove_produit")
+    public void removeProduitDB() {
+        String SQL = "DELETE FROM produit(nomitem, idproduit, description, prix, taille, couleur, visibilite_site, id_etat)" + " VALUES(?,?,?,?,?,?,?,?)";
+
+        String nom = httpServletRequest.getParameter("nom");
+        String taille = httpServletRequest.getParameter("taille");
+        String couleur = httpServletRequest.getParameter("couleur");
+
+        int index = getLastIndex();
+
+        try (Connection conn = connect();
+             PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, nom);
+            stmt.setInt(2, index);
+            stmt.setString(5, taille);
+            stmt.setString(6, couleur);
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
