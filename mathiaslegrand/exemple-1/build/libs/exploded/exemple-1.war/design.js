@@ -94,9 +94,7 @@ webix.ready(function(){
 								const xhr = new XMLHttpRequest();
 								xhr.open('GET','http://localhost:8080/exemple-1/api/insert_etudiant');
 								xhr.send();
-								xhr.onload = () => {
-									console.log(xhr.response);
-								};
+								
 
 							}
 

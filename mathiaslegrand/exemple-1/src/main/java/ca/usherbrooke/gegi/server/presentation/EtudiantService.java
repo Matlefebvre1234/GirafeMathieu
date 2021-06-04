@@ -7,10 +7,7 @@ import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericType;
@@ -23,6 +20,11 @@ import java.util.Map;
 
 import static java.lang.Integer.parseInt;
 
+
+
+
+
+
 @Path("")
 public class EtudiantService {
 
@@ -31,6 +33,9 @@ public class EtudiantService {
 
     @Inject
     EtudiantMapper etudiantMapper;
+
+
+
 
     @GET
     @Path("etudiant")
@@ -73,6 +78,7 @@ public class EtudiantService {
     @Produces("application/json")
     public Etudiant insertEtudiant() {
 
+        System.out.println("mathias");
         Principal principal = httpServletRequest.getUserPrincipal();
         Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
         Etudiant etudiant = new Etudiant();
@@ -82,6 +88,7 @@ public class EtudiantService {
         etudiant.setCourriel((String)details.get("courriel"));
 
         insertEtudiantDB(etudiant);
+
 
         return etudiant;
     }
@@ -107,6 +114,7 @@ public class EtudiantService {
 
         return index+1;
     }
+
 
     public void insertEtudiantDB(Etudiant etudiant){
         String SQL = "INSERT INTO client(cip, courriel, nom, adresse, prenom, id_fonction)" + " VALUES(?,?,?,?,?,?)" ;
