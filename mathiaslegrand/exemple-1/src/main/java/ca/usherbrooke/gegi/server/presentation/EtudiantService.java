@@ -78,7 +78,7 @@ public class EtudiantService {
     @Produces("application/json")
     public Etudiant insertEtudiant() {
 
-        System.out.println("mathias");
+        System.out.println("Mathias");
         Principal principal = httpServletRequest.getUserPrincipal();
         Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
         Etudiant etudiant = new Etudiant();

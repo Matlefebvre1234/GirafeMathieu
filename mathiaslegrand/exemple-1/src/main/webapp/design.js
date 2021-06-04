@@ -88,15 +88,27 @@ webix.ready(function(){
 							"height": 106,
 							click: function (){
 
+								//get des infos
 
-								console.log("adawdawdawd")
+								/*const xhr = new XMLHttpRequest();
+								xhr.open('GET','http://localhost:8080/exemple-1/api/test/get');
+								xhr.send();
+								xhr.onload = () => {
+									console.log(xhr.response);*/
+								//};
+
+								//send info
 
 								const xhr = new XMLHttpRequest();
-								xhr.open('GET','http://localhost:8080/exemple-1/api/insert_etudiant');
-								xhr.send();
+								xhr.open('POST','http://localhost:8080/exemple-1/api/test/post');
+								let data = {cip:'lefm1509',nom:'Mathieu'};
+								xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+								let datatexte = "cip="+data.cip+"&nom="+data.nom
+								xhr.send(datatexte);
 								xhr.onload = () => {
 									console.log(xhr.response);
 								};
+
 
 							}
 

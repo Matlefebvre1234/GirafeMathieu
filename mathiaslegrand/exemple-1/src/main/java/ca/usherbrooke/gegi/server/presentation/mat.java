@@ -1,21 +1,29 @@
 package ca.usherbrooke.gegi.server.presentation;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.Response;
 
 @Path("/test")
 public class mat extends Application {
 
     //localhost:8080/exemple-1/api/test/salut
     @GET
-    @Path("/salut")
-    public String test()
+    @Path("/get")
+    public String testget()
     {
         System.out.println("tamere");
         return "salut";
+    }
+
+    @POST
+    @Path("/post")
+    public void testPost(@FormParam("cip") String cip, @FormParam("nom") String nom)
+    {
+        System.out.println(cip);
+        System.out.println(nom);
+
+
     }
 
 
