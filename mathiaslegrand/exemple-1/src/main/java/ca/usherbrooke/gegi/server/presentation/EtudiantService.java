@@ -7,10 +7,7 @@ import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericType;
@@ -23,6 +20,11 @@ import java.util.Map;
 
 import static java.lang.Integer.parseInt;
 
+
+
+
+
+
 @Path("")
 public class EtudiantService {
 
@@ -31,6 +33,9 @@ public class EtudiantService {
 
     @Inject
     EtudiantMapper etudiantMapper;
+
+
+
 
     @GET
     @Path("etudiant")
@@ -72,7 +77,6 @@ public class EtudiantService {
     @Path("insert_etudiant")
     @Produces("application/json")
     public Etudiant insertEtudiant() {
-
         Principal principal = httpServletRequest.getUserPrincipal();
         Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
         Etudiant etudiant = new Etudiant();
@@ -82,6 +86,7 @@ public class EtudiantService {
         etudiant.setCourriel((String)details.get("courriel"));
 
         insertEtudiantDB(etudiant);
+
 
         return etudiant;
     }
@@ -108,11 +113,12 @@ public class EtudiantService {
         return index+1;
     }
 
+
     public void insertEtudiantDB(Etudiant etudiant){
         String SQL = "INSERT INTO client(cip, courriel, nom, adresse, prenom, id_fonction)" + " VALUES(?,?,?,?,?,?)" ;
 
         try(Connection conn = connect();
-            PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)){
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
 
             stmt.setString(1, etudiant.getCip());
             stmt.setString(2, etudiant.getCourriel());
@@ -127,12 +133,10 @@ public class EtudiantService {
         }
     }
 
-    @GET
+    @POST
     @Path("insert_admin")
-    public void insertAdminDB(){
+    public void insertAdminDB(@FormParam("cip") String cip){
         String SQL = "UPDATE client " + "SET id_fonction = 1" + "WHERE cip = ?";
-
-        String cip = httpServletRequest.getParameter("cip");
 
         try(Connection conn = connect();
             PreparedStatement stmt = conn.prepareStatement(SQL)){
@@ -166,19 +170,8 @@ public class EtudiantService {
 
     @GET
     @Path("insert_produit")
-    public void insertProduitDB() {
+    public void insertProduitDB(@FormParam("nom") String nom, @FormParam("description") String description, @FormParam("taille") String taille, @FormParam("prix") float prix, @FormParam("couleur") String couleur, @FormParam("visibilite") int visibilite, @FormParam("etat") int etat) {
         String SQL = "INSERT INTO produit(nomitem, idproduit, description, prix, taille, couleur, visibilite_site, id_etat)" + " VALUES(?,?,?,?,?,?,?,?)";
-
-        String nom = httpServletRequest.getParameter("nom");
-        String description = httpServletRequest.getParameter("description");
-        String prixS = httpServletRequest.getParameter("prix");
-        String taille = httpServletRequest.getParameter("taille");
-        String couleur = httpServletRequest.getParameter("couleur");
-        String visibiliteS = httpServletRequest.getParameter("visibilite");
-        String etatS = httpServletRequest.getParameter("etat");
-        int prix = parseInt(prixS);
-        int visibilite = parseInt(visibiliteS);
-        int etat = parseInt(etatS);
 
         int index = getLastIndex();
 
@@ -188,7 +181,7 @@ public class EtudiantService {
             stmt.setString(1, nom);
             stmt.setInt(2, index);
             stmt.setString(3, description);
-            stmt.setInt(4, prix);
+            stmt.setFloat(4, prix);
             stmt.setString(5, taille);
             stmt.setString(6, couleur);
             stmt.setInt(7, visibilite);
