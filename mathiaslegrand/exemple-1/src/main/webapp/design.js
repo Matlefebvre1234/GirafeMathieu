@@ -18,10 +18,22 @@ webix.ready(function(){
 				{ css: "image",  template:img, data:{src:"https://drive.google.com/uc?export=view&id=1JLcyOWfbtUFUMPBedtEcO9nw0wAn87A1"} }
 			]},
 			{
-				view:"button",
-				type: "image",
-				image: { css: "image", template:img, data:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"} },
-				label: "Image Button"
+				view:"dataview",
+				id:"dataview1",
+				height:120,
+				xCount:2,
+				select:true,
+				type: {
+					height: 60,
+					width:"auto"
+				},
+				template:"<div class='webix_strong'>#title#</div> #image#  Year: #year#, rank: #rank#",
+				data:[
+					{ id:1, title:"Tuque", image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}, year:1994, votes:678790, rating:9.2, rank:1},
+					{ id:2, title:"The Godfather",  image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"},year:1972, votes:511495, rating:9.2, rank:2},
+					{ id:3, title:"The Godfather: Part II",   image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}, year:1974, votes:319352, rating:9.0, rank:3},
+					{ id:4, title:"The Good, the Bad and the Ugly",  image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}, year:1966, votes:213030, rating:8.9, rank:4}
+				]
 			}
 		]
 	});
