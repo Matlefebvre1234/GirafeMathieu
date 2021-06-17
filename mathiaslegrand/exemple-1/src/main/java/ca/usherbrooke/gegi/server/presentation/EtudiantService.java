@@ -113,6 +113,24 @@ public class EtudiantService {
         return index+1;
     }
 
+    public int getLastIndexPhoto(){
+        int index = 0;
+
+        String SQL = "SELECT MAX(id_photo) FROM produit_photo" ;
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)){
+            rs.next();
+            index = rs.getInt(1);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return index+1;
+
+    }
 
     public void insertEtudiantDB(Etudiant etudiant){
         String SQL = "INSERT INTO client(cip, courriel, nom, adresse, prenom, id_fonction)" + " VALUES(?,?,?,?,?,?)" ;
@@ -149,7 +167,6 @@ public class EtudiantService {
         }
     }
 
-
     @GET
     @Path("remove_admin")
     public void removeAdminDB(){
@@ -168,9 +185,9 @@ public class EtudiantService {
         }
     }
 
-    @GET
+    @POST
     @Path("insert_produit")
-    public void insertProduitDB(@FormParam("nom") String nom, @FormParam("description") String description, @FormParam("taille") String taille, @FormParam("prix") float prix, @FormParam("couleur") String couleur, @FormParam("visibilite") int visibilite, @FormParam("etat") int etat) {
+    public void insertProduitDB(@FormParam("nom") String nom, @FormParam("description") String description, @FormParam("taille") String taille, @FormParam("prix") float prix, @FormParam("couleur") String couleur, @FormParam("visibilite") int visibilite, @FormParam("etat") int etat, @FormParam("url") String url) {
         String SQL = "INSERT INTO produit(nomitem, idproduit, description, prix, taille, couleur, visibilite_site, id_etat)" + " VALUES(?,?,?,?,?,?,?,?)";
 
         int index = getLastIndex();
@@ -191,7 +208,29 @@ public class EtudiantService {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+
+        insertImageProduitDB(url, index);
     }
+
+    @GET
+    @Path("insert_produit")
+    public void insertImageProduitDB(String url, int idProduit){
+        String SQL = "INSERT INTO produit_photo(id_photo, url, idproduit)" + " VALUES(?,?,?)";
+
+        int index = getLastIndexPhoto();
+        try (Connection conn = connect();
+             PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setInt(1, index);
+            stmt.setString(2, url);
+            stmt.setInt(3, idProduit);
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
 
     @GET
     @Path("remove_produit")
