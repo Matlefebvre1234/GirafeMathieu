@@ -1,6 +1,5 @@
 package ca.usherbrooke.gegi.server.presentation;
 
-import ca.usherbrooke.gegi.server.business.Trimestre;
 import ca.usherbrooke.gegi.server.persistence.EtudiantMapper;
 import ca.usherbrooke.gegi.server.business.Etudiant;
 import org.jasig.cas.client.authentication.AttributePrincipalImpl;
@@ -8,11 +7,7 @@ import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
-import javax.ws.rs.client.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.security.Principal;
 import java.sql.*;
 import java.util.List;
@@ -55,23 +50,7 @@ public class EtudiantService {
     }*/
 
 
-    @GET
-    @Path("insert_trimestre")
-    public void insertTrimestre() {
 
-            Client client = ClientBuilder.newClient();
-            WebTarget target = client.target("http://zeus.gel.usherbrooke.ca:8080/ms/rest/trimestre?inscription=2017-01-01");
-            Invocation.Builder  builder = target.request(MediaType.APPLICATION_JSON);
-            Response response = builder.get();
-
-            List<Trimestre> trimestres = response.readEntity(new GenericType<List<Trimestre>>(){});
-            for (Trimestre trimestre : trimestres) {
-               etudiantMapper.insertTrimestre(trimestre);
-               System.out.println(trimestre);
-            }
-
-
-    }
 
     @GET
     @Path("insert_etudiant")
@@ -168,7 +147,7 @@ public class EtudiantService {
         }
     }
 
-    @GET
+    @POST
     @Path("insert_produit")
     public void insertProduitDB(@FormParam("nom") String nom, @FormParam("description") String description, @FormParam("taille") String taille, @FormParam("prix") float prix, @FormParam("couleur") String couleur, @FormParam("visibilite") int visibilite, @FormParam("etat") int etat) {
         String SQL = "INSERT INTO produit(nomitem, idproduit, description, prix, taille, couleur, visibilite_site, id_etat)" + " VALUES(?,?,?,?,?,?,?,?)";

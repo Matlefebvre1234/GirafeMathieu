@@ -5,10 +5,10 @@ public class Produit {
     private int idproduit;
     private String description;
     private int prix;
-    private char taille;
+    private String taille;
     private String couleur;
     private int visibilite_site;
-    private String id_etat;
+    private int id_etat;
 
     public String getNomitem() {
         return nomitem;
@@ -42,11 +42,11 @@ public class Produit {
         this.prix = prix;
     }
 
-    public char getTaille() {
+    public String getTaille() {
         return taille;
     }
 
-    public void setTaille(char taille) {
+    public void setTaille(String taille) {
         this.taille = taille;
     }
 
@@ -66,11 +66,11 @@ public class Produit {
         this.visibilite_site = visibilite_site;
     }
 
-    public String getId_etat() {
+    public int getId_etat(int anInt) {
         return id_etat;
     }
 
-    public void setId_etat(String id_etat) {
+    public void setId_etat(int id_etat) {
         this.id_etat = id_etat;
     }
 }

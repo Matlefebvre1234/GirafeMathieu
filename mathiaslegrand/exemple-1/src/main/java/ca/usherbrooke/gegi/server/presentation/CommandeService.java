@@ -31,7 +31,7 @@ import java.util.ArrayList;
             return index+1;
         }
         @GET
-        @Path("/listeproduits")
+        @Path("/listecommande")
         public String listeProduits() {
             int index = 0;
             ArrayList<Commande> maliste = new ArrayList<Commande>();

@@ -33,18 +33,5 @@
     );
   </insert>
 
-    <insert id="insertTrimestre">
-    INSERT INTO app.trimestre(
-      trimestre_id,
-      trimestre,
-      debut,
-      fin,
-      inscription)
-      VALUES  (#{trimestre.trimestre_id},
-             #{trimestre.trimestre},
-             #{trimestre.debut},
-             #{trimestre.fin},
-             #{trimestre.inscription});
 
-  </insert>
 </mapper>
