@@ -47,14 +47,14 @@ public class ProduitService extends Application {
                 System.out.println(index);
             }
 
-            String sqlPhoto = "SELECT url from produit_photo , produit Where produit_photo.idproduit = produit.idproduit AND produit.idproduit = 11";
+            String sqlPhoto = "SELECT url from produit_photo , produit Where produit_photo.idproduit = produit.idproduit AND produit.idproduit = ?";
             Connection conn2= connect();
             PreparedStatement stmt2 = conn.prepareStatement(sqlPhoto);
 
             for (Produit p:maliste
                  ) {try {
 
-               // stmt2.setInt(1,p.getIdproduit());
+                stmt2.setInt(1,p.getIdproduit());
                 ResultSet rs2 = stmt2.executeQuery();
 
                 while(rs2.next())
