@@ -124,6 +124,13 @@ webix.ready(function(){
 										"height": 38
 									},
 									{
+										"label": "Url photo",
+										"view": "text",
+										name: "url",
+										id:"url",
+										"height": 38
+									},
+									{
 										"label": "Ajouter produit",
 										"view": "button",
 										"height": 38,
@@ -136,9 +143,10 @@ webix.ready(function(){
 														taille:$$("taille").getValue(),
 														couleur:$$("couleur").getValue(),
 														visibilite:$$("visibilite").getValue(),
-														etat:$$("etat").getValue()}
+														etat:$$("etat").getValue(),
+														url:$$("url").getValue()}
 											xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-											var datatexte = ('nom='+data.nom + '&description='+data.description + '&prix='+data.prix + '&taille='+data.taille + '&couleur='+data.couleur + '&visibilite='+data.visibilite + '&etat='+data.etat);
+											var datatexte = ('nom='+data.nom + '&description='+data.description + '&prix='+data.prix + '&taille='+data.taille + '&couleur='+data.couleur + '&visibilite='+data.visibilite + '&etat='+data.etat+ '&url='+data.url);
 											xhr.send(datatexte);
 											xhr.onload = () =>{
 												console.log(xhr.response);
