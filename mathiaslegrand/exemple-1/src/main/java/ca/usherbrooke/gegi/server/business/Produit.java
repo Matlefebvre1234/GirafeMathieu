@@ -1,5 +1,7 @@
 package ca.usherbrooke.gegi.server.business;
 
+import java.util.ArrayList;
+
 public class Produit {
     private String nomitem;
     private int idproduit;
@@ -9,6 +11,28 @@ public class Produit {
     private String couleur;
     private int visibilite_site;
     private int id_etat;
+    private ArrayList<String> arrayPhoto;
+
+   public Produit()
+    {
+        arrayPhoto = new ArrayList<String>();
+    }
+
+
+    public ArrayList<String> getArrayPhoto()
+    {
+        return arrayPhoto;
+    }
+
+    public void setArrayPhoto(ArrayList<String> a)
+    {
+        arrayPhoto = a;
+    }
+
+    public void addPhoto(String url)
+    {
+        arrayPhoto.add(url);
+    }
 
     public String getNomitem() {
         return nomitem;
