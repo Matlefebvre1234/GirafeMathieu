@@ -1,9 +1,29 @@
 
 webix.ready(function(){
+	//webix.html.addCss($$("agegTitre").$view, "red");
 	if (webix.CustomScroll)
 		webix.CustomScroll.init();
 	webix.ui({
+		view:"scrollview",
+		id:"scrollview",
+		scroll:"y",
+		height:"80%",
+		width:"80%",body:{
 		rows:[{
+			view: "label",
+			id: "agegTitre",
+			label : "AGEG UDES",
+			css: "red",
+			align: "center"
+			//label: "Bas De texte"
+			},
+			{
+			view: "label",
+				id:"En vedette",
+			label : "En vedette",
+			//label: "Bas De texte"
+			},
+			{
 			view:"carousel",
 			css:"webix_dark",
 			id:"carousel",
@@ -20,24 +40,35 @@ webix.ready(function(){
 			{
 				view:"dataview",
 				id:"dataview1",
-				height:120,
+				height:600,
 				xCount:2,
+				scroll: "x",
 				select:true,
 				type: {
-					height: 60,
+					height: 300,
 					width:"auto"
 				},
-				template:"<div class='webix_strong'>#title#</div> #image#  Year: #year#, rank: #rank#",
+				template:" <div class='webix_strong'>#title#</div>  Prix: #prix# $, rank: #rank# <img src= #image2# alt='allo'>",
 				data:[
-					{ id:1, title:"Tuque", image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}, year:1994, votes:678790, rating:9.2, rank:1},
-					{ id:2, title:"The Godfather",  image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"},year:1972, votes:511495, rating:9.2, rank:2},
-					{ id:3, title:"The Godfather: Part II",   image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}, year:1974, votes:319352, rating:9.0, rank:3},
-					{ id:4, title:"The Good, the Bad and the Ugly",  image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}, year:1966, votes:213030, rating:8.9, rank:4}
+					{ id:1, title:"Tuque", image2:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO",prix:1994, votes:678790, rating:9.2, rank:1},
+					{ id:2, title:"Bas",  image2:"https://drive.google.com/uc?export=view&id=1GVDq4TWYwS35es9k7IdcN4s76PV1JRE3",prix:1972, votes:511495, rating:9.2, rank:2},
+					{ id:3, title:"Chapeau", image2:"https://drive.google.com/uc?export=view&id=1GtqJ-uWW_aq8nIL6lYnLnG91PNQcwOxL", prix:1974, votes:319352, rating:9.0, rank:3},
+					{ id:4, title:"Hoodie",  image2:"https://drive.google.com/uc?export=view&id=1JLcyOWfbtUFUMPBedtEcO9nw0wAn87A1", prix:1966, votes:213030, rating:8.9, rank:4}
 				]
+			},
+			{
+				view: "label",
+				id: "Suivez-nous",
+				label : "Suivez-nous!!!",
+				//label: "Bas De texte"
 			}
 		]
+		}
 	});
 })
+
+
+
 function img(obj){
 	return '<img src="'+obj.src+'" alt="centered image" class="content"/>'
 }
