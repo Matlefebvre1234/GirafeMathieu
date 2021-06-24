@@ -1,5 +1,6 @@
 package ca.usherbrooke.gegi.server.presentation;
 
+import ca.usherbrooke.gegi.server.business.ConcreteBuilderProduit;
 import ca.usherbrooke.gegi.server.business.Etudiant;
 import ca.usherbrooke.gegi.server.business.Produit;
 
@@ -184,7 +185,7 @@ public class DataBase {
 
         public ArrayList<Produit> getListeProduit()
         {
-            int index =0;
+            ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
             ArrayList<Produit> maliste = new ArrayList<Produit>();
             String SQL = "SELECT produit.idproduit, nomitem, description, prix, taille , couleur , visibilite_site , id_etat FROM produit" ;
             try {Connection conn = connect();
@@ -193,19 +194,7 @@ public class DataBase {
 
                 while(rs.next())
                 {
-                    maliste.add(new Produit());
-                    maliste.get(index).setIdproduit(rs.getInt(1));
-                    maliste.get(index).setNomitem(rs.getString(2));
-                    maliste.get(index).setDescription(rs.getString(3));
-                    maliste.get(index).setPrix(rs.getInt(4));
-                    maliste.get(index).setTaille(rs.getString(5));
-                    maliste.get(index).setCouleur(rs.getString(6));
-                    maliste.get(index).setVisibilite_site(rs.getInt(7));
-                    maliste.get(index).getId_etat(rs.getInt(8));
-
-                    index++;
-
-                    System.out.println(index);
+                    maliste.add(builder.construireProduitInterface(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8)));
                 }
 
                 String sqlPhoto = "SELECT url from produit_photo , produit Where produit_photo.idproduit = produit.idproduit AND produit.idproduit = ?";
