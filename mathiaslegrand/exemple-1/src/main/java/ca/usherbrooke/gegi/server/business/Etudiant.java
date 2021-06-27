@@ -1,10 +1,30 @@
 package ca.usherbrooke.gegi.server.business;
 
-
+/**
+ * Etudiant peut etre un client ou un administrateur du site
+ * @author Mathieu Lefebvre
+ * @version 1.0
+ */
 public class Etudiant {
+
+    /**
+     * Cip unique de l'etudiant
+     */
     private String cip;
+
+    /**
+     * Adresse couriel de l'etudiant
+     */
     private String courriel;
+
+    /**
+     * Nom de l'etudiant
+     */
     private String nom;
+
+    /**
+     * Prenom de l'etudiant
+     */
     private String prenom;
 
     public String getCip() {

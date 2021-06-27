@@ -1,6 +1,13 @@
 package ca.usherbrooke.gegi.server.business;
 
+/**
+ * La classe contient toutes les informations pertinentes lorsqu'un client commande un produit
+ * @author Patrick Normandin
+ * @version 1.0
+ * @see Produit
+ */
 public class Item_Commander {
+
     private int id_item_commander;
     private int quantite;
     private float prixtotal;

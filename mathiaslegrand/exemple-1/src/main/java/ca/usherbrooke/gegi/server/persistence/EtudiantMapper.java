@@ -9,6 +9,9 @@ import org.mybatis.cdi.Mapper;
 
 import java.util.List;
 
+/**
+ * Sert pas a grand chose
+ */
 @SuppressWarnings("CdiManagedBeanInconsistencyInspection")
 @Mapper
 public interface EtudiantMapper {
