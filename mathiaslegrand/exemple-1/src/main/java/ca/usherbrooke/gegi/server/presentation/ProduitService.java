@@ -9,6 +9,12 @@ import javax.ws.rs.core.Application;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Contient toutes les methodes pouvant etre appelees dans le frontend qui ont rapport aux produits
+ * @author Mathieu Lefebvre
+ * @version 1.0
+ * @see DataBase
+ */
 @Path("/produit")
 public class ProduitService extends Application {
 

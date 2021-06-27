@@ -17,10 +17,12 @@ import java.util.Map;
 import static java.lang.Integer.parseInt;
 
 
-
-
-
-
+/**
+ * Contient toutes les methodes pouvant etre appelees dans le frontend qui ont rapport aux etudiants
+ * @author Mathias Gagnon
+ * @version 1.0
+ * @see DataBase
+ */
 @Path("")
 public class EtudiantService {
 

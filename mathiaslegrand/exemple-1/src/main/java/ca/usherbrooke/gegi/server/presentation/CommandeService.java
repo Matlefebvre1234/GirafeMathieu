@@ -8,7 +8,16 @@ import java.sql.*;
 import java.util.ArrayList;
 
 
+/**
+ * Contient toutes les methodes pouvant etre appelees dans le frontend qui ont rapport aux commandes
+ * @author Patrick Normandin
+ * @version 1.0
+ * @see DataBase
+ */
 
+/**
+ * Methode qui permet d'aller chercher l'index d'identification le plus gros dans les commandes
+ */
     @Path("/commande")
     public class CommandeService {
         //localhost:8080/exemple-1/api/produit/salut
@@ -30,8 +39,13 @@ import java.util.ArrayList;
             }
             return index+1;
         }
-        @GET
-        @Path("/listecommande")
+
+    /**
+     * Methode qui permet de retourner la liste des produits contenus dans la base de donnees, ainsi que leurs informations
+     * @return liste des produits
+     */
+    @GET
+    @Path("/listecommande")
         public String listeProduits() {
             int index = 0;
             ArrayList<Commande> maliste = new ArrayList<Commande>();

@@ -2,6 +2,11 @@ package ca.usherbrooke.gegi.server.business;
 
 import java.util.ArrayList;
 
+/**
+ * La classe contient toutes les informations utiles pour instancier un produit provenant de la base de donnees
+ * @author Mathieu Lefebvre
+ * @version 1.0
+ */
 public class Produit {
     private String nomitem;
     private int idproduit;

@@ -9,6 +9,11 @@ import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Contient toutes les methodes qui communiquent avec la base de donnees
+ * @author Mathieu Lefebvre
+ * @version 1.0
+ */
 public class DataBase {
 
     private static  DataBase instance;
