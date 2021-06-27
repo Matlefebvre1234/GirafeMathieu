@@ -1,7 +1,6 @@
 package ca.usherbrooke.gegi.server.persistence;
 
 import ca.usherbrooke.gegi.server.business.Etudiant;
-
 import ca.usherbrooke.gegi.server.business.Universite;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.cdi.Mapper;
@@ -9,9 +8,6 @@ import org.mybatis.cdi.Mapper;
 
 import java.util.List;
 
-/**
- * Sert pas a grand chose
- */
 @SuppressWarnings("CdiManagedBeanInconsistencyInspection")
 @Mapper
 public interface EtudiantMapper {

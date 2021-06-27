@@ -2,7 +2,6 @@ package ca.usherbrooke.gegi.server.presentation;
 
 import ca.usherbrooke.gegi.server.business.ConcreteBuilderProduit;
 import ca.usherbrooke.gegi.server.business.Etudiant;
-import ca.usherbrooke.gegi.server.business.Item_inventaire;
 import ca.usherbrooke.gegi.server.business.Produit;
 
 import javax.ws.rs.FormParam;
@@ -19,45 +18,27 @@ public class DataBase {
 
     private static  DataBase instance;
 
-        private DataBase()
-        {
-            try {
-                connect();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-
-        }
-
-        public static DataBase getInstance()
-        {
-            if(instance == null)
-            {
-                instance = new DataBase();
-                return instance;
-            }
-            else return instance;
-        }
-
-
-    public boolean isAdmin(String cip)
+    private DataBase()
     {
-        String SQL = "SELECT id_fonction from Client WHERE cip = ?" ;
-
-        try(Connection conn = connect();
-            PreparedStatement stmt = conn.prepareStatement(SQL)){
-
-            stmt.setString(1, cip);
-            ResultSet rs2 = stmt.executeQuery();
-            rs2.next();
-            if(rs2.getInt(1) == 1)return true;
-            else return false;
-
-        } catch (SQLException ex){
-            System.out.println(ex.getMessage());
+        try {
+            connect();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        return false;
+
     }
+
+    public static DataBase getInstance()
+    {
+        if(instance == null)
+        {
+            instance = new DataBase();
+            return instance;
+        }
+        else return instance;
+    }
+
+
     public void insertEtudiantDB(Etudiant etudiant){
         String SQL = "INSERT INTO client(cip, courriel, nom, adresse, prenom, id_fonction)" + " VALUES(?,?,?,?,?,?)" ;
 
@@ -207,81 +188,51 @@ public class DataBase {
 
 
 
-
-
-    public ArrayList<Item_inventaire> getInventaire()
+    public ArrayList<Produit> getListeProduit()
     {
         ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
-        ArrayList<Item_inventaire> maliste = new ArrayList<Item_inventaire>();
-        String SQL = "SELECT produit.idproduit, nomitem, description, prix, taille , couleur , visibilite_site , id_etat,inventaire_produit.quantite FROM inventaire_produit JOIN produit ON inventaire_produit.idproduit = produit.idproduit" ;
+        ArrayList<Produit> maliste = new ArrayList<Produit>();
+        String SQL = "SELECT produit.idproduit, nomitem, description, prix, taille , couleur , visibilite_site , id_etat FROM produit" ;
         try {Connection conn = connect();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(SQL);
 
             while(rs.next())
             {
-                Produit p = builder.construireProduitInterface(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8));
-                Item_inventaire item = new Item_inventaire();
-                item.setProduit(p);
-                item.setQuantite(rs.getInt(9));
-                maliste.add(item);
+                maliste.add(builder.construireProduitInterface(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8)));
             }
 
+            String sqlPhoto = "SELECT url from produit_photo , produit Where produit_photo.idproduit = produit.idproduit AND produit.idproduit = ?";
+            Connection conn2= connect();
+            PreparedStatement stmt2 = conn.prepareStatement(sqlPhoto);
+
+            for (Produit p:maliste
+            ) {try {
+
+                stmt2.setInt(1,p.getIdproduit());
+                ResultSet rs2 = stmt2.executeQuery();
+
+                while(rs2.next())
+                {
+                    System.out.println("aawdawawdwad");
+                    System.out.println(rs2.getString(1));
+                    p.addPhoto(rs2.getString(1));
+                }
             }catch (SQLException e)
             {
                 System.out.println(e.getMessage());
             }
 
+            }
+
             return  maliste;
 
         }
-
-
-        public ArrayList<Produit> getListeProduit()
-        {
-            ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
-            ArrayList<Produit> maliste = new ArrayList<Produit>();
-            String SQL = "SELECT produit.idproduit, nomitem, description, prix, taille , couleur , visibilite_site , id_etat FROM produit" ;
-            try {Connection conn = connect();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(SQL);
-
-                while(rs.next())
-                {
-                    maliste.add(builder.construireProduitInterface(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8)));
-                }
-
-                String sqlPhoto = "SELECT url from produit_photo , produit Where produit_photo.idproduit = produit.idproduit AND produit.idproduit = ?";
-                Connection conn2= connect();
-                PreparedStatement stmt2 = conn.prepareStatement(sqlPhoto);
-
-                for (Produit p:maliste
-                ) {try {
-
-                    stmt2.setInt(1,p.getIdproduit());
-                    ResultSet rs2 = stmt2.executeQuery();
-
-                    while(rs2.next())
-                    {
-
-                        System.out.println(rs2.getString(1));
-                        p.addPhoto(rs2.getString(1));
-                    }
-                }catch (SQLException e)
-                {
-                    System.out.println(e.getMessage());
-                }
-
-                }
-
-                return  maliste;
-
-            }
-            catch(SQLException e){
-                System.out.println(e.getMessage());
-            }
-            return null;
+        catch(SQLException e){
+            System.out.println(e.getMessage());
         }
+        return null;
+    }
 
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");

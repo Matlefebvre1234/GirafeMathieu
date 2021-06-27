@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="exploded-war" name="this">
-    <output-path>$PROJECT_DIR$/out/artifacts/this</output-path>
-    <root id="root">
-      <element id="file-copy" path="$PROJECT_DIR$/build/libs/exemple-1.war" />
-    </root>
-  </artifact>
-</component>

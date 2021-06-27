@@ -4,7 +4,7 @@ package ca.usherbrooke.gegi.server.business;
  * Classe qui regroupe toutes les informations d'une commande
  * @author Patrick Normandin
  * @version 1.0
- * @see Item_Commander
+ * @see ItemCommander
  */
 
 public class Commande {
