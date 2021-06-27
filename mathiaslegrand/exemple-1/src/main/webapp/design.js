@@ -58,7 +58,7 @@ webix.ready(function(){
 					height: 200,
 					width:"auto"
 				},
-				template:" <div class='webix_strong'>#title#</div>  Prix: #prix# $, rank: #rank# <a href = <img src= #image2# class = image_article alt='images articles'>",
+				template:" <div class='webix_strong'>#title#</div>  Prix: #prix# $, rank: #rank# <a href = pageArticles.html> <img src= #image2# class = image_article alt='images articles'></a>  >",
 				data:[
 					{ id:1, title:"Tuque", image2:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO",prix:1994, votes:678790, rating:9.2, rank:1},
 					{ id:2, title:"Bas",  image2:"https://drive.google.com/uc?export=view&id=1GVDq4TWYwS35es9k7IdcN4s76PV1JRE3",prix:1972, votes:511495, rating:9.2, rank:2},
@@ -107,6 +107,8 @@ webix.ready(function(){
 		}
 	});
 })
+
+
 
 
 
