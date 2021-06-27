@@ -3,166 +3,44 @@ webix.ready(function(){
 	if (webix.CustomScroll)
 		webix.CustomScroll.init();
 	webix.ui({
-		"rows": [
+		rows:[{
+			view:"carousel",
+			css:"webix_dark",
+			id:"carousel",
+			scrollSpeed: "500ms",
+			width:500,
+			height:500,
+			cols:[
+				{ css: "image", template:img, data:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"} },
+				{ css: "image", template:img, data:{src:"https://drive.google.com/uc?export=view&id=1GVDq4TWYwS35es9k7IdcN4s76PV1JRE3"} },
+				{ css: "image", template:img, data:{src:"https://drive.google.com/uc?export=view&id=1GtqJ-uWW_aq8nIL6lYnLnG91PNQcwOxL"} },
+				{css: "image", template:img, data:{src:"https://drive.google.com/uc?export=view&id=1juGpKhUP184DaYzEferp7eOPAXzC3qWn"} },
+				{ css: "image",  template:img, data:{src:"https://drive.google.com/uc?export=view&id=1JLcyOWfbtUFUMPBedtEcO9nw0wAn87A1"} }
+			]},
 			{
-				"view": "form",
-				"margin": 40,
-				"rows": [
-					{
-						"margin": 20,
-						"cols": [
-							{
-								"margin": 10,
-								"rows": [
-									{
-										"view": "template",
-										"type": "section",
-										"template": "Menu utilisateur"
-									},
-									{
-										"label": "M'ajouter comme client",
-										"view": "button",
-										"height": 38,
-										click: function (){
-
-
-											console.log("adawdawdawd")
-
-											const xhr = new XMLHttpRequest();
-											xhr.open('GET','http://localhost:8080/exemple-1/api/insert_etudiant');
-											xhr.send();
-											xhr.onload = () => {
-												console.log(xhr.response);
-											};
-										}
-									},
-									{
-										"cols": [
-											{
-												"view": "text",
-												"placeholder": "Type here...",
-												"label": "Cip",
-												name: "cip",
-												id:"cip",
-												"labelWidth": 100
-											},
-											{
-												"label": "Ajouter Admin",
-												"view": "button",
-												"height": 38,
-												click: function (){
-													const xhr = new XMLHttpRequest();
-													xhr.open('POST', 'http://localhost:8080/exemple-1/api/insert_admin');
-													var data = {cip:$$("cip").getValue()}
-													xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-													var datatexte = ('cip='+data.cip)
-													xhr.send(datatexte);
-													xhr.onload = () =>{
-														console.log(xhr.response);
-													};
-												}
-											}
-										]
-									}
-								]
-							},
-							{
-								"margin": 10,
-								"rows": [
-									{
-										"view": "template",
-										"type": "section",
-										"template": "Menu produit"
-									},
-									{
-										"label": "Nom",
-										"view": "text",
-										name: "nom",
-										id:"nom",
-										"height": 38
-									},
-									{
-										"label": "Description",
-										"view": "text",
-										name: "description",
-										id:"description",
-										"height": 38
-									},
-									{
-										"label": "Prix",
-										"view": "text",
-										name: "prix",
-										id:"prix",
-										"height": 38
-									},
-									{
-										"label": "Taille",
-										"view": "text",
-										name: "taille",
-										id:"taille",
-										"height": 38
-									},
-									{
-										"label": "Couleur",
-										"view": "text",
-										name: "couleur",
-										id:"couleur",
-										"height": 38
-									},
-									{
-										"label": "Visibilité",
-										"view": "text",
-										name: "visibilite",
-										id:"visibilite",
-										"height": 38
-									},
-									{
-										"label": "État",
-										"view": "text",
-										name: "etat",
-										id:"etat",
-										"height": 38
-									},
-									{
-										"label": "Url photo",
-										"view": "text",
-										name: "url",
-										id:"url",
-										"height": 38
-									},
-									{
-										"label": "Ajouter produit",
-										"view": "button",
-										"height": 38,
-										click: function (){
-											const xhr = new XMLHttpRequest();
-											xhr.open('POST', 'http://localhost:8080/exemple-1/api/insert_produit');
-											var data = {nom:$$("nom").getValue(),
-														description:$$("description").getValue(),
-														prix:$$("prix").getValue(),
-														taille:$$("taille").getValue(),
-														couleur:$$("couleur").getValue(),
-														visibilite:$$("visibilite").getValue(),
-														etat:$$("etat").getValue(),
-														url:$$("url").getValue()}
-											xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-											var datatexte = ('nom='+data.nom + '&description='+data.description + '&prix='+data.prix + '&taille='+data.taille + '&couleur='+data.couleur + '&visibilite='+data.visibilite + '&etat='+data.etat+ '&url='+data.url);
-											xhr.send(datatexte);
-											xhr.onload = () =>{
-												console.log(xhr.response);
-											};
-										}
-									}
-								]
-							}
-						]
-					}
+				view:"dataview",
+				id:"dataview1",
+				height:120,
+				xCount:2,
+				select:true,
+				type: {
+					height: 60,
+					width:"auto"
+				},
+				template:"<div class='webix_strong'>#title#</div> #image#  Year: #year#, rank: #rank#",
+				data:[
+					{ id:1, title:"Tuque", image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}, year:1994, votes:678790, rating:9.2, rank:1},
+					{ id:2, title:"The Godfather",  image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"},year:1972, votes:511495, rating:9.2, rank:2},
+					{ id:3, title:"The Godfather: Part II",   image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}, year:1974, votes:319352, rating:9.0, rank:3},
+					{ id:4, title:"The Good, the Bad and the Ugly",  image:{src:"https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}, year:1966, votes:213030, rating:8.9, rank:4}
 				]
 			}
 		]
 	});
 })
-
+function img(obj){
+	return '<img src="'+obj.src+'" alt="centered image" class="content"/>'
+}
 const sendHttpRequest  = (method, url, data) =>{
 		const xhr = new XMLHttpRequest();
 		xhr.open(method, url);
