@@ -1,5 +1,6 @@
 package ca.usherbrooke.gegi.server.presentation;
 
+import ca.usherbrooke.gegi.server.business.Item_inventaire;
 import ca.usherbrooke.gegi.server.business.Produit;
 
 import javax.ws.rs.GET;
@@ -27,5 +28,15 @@ public class ProduitService extends Application {
         DataBase database = DataBase.getInstance();
         return database.getListeProduit();
     }
+
+    @GET
+    @Path("/inventaire")
+    @Produces("application/json")
+    public ArrayList<Item_inventaire> getInventaire()
+    {
+        DataBase database = DataBase.getInstance();
+        return database.getInventaire();
+    }
+
 
 }

@@ -71,6 +71,35 @@ public class EtudiantService {
         return etudiant;
     }
 
+    @GET
+    @Path("getUtilisateur")
+    @Produces("application/json")
+    public Etudiant getUtilisateur() {
+        Principal principal = httpServletRequest.getUserPrincipal();
+        Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
+        Etudiant etudiant = new Etudiant();
+        etudiant.setCip(principal.getName());
+        etudiant.setNom((String)details.get("nomFamille"));
+        etudiant.setPrenom((String)details.get("prenom"));
+        etudiant.setCourriel((String)details.get("courriel"));
+        return etudiant;
+    }
+
+    @GET
+    @Path("isAdmin")
+    @Produces("application/json")
+    public boolean isAdmin() {
+        Principal principal = httpServletRequest.getUserPrincipal();
+        Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
+        Etudiant etudiant = new Etudiant();
+        etudiant.setCip(principal.getName());
+        etudiant.setNom((String)details.get("nomFamille"));
+        etudiant.setPrenom((String)details.get("prenom"));
+        etudiant.setCourriel((String)details.get("courriel"));
+        DataBase database = DataBase.getInstance();
+        return database.isAdmin(principal.getName());
+    }
+
     @POST
     @Path("insert_admin")
     public void insertAdminDB(@FormParam("cip") String cip){
