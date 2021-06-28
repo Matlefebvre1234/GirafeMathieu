@@ -1,5 +1,6 @@
 package ca.usherbrooke.gegi.server.business;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -38,12 +39,13 @@ public class ConcreteBuilderCommande implements BuilderCommande{
      * Methode qui permet de construire la commande
      */
     @Override
-    public void construireCommande(int idCcommande, String cip, Date date, int prixTotal, int idEtatCommande) {
+    public void construireCommande(int idCcommande, String cip, Date date, int prixTotal, int idEtatCommande, ArrayList<Item_Commander> liste) {
         resultat.setId_commande(idCcommande);
         resultat.setCip(cip);
         resultat.setDate(date);
         resultat.setPrix_total(prixTotal);
         resultat.setId_etat_commande(idEtatCommande);
+        resultat.setListeItem(liste);
     }
 
     /**
@@ -51,12 +53,7 @@ public class ConcreteBuilderCommande implements BuilderCommande{
      */
     @Override
     public void constuireItemCommander() {
-       /*item_commander = new Item_Commander();
-        item_commander.setQuantite(1 getQuantitedatabase);
-        item_commander.setPrixtotal(1 getPrixTotal);
-        item_commander.setId_commande(1 setidcommande);
-        item_commander.setId_etat_commade(1 getEtatCommande);
-        item_commander.setProduit(produit);*/
+        //un peu useless
     }
 
     /**
@@ -64,7 +61,7 @@ public class ConcreteBuilderCommande implements BuilderCommande{
      */
     @Override
     public void construireProduit() {
-        //appeler builder produit
+        //un peu useless
     }
 
     /**
