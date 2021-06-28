@@ -26,7 +26,7 @@ webix.ready(function() {
                             {
                             view: "multiview",
                                 cells: [
-                                    { id: "Inventaire",padding: 20, margin: 20, "rows": [Inventaire] },
+                                    { id: "Inventaire", "rows": [Inventaire] },
                                     { id: "Precommande", "rows": [Precommande] },
                                     { id: "Commande", "rows": [Commande] },
                                     { id: "Log", "rows": [log] }
@@ -39,4 +39,30 @@ webix.ready(function() {
 
     });
 });
+
+const sendHttpRequest = (method, url, data) => {
+    const promise = new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+
+        xhr.responseType = 'json';
+
+        if(data) {
+            resolve(xhr.response);
+        };
+
+        xhr.send(JSON.stringify(data));
+    });
+    return promise;
+}
+
+const getData = () => {
+    sendHttpRequest('GET','http://localhost:8080/exemple-1/api/isAdmin'.then(responseData => {
+        console.log(reponseData);
+    }));
+};
+
+const PageAccueil = () => {
+    window.location.replace("http://www.w3schools.com");
+}
 

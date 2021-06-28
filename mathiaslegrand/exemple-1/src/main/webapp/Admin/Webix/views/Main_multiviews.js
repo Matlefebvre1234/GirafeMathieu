@@ -2,12 +2,12 @@ var Inventaire = {
     cols: [
         {
             "columns": [
-                { "id": "Id", "header": [{ text: "#" }], width: 50, "sort": "int" },
+                { "id": "Id", "header": [{ text: "#" }], autowidth:true, "sort": "int" },
                 { "id": "Nom", "header": [{ text: "Nom" }, { content: "textFilter" }], "fillspace": true, sort: "string" },
-                { "id": "Qte", "header": [{ text: "Quantite" }], sort: "string", width: 50 },
-                { "id": "ModifTime", "header": [{ text: "Temps" }], "sort": "string", width: 250 },
-                { "id": "PrixUnitaire", "header": [{ text: "Prix Unitaire" }], "sort": "string", width: 100 },
-                { "id": "Action", "header": [{ text: "Action" }], template: "{common.trashIcon} {common.editIcon}", width: 60 }
+                { "id": "Qte", "header": [{ text: "Quantite" }], sort: "string", autowidth:true },
+                { "id": "ModifTime", "header": [{ text: "Temps" }], "sort": "string", autowidth:true },
+                { "id": "PrixUnitaire", "header": [{ text: "Prix Unitaire" }], "sort": "string", autowidth:true },
+                { "id": "Action", "header": [{ text: "Action" }], template: "{common.trashIcon} {common.editIcon}", autowidth:true }
             ],
             view: "datatable",
             data: Inventaire_data,
