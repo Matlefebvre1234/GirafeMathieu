@@ -1,8 +1,6 @@
-
 package ca.usherbrooke.gegi.server.business;
-import java.sql.*;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 /**
  * La classe contient toutes les informations utiles pour instancier un produit provenant de la base de donnees
@@ -25,11 +23,6 @@ public class Produit {
         arrayPhoto = new ArrayList<String>();
     }
 
-    public Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
-    }
-
-
 
     public ArrayList<String> getArrayPhoto()
     {
@@ -46,54 +39,17 @@ public class Produit {
         arrayPhoto.add(url);
     }
 
-    public String getNomitem(int id) {
-        String SQL = "SELECT nomitem FROM produit WHERE id=?";
-        String retour = "";
-        try (Connection conn = connect();
-             PreparedStatement prestmt = conn.prepareStatement(SQL))
-        {
-            prestmt.setInt(1,id);
-            ResultSet rs = prestmt.executeQuery();
-            retour = rs.getString(1);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+    public String getNomitem() {
         return nomitem;
     }
 
-
-    public void setNomitem(String nomitem, int id) {
-        String SQL = "UPDATE produit SET nomitem = ? WHERE id = ?";
-        String retour = "";
-        try (Connection conn = connect();
-             PreparedStatement prestmt = conn.prepareStatement(SQL)) {
-            prestmt.setString(1, nomitem);
-            prestmt.setInt(2, id);
-            prestmt.executeUpdate(SQL);
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+    public void setNomitem(String nomitem) {
         this.nomitem = nomitem;
     }
 
-
-    public String getDescription(int id) {
-        String SQL = "SELECT description FROM produit WHERE id=?";
-        String retour = "";
-        try (Connection conn = connect();
-             PreparedStatement prestmt = conn.prepareStatement(SQL))
-        {
-            prestmt.setInt(1,id);
-            ResultSet rs = prestmt.executeQuery();
-            retour = rs.getString(1);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
+    public String getDescription() {
         return description;
     }
-
 
     public void setDescription(String description) {
         this.description = description;
@@ -131,19 +87,19 @@ public class Produit {
         this.couleur = couleur;
     }
 
-    public int getVisibiliteSite() {
+    public int getVisibilite_site() {
         return visibilite_site;
     }
 
-    public void setVisibiliteSite(int visibilite_site) {
+    public void setVisibilite_site(int visibilite_site) {
         this.visibilite_site = visibilite_site;
     }
 
-    public int getIdEtat() {
+    public int getId_etat() {
         return id_etat;
     }
 
-    public void setIdEtat(int id_etat) {
+    public void setId_etat(int id_etat) {
         this.id_etat = id_etat;
     }
 }

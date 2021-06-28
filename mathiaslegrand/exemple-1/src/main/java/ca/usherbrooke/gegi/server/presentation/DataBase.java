@@ -2,6 +2,7 @@ package ca.usherbrooke.gegi.server.presentation;
 
 import ca.usherbrooke.gegi.server.business.ConcreteBuilderProduit;
 import ca.usherbrooke.gegi.server.business.Etudiant;
+import ca.usherbrooke.gegi.server.business.Item_inventaire;
 import ca.usherbrooke.gegi.server.business.Produit;
 
 import javax.ws.rs.FormParam;
@@ -39,6 +40,24 @@ public class DataBase {
     }
 
 
+    public boolean isAdmin(String cip)
+    {
+        String SQL = "SELECT id_fonction from Client WHERE cip = ?" ;
+
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setString(1, cip);
+            ResultSet rs2 = stmt.executeQuery();
+            rs2.next();
+            if(rs2.getInt(1) == 1)return true;
+            else return false;
+
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
     public void insertEtudiantDB(Etudiant etudiant){
         String SQL = "INSERT INTO client(cip, courriel, nom, adresse, prenom, id_fonction)" + " VALUES(?,?,?,?,?,?)" ;
 
@@ -188,6 +207,36 @@ public class DataBase {
 
 
 
+
+
+    public ArrayList<Item_inventaire> getInventaire()
+    {
+        ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
+        ArrayList<Item_inventaire> maliste = new ArrayList<Item_inventaire>();
+        String SQL = "SELECT produit.idproduit, nomitem, description, prix, taille , couleur , visibilite_site , id_etat,inventaire_produit.quantite FROM inventaire_produit JOIN produit ON inventaire_produit.idproduit = produit.idproduit" ;
+        try {Connection conn = connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL);
+
+            while(rs.next())
+            {
+                Produit p = builder.construireProduitInterface(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8));
+                Item_inventaire item = new Item_inventaire();
+                item.setProduit(p);
+                item.setQuantite(rs.getInt(9));
+                maliste.add(item);
+            }
+
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        return  maliste;
+
+    }
+
+
     public ArrayList<Produit> getListeProduit()
     {
         ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
@@ -214,7 +263,7 @@ public class DataBase {
 
                 while(rs2.next())
                 {
-                    System.out.println("aawdawawdwad");
+
                     System.out.println(rs2.getString(1));
                     p.addPhoto(rs2.getString(1));
                 }

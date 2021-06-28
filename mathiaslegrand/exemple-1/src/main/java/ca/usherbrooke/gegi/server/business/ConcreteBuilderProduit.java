@@ -4,7 +4,7 @@ package ca.usherbrooke.gegi.server.business;
  * Implementation concrete du builder de commande
  * @author Mathieu Lefebvre
  * @version 1.0
- * @see builderProduit
+ * @see BuilderProduit
  */
 public class ConcreteBuilderProduit implements builderProduit{
 
@@ -25,13 +25,13 @@ public class ConcreteBuilderProduit implements builderProduit{
         Produit po = new Produit();
 
         po.setIdproduit(idproduit);
-        po.setNomitem(nomitem, 1);
+        po.setNomitem(nomitem);
         po.setDescription(description);
         po.setPrix(prix);
         po.setTaille(taille);
         po.setCouleur(couleur);
-        po.setVisibiliteSite(visibilite_site);
-        po.getIdEtat();
+        po.setVisibilite_site(visibilite_site);
+        po.setId_etat(id_etat);
         return po;
     }
 
@@ -49,10 +49,10 @@ public class ConcreteBuilderProduit implements builderProduit{
         Produit po = new Produit();
 
         po.setIdproduit(idproduit);
-        po.setNomitem(nomitem,1);
+        po.setNomitem(nomitem);
         po.setPrix(prix);
-        po.setVisibiliteSite(visibilite_site);
-        po.getIdEtat();
+        po.setVisibilite_site(visibilite_site);
+        po.setId_etat(id_etat);
         return po;
     }
 }

@@ -20,24 +20,24 @@ class ProduitTest {
     @Test
     void getNomitem() {
         Produit produit = new Produit();
-        produit.setNomitem("Brosse a dent",1);
-        Assertions.assertEquals("Brosse a dent",produit.getNomitem(1));
-        produit.setNomitem("Bas",1);
-        Assertions.assertEquals("Bas",produit.getNomitem(1));
-        produit.setNomitem("Le Saint caliss",1);
-        Assertions.assertEquals("Le Saint caliss",produit.getNomitem(1));
+        produit.setNomitem("Brosse a dent");
+        Assertions.assertEquals("Brosse a dent",produit.getNomitem());
+        produit.setNomitem("Bas");
+        Assertions.assertEquals("Bas",produit.getNomitem());
+        produit.setNomitem("Le Saint caliss");
+        Assertions.assertEquals("Le Saint caliss",produit.getNomitem());
 
     }
 
     @Test
     void setNomitem() {
         Produit produit = new Produit();
-        produit.setNomitem("Brosse a dent",1);
-        Assertions.assertEquals("Brosse a dent",produit.getNomitem(1));
-        produit.setNomitem("Bas",1);
-        Assertions.assertEquals("Bas",produit.getNomitem(1));
-        produit.setNomitem("Le Saint caliss",1);
-        Assertions.assertEquals("Le Saint caliss",produit.getNomitem(1));
+        produit.setNomitem("Brosse a dent");
+        Assertions.assertEquals("Brosse a dent",produit.getNomitem());
+        produit.setNomitem("Bas");
+        Assertions.assertEquals("Bas",produit.getNomitem());
+        produit.setNomitem("Le Saint caliss");
+        Assertions.assertEquals("Le Saint caliss",produit.getNomitem());
     }
 
 
@@ -46,26 +46,26 @@ class ProduitTest {
     void getDescription() {
         Produit produit = new Produit();
         produit.setDescription("WOW");
-        Assertions.assertEquals("WOW",produit.getDescription(1));
+        Assertions.assertEquals("WOW",produit.getDescription());
         produit.setDescription("Nice");
-        Assertions.assertEquals("Nice",produit.getDescription(1));
+        Assertions.assertEquals("Nice",produit.getDescription());
         produit.setDescription("Unnga Bunga");
-        Assertions.assertEquals("Unnga Bunga",produit.getDescription(1));
+        Assertions.assertEquals("Unnga Bunga",produit.getDescription());
         produit.setDescription("Magnifico");
-        Assertions.assertEquals("Magnifico",produit.getDescription(1));
+        Assertions.assertEquals("Magnifico",produit.getDescription());
     }
 
     @Test
     void setDescription() {
         Produit produit = new Produit();
         produit.setDescription("WOW");
-        Assertions.assertEquals("WOW",produit.getDescription(1));
+        Assertions.assertEquals("WOW",produit.getDescription());
         produit.setDescription("Nice");
-        Assertions.assertEquals("Nice",produit.getDescription(1));
+        Assertions.assertEquals("Nice",produit.getDescription());
         produit.setDescription("Unnga Bunga");
-        Assertions.assertEquals("Unnga Bunga",produit.getDescription(1));
+        Assertions.assertEquals("Unnga Bunga",produit.getDescription());
         produit.setDescription("Magnifico");
-        Assertions.assertEquals("Magnifico",produit.getDescription(1));
+        Assertions.assertEquals("Magnifico",produit.getDescription());
     }
 
     @Test
@@ -181,52 +181,52 @@ class ProduitTest {
     @Test
     void getVisibiliteSite() {
         Produit produit = new Produit();
-        produit.setVisibiliteSite(1);
-        Assertions.assertEquals(1,produit.getVisibiliteSite());
-        produit.setVisibiliteSite(2);
-        Assertions.assertEquals(2,produit.getVisibiliteSite());
-        produit.setVisibiliteSite(3);
-        Assertions.assertEquals(3,produit.getVisibiliteSite());
-        produit.setVisibiliteSite(4);
-        Assertions.assertEquals(4,produit.getVisibiliteSite());
+        produit.setVisibilite_site(1);
+        Assertions.assertEquals(1,produit.getVisibilite_site());
+        produit.setVisibilite_site(2);
+        Assertions.assertEquals(2,produit.getVisibilite_site());
+        produit.setVisibilite_site(3);
+        Assertions.assertEquals(3,produit.getVisibilite_site());
+        produit.setVisibilite_site(4);
+        Assertions.assertEquals(4,produit.getVisibilite_site());
     }
 
     @Test
     void setVisibiliteSite() {
         Produit produit = new Produit();
-        produit.setVisibiliteSite(1);
-        Assertions.assertEquals(1,produit.getVisibiliteSite());
-        produit.setVisibiliteSite(2);
-        Assertions.assertEquals(2,produit.getVisibiliteSite());
-        produit.setVisibiliteSite(3);
-        Assertions.assertEquals(3,produit.getVisibiliteSite());
-        produit.setVisibiliteSite(4);
-        Assertions.assertEquals(4,produit.getVisibiliteSite());
+        produit.setVisibilite_site(1);
+        Assertions.assertEquals(1,produit.getVisibilite_site());
+        produit.setVisibilite_site(2);
+        Assertions.assertEquals(2,produit.getVisibilite_site());
+        produit.setVisibilite_site(3);
+        Assertions.assertEquals(3,produit.getVisibilite_site());
+        produit.setVisibilite_site(4);
+        Assertions.assertEquals(4,produit.getVisibilite_site());
     }
 
     @Test
     void getIdEtat() {
         Produit produit = new Produit();
-        produit.setIdEtat(1);
-        Assertions.assertEquals(1,produit.getIdEtat());
-        produit.setIdEtat(2);
-        Assertions.assertEquals(2,produit.getIdEtat());
-        produit.setIdEtat(3);
-        Assertions.assertEquals(3,produit.getIdEtat());
-        produit.setIdEtat(4);
-        Assertions.assertEquals(4,produit.getIdEtat());
+        produit.setId_etat(1);
+        Assertions.assertEquals(1,produit.getId_etat());
+        produit.setId_etat(2);
+        Assertions.assertEquals(2,produit.getId_etat());
+        produit.setId_etat(3);
+        Assertions.assertEquals(3,produit.getId_etat());
+        produit.setId_etat(4);
+        Assertions.assertEquals(4,produit.getId_etat());
     }
 
     @Test
     void setIdEtat() {
         Produit produit = new Produit();
-        produit.setIdEtat(1);
-        Assertions.assertEquals(1,produit.getIdEtat());
-        produit.setIdEtat(2);
-        Assertions.assertEquals(2,produit.getIdEtat());
-        produit.setIdEtat(3);
-        Assertions.assertEquals(3,produit.getIdEtat());
-        produit.setIdEtat(4);
-        Assertions.assertEquals(4,produit.getIdEtat());
+        produit.setId_etat(1);
+        Assertions.assertEquals(1,produit.getId_etat());
+        produit.setId_etat(2);
+        Assertions.assertEquals(2,produit.getId_etat());
+        produit.setId_etat(3);
+        Assertions.assertEquals(3,produit.getId_etat());
+        produit.setId_etat(4);
+        Assertions.assertEquals(4,produit.getId_etat());
     }
 }
