@@ -9,7 +9,8 @@ webix.ready(function(){
 		scroll:"y",
 		height:"80%",
 		width:"80%",body:{
-			rows:[{
+			rows:[
+				{
 				view: "label",
 				id: "agegTitre",
 				height: 200,
@@ -17,7 +18,7 @@ webix.ready(function(){
 				css: "titre",
 				align: "center"
 				//label: "Bas De texte"
-			},
+				},
 				{
 					view: "label",
 					id:"En vedette",
