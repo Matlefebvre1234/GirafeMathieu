@@ -1,9 +1,6 @@
 package ca.usherbrooke.gegi.server.presentation;
 
-import ca.usherbrooke.gegi.server.business.ConcreteBuilderProduit;
-import ca.usherbrooke.gegi.server.business.Etudiant;
-import ca.usherbrooke.gegi.server.business.Item_inventaire;
-import ca.usherbrooke.gegi.server.business.Produit;
+import ca.usherbrooke.gegi.server.business.*;
 
 import javax.ws.rs.FormParam;
 import javax.xml.crypto.Data;
@@ -234,6 +231,36 @@ public class DataBase {
 
         return  maliste;
 
+    }
+
+    public ArrayList<Item_Commander> getItem_Commander(){
+        ArrayList<Item_Commander> listeItems = new ArrayList<>();
+        String SQL = "SELECT commande.date, id_item_commander, idproduit,quantite, prixtotal, item_commander.id_commande, item_commander.id_etat_commande FROM item_commander JOIN commande ON commande.id_commande = item_commander.id_commande";
+
+        try {Connection conn = connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL);
+
+            while(rs.next())
+            {
+                Item_Commander item = new Item_Commander();
+                item.setDate(rs.getDate(1));
+                item.setId_item_commander(rs.getInt(2));
+                item.setIdproduit(rs.getInt(3));
+                item.setQuantite(rs.getInt(4));
+                item.setPrixtotal(rs.getInt(5));
+                item.setId_commande(rs.getInt(6));
+                item.setId_etat_commade(rs.getInt(7));
+                //item.setProduit(p);
+                listeItems.add(item);
+            }
+
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        return listeItems;
     }
 
 

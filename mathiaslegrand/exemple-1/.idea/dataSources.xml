@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="s3iprojet04@zeus.gel.usherbrooke.ca" uuid="0fe1172a-51c1-4853-8269-fa8250229341">
+    <data-source source="LOCAL" name="s3iprojet04@zeus.gel.usherbrooke.ca" uuid="0889b738-dcbe-4291-8cdb-815a684a3637">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="postgres@localhost" uuid="be9eadbb-06be-4689-b72e-2abb7276ec56">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

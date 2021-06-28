@@ -1,5 +1,7 @@
 package ca.usherbrooke.gegi.server.business;
 
+import java.util.Date;
+
 /**
  * Interface pour le builder de commande
  * @author Mathias Gagnon
@@ -8,7 +10,7 @@ package ca.usherbrooke.gegi.server.business;
  */
 public interface BuilderCommande {
     void reset();
-    void construireCommande();
+    void construireCommande(int idCcommande, String cip, Date date, int prixTotal, int idEtatCommande);
     void constuireItemCommander();
     void construireProduit();
 }

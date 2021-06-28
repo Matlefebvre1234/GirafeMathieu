@@ -1,5 +1,8 @@
 package ca.usherbrooke.gegi.server.business;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Implementation concrete du builder de commande
  * @author Mathias Gagnon
@@ -21,7 +24,7 @@ public class ConcreteBuilderCommande implements BuilderCommande{
     /**
      * Item_Commander construits pour construire la commande
      */
-    private Item_Commander item_commander;
+    private ArrayList<Item_Commander> listeItems;
 
     /**
      * Methode qui permet de reset la commande cree
@@ -35,13 +38,12 @@ public class ConcreteBuilderCommande implements BuilderCommande{
      * Methode qui permet de construire la commande
      */
     @Override
-    public void construireCommande() {
-        /*resultat.setId_commande(1 getIdCommande);
-        resultat.setCip("1" getCip);
-        resultat.setDate("1" getDate);
-        resultat.setPrix_total(1 prixtotal);
-        resultat.setId_etat_commande(1 etat);
-        //resultat.setListItems();*/
+    public void construireCommande(int idCcommande, String cip, Date date, int prixTotal, int idEtatCommande) {
+        resultat.setId_commande(idCcommande);
+        resultat.setCip(cip);
+        resultat.setDate(date);
+        resultat.setPrix_total(prixTotal);
+        resultat.setId_etat_commande(idEtatCommande);
     }
 
     /**
