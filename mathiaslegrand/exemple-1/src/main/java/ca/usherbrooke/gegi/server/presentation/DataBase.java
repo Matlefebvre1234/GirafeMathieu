@@ -310,6 +310,15 @@ public class DataBase {
         return null;
     }
 
+    /**
+     * Retourne un panier
+     * @return
+     */
+    public Panier getPanier(int id){
+        Panier panier = new Panier();
+        return panier;
+    }
+
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
     }
