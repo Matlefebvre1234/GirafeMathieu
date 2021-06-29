@@ -1,5 +1,6 @@
 package ca.usherbrooke.gegi.server.presentation;
 
+import ca.usherbrooke.gegi.server.business.ConcreteBuilderProduit;
 import ca.usherbrooke.gegi.server.business.Panier;
 import ca.usherbrooke.gegi.server.business.Produit;
 
@@ -31,5 +32,12 @@ public class PanierService {
             dataBase.creerPanier(cip);
             dataBase.getPanier(cip);
         }
+    }
+
+    @POST
+    @Path("/ajouterItemPanier")
+    public void ajouterItemPanier(@FormParam("quantite") int quantite, @FormParam("idproduit") int idproduit){
+
+
     }
 }

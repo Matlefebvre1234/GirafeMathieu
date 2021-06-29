@@ -1,11 +1,16 @@
 package ca.usherbrooke.gegi.server.presentation;
 
 import ca.usherbrooke.gegi.server.business.*;
+import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.core.Context;
 import javax.xml.crypto.Data;
+import java.security.Principal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Contient toutes les methodes qui communiquent avec la base de donnees
@@ -13,6 +18,9 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class DataBase {
+
+    @Context
+    HttpServletRequest httpServletRequest;
 
     private static  DataBase instance;
 
@@ -405,6 +413,34 @@ public class DataBase {
             System.out.println(ex.getMessage());
         }
 
+    }
+
+    public void insertItemPanier(int quantite, int idProduit){
+        String SQL = "INSERT INTO item_panier VALUES(?,?,?,?)";
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setInt(1, quantite);
+            stmt.setInt(2, getIndexItemPanier());
+            stmt.setInt(3, idProduit);
+            stmt.setInt(4, getPanier(getCip()).getIdPanier());
+
+            stmt.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public String getCip(){
+        Principal principal = httpServletRequest.getUserPrincipal();
+        Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
+        Etudiant etudiant = new Etudiant();
+        etudiant.setCip(principal.getName());
+        etudiant.setNom((String)details.get("nomFamille"));
+        etudiant.setPrenom((String)details.get("prenom"));
+        etudiant.setCourriel((String)details.get("courriel"));
+
+        return etudiant.getCip();
     }
 
     public Connection connect() throws SQLException {
