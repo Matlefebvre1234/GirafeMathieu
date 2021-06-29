@@ -1,14 +1,16 @@
 package ca.usherbrooke.gegi.server.presentation;
 
-import ca.usherbrooke.gegi.server.business.ConcreteBuilderProduit;
-import ca.usherbrooke.gegi.server.business.Etudiant;
-import ca.usherbrooke.gegi.server.business.Item_inventaire;
-import ca.usherbrooke.gegi.server.business.Produit;
+import ca.usherbrooke.gegi.server.business.*;
+import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.core.Context;
 import javax.xml.crypto.Data;
+import java.security.Principal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Contient toutes les methodes qui communiquent avec la base de donnees
@@ -16,6 +18,9 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class DataBase {
+
+    @Context
+    HttpServletRequest httpServletRequest;
 
     private static  DataBase instance;
 
@@ -205,7 +210,25 @@ public class DataBase {
 
     }
 
+    public Produit getProduit(int id){
+        ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
+        String SQL = "SELECT * FROM produit WHERE idproduit = ?";
+        Produit p = new Produit();
 
+        try {Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            p = builder.construireProduitInterface(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8));
+
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        return  p;
+    }
 
 
 
@@ -234,6 +257,89 @@ public class DataBase {
 
         return  maliste;
 
+    }
+
+    public ArrayList<Item_Commander> getItem_Commander(){
+        ArrayList<Item_Commander> listeItems = new ArrayList<>();
+        String SQL = "SELECT commande.date, id_item_commander, idproduit,quantite, prixtotal, item_commander.id_commande, item_commander.id_etat_commande FROM item_commander JOIN commande ON commande.id_commande = item_commander.id_commande";
+
+        try {Connection conn = connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL);
+
+            while(rs.next())
+            {
+                Item_Commander item = new Item_Commander();
+                item.setDate(rs.getDate(1));
+                item.setId_item_commander(rs.getInt(2));
+                item.setIdproduit(rs.getInt(3));
+                item.setQuantite(rs.getInt(4));
+                item.setPrixtotal(rs.getInt(5));
+                item.setId_commande(rs.getInt(6));
+                item.setId_etat_commade(rs.getInt(7));
+                //item.setProduit(p);
+                listeItems.add(item);
+            }
+
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        return listeItems;
+    }
+
+    public int getIndexItemPanier(){
+        int index = 0;
+
+        String SQL = "SELECT MAX(id_item_panier) FROM item_panier" ;
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)){
+            rs.next();
+            index = rs.getInt(1);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return index+1;
+    }
+
+    public int getIndexPanier(){
+        int index = 0;
+
+        String SQL = "SELECT MAX(idpanier) FROM item_panier" ;
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)){
+            rs.next();
+            index = rs.getInt(1);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return index+1;
+    }
+
+    public void ajouterPanier(int quantite, Panier panier, Produit produit){
+        String SQL = "INSERT INTO item_panier VALUES(?,?,?,?)";
+
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setInt(1, quantite);
+            stmt.setInt(2, getIndexItemPanier());
+            stmt.setInt(3,produit.getIdproduit());
+            stmt.setInt(4, panier.getIdPanier());
+
+            stmt.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
 
@@ -281,6 +387,78 @@ public class DataBase {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    /**
+     * Retourne le panier du client
+     * @return
+     */
+    public Panier getPanier(String cip){
+        Panier panier = new Panier();
+        String SQL = "SELECT idpanier FROM panier WHERE cip = ?";
+
+        try(Connection conn = connect();
+        PreparedStatement stmt = conn.prepareStatement(SQL)){
+            stmt.setString(1, cip);
+            ResultSet rs = stmt.executeQuery();
+            panier.setIdPanier(rs.getInt(1));
+
+        }
+
+        catch (SQLException ex){
+            System.out.println(ex.getMessage());
+            panier.setIdPanier(2147483647);
+        }
+
+        panier.setCip(cip);
+        return panier;
+    }
+
+    /**
+     * Cree le panier pour le client
+     * @param cip
+     */
+    public void creerPanier(String cip){
+        String SQL = "INSERT INTO panier VALUES(?,?)";
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setInt(1, getIndexPanier());
+            stmt.setString(2, cip);
+
+            stmt.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    public void insertItemPanier(int quantite, int idProduit){
+        String SQL = "INSERT INTO item_panier VALUES(?,?,?,?)";
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setInt(1, quantite);
+            stmt.setInt(2, getIndexItemPanier());
+            stmt.setInt(3, idProduit);
+            stmt.setInt(4, getPanier(getCip()).getIdPanier());
+
+            stmt.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public String getCip(){
+        Principal principal = httpServletRequest.getUserPrincipal();
+        Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
+        Etudiant etudiant = new Etudiant();
+        etudiant.setCip(principal.getName());
+        etudiant.setNom((String)details.get("nomFamille"));
+        etudiant.setPrenom((String)details.get("prenom"));
+        etudiant.setCourriel((String)details.get("courriel"));
+
+        return etudiant.getCip();
     }
 
     public Connection connect() throws SQLException {

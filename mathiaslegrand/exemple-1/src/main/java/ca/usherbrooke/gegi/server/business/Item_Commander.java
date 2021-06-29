@@ -1,5 +1,7 @@
 package ca.usherbrooke.gegi.server.business;
 
+import java.util.Date;
+
 /**
  * La classe contient toutes les informations pertinentes lorsqu'un client commande un produit
  * @author Patrick Normandin
@@ -9,11 +11,13 @@ package ca.usherbrooke.gegi.server.business;
 public class Item_Commander {
 
     private int id_item_commander;
+    private Date date;
     private int quantite;
     private float prixtotal;
     private int id_commande;
     private int idproduit;
     private int id_etat_commade;
+    private Produit produit;
 
     public int getId_item_commander() {
         return id_item_commander;
@@ -61,5 +65,21 @@ public class Item_Commander {
 
     public void setId_etat_commade(int id_etat_commade) {
         this.id_etat_commade = id_etat_commade;
+    }
+
+    public Produit getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Produit produit) {
+        this.produit = produit;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getDate() {
+        return date;
     }
 }
