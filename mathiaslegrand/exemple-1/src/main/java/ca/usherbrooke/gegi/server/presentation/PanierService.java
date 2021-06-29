@@ -1,22 +1,43 @@
 package ca.usherbrooke.gegi.server.presentation;
 
+import ca.usherbrooke.gegi.server.business.ConcreteBuilderProduit;
 import ca.usherbrooke.gegi.server.business.Panier;
 import ca.usherbrooke.gegi.server.business.Produit;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import java.util.ArrayList;
 
 @Path("/Panier")
 public class PanierService {
-    @GET
+
+    @POST
     @Path("/getPanier")
     @Produces("application/json")
-    public Panier getPanier()
+    public Panier getPanier(@FormParam("cip") String cip)
     {
         DataBase database = DataBase.getInstance();
-        Panier panier = new Panier();
+        Panier panier;
+        panier = database.getPanier(cip);
         return panier;
+    }
+
+    @POST
+    @Path("/ajouterPanier")
+    public void ajouterPanier(@FormParam("cip") String cip){
+        Panier panier;
+        DataBase dataBase = DataBase.getInstance();
+        panier = dataBase.getPanier(cip);
+
+        if(panier.getIdPanier() == 2147483647){
+            dataBase.creerPanier(cip);
+            dataBase.getPanier(cip);
+        }
+    }
+
+    @POST
+    @Path("/ajouterItemPanier")
+    public void ajouterItemPanier(@FormParam("quantite") int quantite, @FormParam("idproduit") int idproduit){
+
+
     }
 }
