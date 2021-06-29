@@ -1,9 +1,11 @@
 package ca.usherbrooke.gegi.server.presentation;
 
 import ca.usherbrooke.gegi.server.business.Commande;
+import ca.usherbrooke.gegi.server.business.Item_Commander;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -46,7 +48,8 @@ public class CommandeService {
      */
     @GET
     @Path("/listecommande")
-    public String listeProduits() {
+    @Produces("application/JSON")
+    public ArrayList<Commande> listeProduits() {
         int index = 0;
         ArrayList<Commande> maliste = new ArrayList<Commande>();
         String SQL = "SELECT date, id_commande, prix_total, cip , id_etat_commande FROM commande";
@@ -58,22 +61,89 @@ public class CommandeService {
             while (rs.next()) {
 
                 maliste.add(new Commande());
-                maliste.get(index).setId_commande(rs.getInt(1));
-                maliste.get(index).setPrix_total(rs.getFloat(2));
-                maliste.get(index).setCip(rs.getString(3));
-                maliste.get(index).setId_etat_commande(rs.getInt(4));
+                maliste.get(index).setDate(rs.getDate(1));
+                maliste.get(index).setId_commande(rs.getInt(2));
+                maliste.get(index).setPrix_total(rs.getInt(3));
+                maliste.get(index).setCip(rs.getString(4));
+                maliste.get(index).setId_etat_commande(rs.getInt(5));
 
-
-                return "salut";
-
-
+                index++;
             }
 
 
         } catch (SQLException e) {
-            System.out.println("allo");
+            System.out.println(e.getMessage());
         }
-        return "Aloha";
+        return maliste;
+    }
+
+    @GET
+    @Path("/item_commander")
+    @Produces("application/JSON")
+    public ArrayList<Commande> prixTotal() {
+        int index = 0;
+        ArrayList<Commande> maliste = new ArrayList<Commande>();
+        //int prix_tot =0;
+        String SQL = "SELECT prix * quantite AS prixtotal FROM produit, item_commander WHERE item_commander.idproduit=produit.idproduit";
+        String SQL2 = "SELECT * FROM commande";
+        //String SQL3 = "SELECT * FROM etat__commande";
+        String SQL3 = "SELECT * FROM etat__commande JOIN commande ON commande.id_etat_commande=etat__commande.id_etat_commande";
+        try {
+            Connection conn = connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL);
+
+            while (rs.next()) {
+                maliste.add(new Commande());
+                maliste.get(index).setPrix_total(rs.getInt(1));
+                //maliste.get(index).setId_commande(rs2.getInt(2));
+                //maliste.get(index).setDate(rs2.getDate(1));
+                //maliste.get(index).setId_etat_commande(rs2.getInt(5));
+                //maliste.get(index).setCip(rs2.getString(4));
+                index ++;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        index=0;
+        try{
+            Connection conn2 = connect();
+            Statement stmt2 = conn2.createStatement();
+            ResultSet rs2 = stmt2.executeQuery(SQL2);
+            while (rs2.next()) {
+                maliste.get(index).setId_commande(rs2.getInt(2));
+                maliste.get(index).setDate(rs2.getDate(1));
+                maliste.get(index).setId_etat_commande(rs2.getInt(5));
+                maliste.get(index).setCip(rs2.getString(4));
+                index++;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        index=0;
+        try{
+            Connection conn3 = connect();
+            Statement stmt3 = conn3.createStatement();
+            ResultSet rs3 = stmt3.executeQuery(SQL3);
+            while (rs3.next()) {
+                maliste.get(index).setId_etat_commande(rs3.getInt(2));
+
+                index++;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return maliste;
+    }
+
+    @GET
+    @Path("/item_commander")
+    @Produces("application/JSON")
+    public ArrayList<Item_Commander> getListeItemCommander(){
+        DataBase database = DataBase.getInstance();
+        return database.getItem_Commander();
     }
 }
 

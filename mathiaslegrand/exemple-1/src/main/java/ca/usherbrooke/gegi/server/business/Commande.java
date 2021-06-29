@@ -1,5 +1,8 @@
 package ca.usherbrooke.gegi.server.business;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Classe qui regroupe toutes les informations d'une commande
  * @author Patrick Normandin
@@ -8,17 +11,22 @@ package ca.usherbrooke.gegi.server.business;
  */
 
 public class Commande {
-    private String date;
+    private Date date;
     private int id_commande;
     private float prix_total;
     private String cip;
     private int id_etat_commande;
+    private ArrayList<Item_Commander> listeItem;
 
-    public String getDate() {
+    public Commande(){
+        listeItem = new ArrayList<>();
+    }
+
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -52,5 +60,13 @@ public class Commande {
 
     public void setId_etat_commande(int id_etat_commande) {
         this.id_etat_commande = id_etat_commande;
+    }
+
+    public void setListeItem(ArrayList<Item_Commander> listeItem) {
+        this.listeItem = listeItem;
+    }
+
+    public ArrayList<Item_Commander> getListeItem() {
+        return listeItem;
     }
 }
