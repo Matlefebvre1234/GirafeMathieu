@@ -3,9 +3,7 @@ package ca.usherbrooke.gegi.server.presentation;
 import ca.usherbrooke.gegi.server.business.Item_inventaire;
 import ca.usherbrooke.gegi.server.business.Produit;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import java.sql.*;
 import java.util.ArrayList;
@@ -38,5 +36,12 @@ public class ProduitService extends Application {
         return database.getInventaire();
     }
 
-
+    @POST
+    @Path("/getProduit")
+    @Produces("application/json")
+    public Produit getProduit(@FormParam("nom") int idProduit)
+    {
+        DataBase database = DataBase.getInstance();
+        return database.getProduit(idProduit);
+    }
 }
