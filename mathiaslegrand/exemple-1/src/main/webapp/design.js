@@ -104,7 +104,7 @@ webix.ready(function(){
 	});
 	$$("dataview1").attachEvent("onAfterSelect", function(id){
 		var value1= $$("dataview1").getItem(id);
-		var value = value1["idproduit"]
+		var value = value1["idproduit"];
 		var queryString = "?" + value;
 		window.location.href = "pageArticles.html" + queryString;
 	}
