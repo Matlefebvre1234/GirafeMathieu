@@ -219,8 +219,8 @@ public class DataBase {
             PreparedStatement stmt = conn.prepareStatement(SQL);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-
-            p = builder.construireProduitInterface(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8));
+            rs.next();
+            p = builder.construireProduitInterface(rs.getInt(2),rs.getString(1),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8));
 
         }catch (SQLException e)
         {
