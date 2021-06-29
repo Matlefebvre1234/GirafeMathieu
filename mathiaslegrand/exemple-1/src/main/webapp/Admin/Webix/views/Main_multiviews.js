@@ -1,15 +1,16 @@
 var Inventaire = {
     cols: [
         {
-            "columns": [
-                { "id": "Id", "header": [{ text: "#" }], autowidth:true, "sort": "int" },
-                { "id": "Nom", "header": [{ text: "Nom" }, { content: "textFilter" }], "fillspace": true, sort: "string" },
-                { "id": "Qte", "header": [{ text: "Quantite" }], sort: "string", autowidth:true },
-                { "id": "ModifTime", "header": [{ text: "Temps" }], "sort": "string", autowidth:true },
-                { "id": "PrixUnitaire", "header": [{ text: "Prix Unitaire" }], "sort": "string", autowidth:true },
+           "columns": [
+                { "id": "idproduit", "header": [{ text: "#" }], autowidth:true, "sort": "int" },
+                { "id": "nomitem", "header": [{ text: "Nom" }, { content: "textFilter" }], "fillspace": true, sort: "string" },
+                { "id": "quantite", "header": [{ text: "Quantite" }], sort: "string", autowidth:true },
+              //  { "id": "ModifTime", "header": [{ text: "Temps" }], "sort": "string", autowidth:true },
+                { "id": "prix", "header": [{ text: "Prix Unitaire" }], "sort": "string", autowidth:true },
                 { "id": "Action", "header": [{ text: "Action" }], template: "{common.trashIcon} {common.editIcon}", autowidth:true }
             ],
             view: "datatable",
+            id: "inventaireTable",
             data: Inventaire_data,
             scroll: false,
             type: {
@@ -56,3 +57,4 @@ var log = {
     ],
     "view": "datatable"
 }
+
