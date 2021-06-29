@@ -31,6 +31,5 @@ public class PanierService {
             dataBase.creerPanier(cip);
             dataBase.getPanier(cip);
         }
-
     }
 }
