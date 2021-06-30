@@ -102,7 +102,7 @@ public class DataBase {
     }
 
 
-    public void insertProduitDB( String nom, String description, String taille, float prix,String couleur, int visibilite,  int etat, String url) {
+    public void insertProduitDB(String nom, String description, String taille, float prix, String couleur, int visibilite, int etat, String url, int quantite) {
         String SQL = "INSERT INTO produit(nomitem, idproduit, description, prix, taille, couleur, visibilite_site, id_etat)" + " VALUES(?,?,?,?,?,?,?,?)";
 
         int index = getLastIndex();
@@ -126,6 +126,7 @@ public class DataBase {
 
 
         insertImageProduitDb(url, index);
+        ajouterItemInventaire(index, quantite);
     }
 
 
@@ -220,6 +221,23 @@ public class DataBase {
             ResultSet rs = stmt.executeQuery();
             rs.next();
             p = builder.construireProduitInterface(rs.getInt(2),rs.getString(1),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8));
+
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        String SQL2 = "SELECT url FROM produit_photo WHERE idproduit = ?";
+
+        try {Connection conn2 = connect();
+            PreparedStatement stmt = conn2.prepareStatement(SQL2);
+            stmt.setInt(1, id);
+            ResultSet rs2 = stmt.executeQuery();
+            while(rs2.next()){
+                System.out.println("allo: " + rs2.getString(1));
+                p.addPhoto(rs2.getString(1));
+            }
+
 
         }catch (SQLException e)
         {
@@ -341,6 +359,81 @@ public class DataBase {
         }
     }
 
+    public ArrayList<Commande> getCommande()
+    {
+        ConcreteBuilderCommande builder = new ConcreteBuilderCommande();
+        ArrayList<Commande> malisteCommande = new ArrayList<Commande>();
+
+        String SQL1 = "SELECT Commande.id_commande,cip,Commande.prix_total,Commande.date,Commande.id_etat_commande FROM commande";
+        try {Connection conn = connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL1);
+
+            while (rs.next())
+            {
+                System.out.println(rs.getDate(4));
+                Commande c = builder.construireCommande(rs.getInt(1),rs.getString(2),rs.getDate(4),rs.getInt(3),rs.getInt(5),new ArrayList<Item_Commander>());
+                malisteCommande.add(c);
+                System.out.println("date c : " + c.getDate());
+            }
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        ConcreteBuilderProduit productbuilder = new ConcreteBuilderProduit();
+        ArrayList<Item_Commander> listeItem = new ArrayList<Item_Commander>();
+        String SQL = "SELECT Commande.id_commande,cip,Commande.prix_total,Commande.date,Commande.id_etat_commande, item_commander.id_item_commander," +
+                "item_commander.quantite,item_commander.prixtotal,item_commander.id_etat_commande," +
+                "item_commander.idproduit,produit.nomitem,produit.taille,produit.couleur,produit.id_etat FROM Commande JOIN item_commander" +
+                " ON Commande.id_commande = item_commander.id_commande JOIN produit ON item_commander.idproduit = produit.idproduit order by Commande.id_commande";
+        try {Connection conn = connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL);
+
+            int indexTemp = 0;
+            while(rs.next())
+            {
+
+
+                for(int i =0;i<malisteCommande.size();i++)
+                {
+
+                    if(malisteCommande.get(i).getId_commande() == rs.getInt(1))
+                    {
+                        indexTemp = i;
+                    }
+
+                }
+
+
+                Item_Commander item = new Item_Commander();
+                item.setId_item_commander(rs.getInt(6));
+                item.setQuantite(rs.getInt(7));
+                item.setPrixtotal(rs.getInt(8));
+                item.setId_commande(rs.getInt(1));
+                item.setId_etat_commade(rs.getInt(9));
+                Produit p = productbuilder.construireProduitLogique(rs.getInt(10), rs.getString(11),0,0, rs.getInt(14));
+                p.setCouleur(rs.getString(13));
+                p.setTaille(rs.getString(12));
+                item.setProduit(p);
+
+                malisteCommande.get(indexTemp).getListeItem().add(item);
+
+            }
+
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        return  malisteCommande;
+
+    }
+
+
+
+
 
     public ArrayList<Produit> getListeProduit()
     {
@@ -440,7 +533,7 @@ public class DataBase {
             stmt.setInt(1, quantite);
             stmt.setInt(2, getIndexItemPanier());
             stmt.setInt(3, idProduit);
-            stmt.setInt(4, getPanier(getCip()).getIdPanier());
+            //stmt.setInt(4, getPanier(cip);
 
             stmt.executeUpdate();
         } catch (SQLException ex){
@@ -448,16 +541,150 @@ public class DataBase {
         }
     }
 
-    public String getCip(){
-        Principal principal = httpServletRequest.getUserPrincipal();
-        Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
-        Etudiant etudiant = new Etudiant();
-        etudiant.setCip(principal.getName());
-        etudiant.setNom((String)details.get("nomFamille"));
-        etudiant.setPrenom((String)details.get("prenom"));
-        etudiant.setCourriel((String)details.get("courriel"));
+    /**
+     * Permet d'aller chercher le dernier index de commande
+     * @return l'index pour ajouter une nouvelle commande
+     */
+    public int getIndexCommande(){
+        int index = 0;
 
-        return etudiant.getCip();
+        String SQL = "SELECT MAX(id_commande) FROM commande" ;
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)){
+            rs.next();
+            index = rs.getInt(1);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return index+1;
+    }
+
+    /**
+     * Permet d'aller chercher le dernier index de item_commander
+     * @return l'index pour ajouter un nouvel item_commander
+     */
+    public int getIndexItemCommande(){
+        int index = 0;
+
+        String SQL = "SELECT MAX(id_item_commander) FROM item_commander" ;
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)){
+            rs.next();
+            index = rs.getInt(1);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return index+1;
+    }
+
+    /**
+     * Methode qui permet de commander un item individuel
+     * @param id id du produit a commander
+     */
+    public void CommanderItem(int id, int quantite, String cip){
+        String SQL = "INSERT INTO COMMANDE VALUES(?,?,?,?,?)";
+        int index = getIndexCommande();
+        int prixTotal = getProduit(id).getPrix()*quantite;
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setDate(1, new Date(System.currentTimeMillis()));
+            stmt.setInt(2, index);
+            stmt.setInt(3, prixTotal);
+            stmt.setString(4, cip);
+            stmt.setInt(5, 1);
+
+            stmt.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        String SQL2 = "INSERT INTO item_commander VALUES(?,?,?,?,?,?)";
+
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
+
+            stmt2.setInt(1, getIndexItemCommande());
+            stmt2.setInt(2, quantite);
+            stmt2.setInt(3, prixTotal);
+            stmt2.setInt(4, index);
+            stmt2.setInt(5, id);
+            stmt2.setInt(6,1);
+
+            stmt2.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        System.out.println("ca marche i guess");
+    }
+
+    public void ajouterItemCommander(int id, int quantite, int idCommande){
+        String SQL2 = "INSERT INTO item_commander VALUES(?,?,?,?,?,?)";
+        int prixTotal = getProduit(id).getPrix()*quantite;
+
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
+
+            stmt2.setInt(1, getIndexItemCommande());
+            stmt2.setInt(2, quantite);
+            stmt2.setInt(3, prixTotal);
+            stmt2.setInt(4, idCommande);
+            stmt2.setInt(5, id);
+            stmt2.setInt(6,1);
+
+            stmt2.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        System.out.println("ca marche i guess");
+    }
+
+    /**
+     * Permet d'aller chercher le dernier index de item_commander
+     * @return l'index pour ajouter un nouvel item_commander
+     */
+    public int getIndexItemInventaire(){
+        int index = 0;
+
+        String SQL = "SELECT MAX(id_envnetaire_produit) FROM inventaire_produit" ;
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)){
+            rs.next();
+            index = rs.getInt(1);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return index+1;
+    }
+
+    public void ajouterItemInventaire(int idProduit, int quantite){
+        String SQL2 = "INSERT INTO inventaire_produit VALUES(?,?,?)";
+
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
+
+            stmt2.setInt(1, quantite);
+            stmt2.setInt(2, getIndexItemInventaire());
+            stmt2.setInt(3, idProduit);
+
+            stmt2.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
     public Connection connect() throws SQLException {

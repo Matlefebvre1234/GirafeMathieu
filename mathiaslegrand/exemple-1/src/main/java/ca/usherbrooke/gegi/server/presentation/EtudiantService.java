@@ -71,6 +71,13 @@ public class EtudiantService {
         return etudiant;
     }
 
+    public String getCip() {
+        Principal principal = httpServletRequest.getUserPrincipal();
+        Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
+
+        return principal.getName();
+    }
+
     @GET
     @Path("getUtilisateur")
     @Produces("application/json")
@@ -116,9 +123,9 @@ public class EtudiantService {
 
     @POST
     @Path("insert_produit")
-    public void insertProduitDB(@FormParam("nom") String nom, @FormParam("description") String description, @FormParam("taille") String taille, @FormParam("prix") float prix, @FormParam("couleur") String couleur, @FormParam("visibilite") int visibilite, @FormParam("etat") int etat, @FormParam("url") String url) {
+    public void insertProduitDB(@FormParam("nom") String nom, @FormParam("description") String description, @FormParam("taille") String taille, @FormParam("prix") float prix, @FormParam("couleur") String couleur, @FormParam("visibilite") int visibilite, @FormParam("etat") int etat, @FormParam("url") String url, @FormParam("quantite") int quantite) {
         DataBase database = DataBase.getInstance();
-        database.insertProduitDB( nom,description,taille,prix,couleur,visibilite, etat,url);
+        database.insertProduitDB( nom,description,taille,prix,couleur,visibilite, etat,url, quantite);
     }
 
     @GET

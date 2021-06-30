@@ -39,13 +39,15 @@ public class ConcreteBuilderCommande implements BuilderCommande{
      * Methode qui permet de construire la commande
      */
     @Override
-    public void construireCommande(int idCcommande, String cip, Date date, int prixTotal, int idEtatCommande, ArrayList<Item_Commander> liste) {
+    public Commande construireCommande(int idCcommande, String cip, Date date, int prixTotal, int idEtatCommande, ArrayList<Item_Commander> liste) {
+        resultat = new Commande();
         resultat.setId_commande(idCcommande);
         resultat.setCip(cip);
         resultat.setDate(date);
         resultat.setPrix_total(prixTotal);
         resultat.setId_etat_commande(idEtatCommande);
         resultat.setListeItem(liste);
+        return resultat;
     }
 
     /**
