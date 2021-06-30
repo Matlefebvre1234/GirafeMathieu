@@ -14,10 +14,9 @@ import java.util.ArrayList;
  * @version 1.0
  * @see DataBase
  */
-@Path("/produit")
-public class ProduitService extends Application {
+@Path("/inventaire")
+public class InventaireService extends Application {
 
-    //localhost:8080/exemple-1/api/produit/salut
     @GET
     @Path("/listeproduits")
     @Produces("application/json")
@@ -37,12 +36,9 @@ public class ProduitService extends Application {
     }
 
     @POST
-    @Path("/getProduit")
-    @Produces("application/json")
-    public Produit getProduit(@FormParam("cip") int idProduit)
-    {
-        DataBase database = DataBase.getInstance();
-        System.out.println("ariel2.0: "+ idProduit);
-        return database.getProduit(idProduit);
+    @Path("/insererProduitInventaire")
+    public void insererProduitInventaire(@FormParam("id") int idProduit, @FormParam("quantite") int quantite){
+        DataBase dataBase = DataBase.getInstance();
+        dataBase.ajouterItemInventaire(idProduit, quantite);
     }
 }

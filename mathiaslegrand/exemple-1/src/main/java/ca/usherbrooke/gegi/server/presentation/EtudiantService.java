@@ -71,6 +71,13 @@ public class EtudiantService {
         return etudiant;
     }
 
+    public String getCip() {
+        Principal principal = httpServletRequest.getUserPrincipal();
+        Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
+
+        return principal.getName();
+    }
+
     @GET
     @Path("getUtilisateur")
     @Produces("application/json")

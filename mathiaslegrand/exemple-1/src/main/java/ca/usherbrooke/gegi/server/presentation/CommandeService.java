@@ -2,12 +2,15 @@ package ca.usherbrooke.gegi.server.presentation;
 
 import ca.usherbrooke.gegi.server.business.Commande;
 import ca.usherbrooke.gegi.server.business.Item_Commander;
+import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import java.security.Principal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 
 /**
@@ -22,6 +25,8 @@ import java.util.ArrayList;
  */
 @Path("/commande")
 public class CommandeService {
+    @Context
+    HttpServletRequest httpServletRequest;
     //localhost:8080/exemple-1/api/produit/salut
 
     public Connection connect() throws SQLException {
@@ -144,6 +149,29 @@ public class CommandeService {
     public ArrayList<Item_Commander> getListeItemCommander(){
         DataBase database = DataBase.getInstance();
         return database.getItem_Commander();
+    }
+
+
+    @GET
+    @Path("/commande")
+    @Produces("application/json")
+    public ArrayList<Commande> getCommande()
+    {
+        DataBase database = DataBase.getInstance();
+       //System.out.println(database.getCommande(.get(0).getId_comm)ande());
+        return database.getCommande();
+    }
+
+
+
+    @POST
+    @Path("/commander_item")
+    public void commanderItem(@FormParam("id") int idProduit, @FormParam("quantite") int quantite){
+        DataBase dataBase = DataBase.getInstance();
+        Principal principal = httpServletRequest.getUserPrincipal();
+        Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
+
+        dataBase.CommanderItem(idProduit, quantite, principal.getName());
     }
 }
 
