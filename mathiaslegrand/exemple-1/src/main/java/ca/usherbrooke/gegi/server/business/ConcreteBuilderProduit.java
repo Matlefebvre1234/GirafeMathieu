@@ -4,7 +4,7 @@ package ca.usherbrooke.gegi.server.business;
  * Implementation concrete du builder de commande
  * @author Mathieu Lefebvre
  * @version 1.0
- * @see BuilderProduit
+ * @see builderProduit
  */
 public class ConcreteBuilderProduit implements builderProduit{
 
@@ -20,7 +20,11 @@ public class ConcreteBuilderProduit implements builderProduit{
      * @param id_etat etat de l'itenm (precommande, etc.)
      * @return
      */
+
     @Override
+    /**
+     * Cette fonction permet de construire des produits pour l'interface
+     */
     public Produit construireProduitInterface(int idproduit, String nomitem, String description, int prix, String taille, String couleur, int visibilite_site, int id_etat) {
         Produit po = new Produit();
 
@@ -45,6 +49,10 @@ public class ConcreteBuilderProduit implements builderProduit{
      * @return
      */
     @Override
+
+    /**
+     * Cette fonction permet de construire des produits pour la logique du code
+     */
     public Produit construireProduitLogique(int idproduit, String nomitem, int prix, int visibilite_site, int id_etat) {
         Produit po = new Produit();
 
