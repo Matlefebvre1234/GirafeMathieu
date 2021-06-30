@@ -24,8 +24,7 @@ public class DataBase {
 
     private static  DataBase instance;
 
-    private DataBase()
-    {
+    private DataBase()  {
         try {
             connect();
         } catch (SQLException throwables) {
@@ -463,5 +462,41 @@ public class DataBase {
 
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
+    }
+
+    public Panier getPanierFromCIP(String cip){
+        String SQL = "SELECT nomitem, taille, prix, quantite FROM produit, item_panier WHERE item_panier.idproduit= produit.idproduit AND client.idproduit = item_panier.idproduit AND cip=?";
+        Panier panier = new Panier();
+        ArrayList<ItemPanier> itemArray = new ArrayList<>();
+
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setString(1,cip);
+            ResultSet rs = stmt.executeQuery();
+            panier.setCip(cip);
+
+            while(rs.next()){
+                ItemPanier item = new ItemPanier();
+                Produit produit = new Produit();
+
+                produit.setNomitem(rs.getString(1));
+                produit.setTaille(rs.getString(2));
+                produit.setPrix(rs.getInt(3));
+                item.addQuantite(rs.getInt(4));
+                item.setProduit(produit);
+
+                itemArray.add(item);
+            }
+
+
+            panier.setItems(itemArray);
+
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+
+        }
+
+        return panier;
     }
 }
