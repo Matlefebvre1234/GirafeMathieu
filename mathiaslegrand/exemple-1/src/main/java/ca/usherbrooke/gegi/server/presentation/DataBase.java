@@ -534,7 +534,7 @@ public class DataBase {
             stmt.setInt(1, quantite);
             stmt.setInt(2, getIndexItemPanier());
             stmt.setInt(3, idProduit);
-            stmt.setInt(4, getPanier(getCip()).getIdPanier());
+            //stmt.setInt(4, getPanier(cip);
 
             stmt.executeUpdate();
         } catch (SQLException ex){
@@ -542,24 +542,90 @@ public class DataBase {
         }
     }
 
-    public String getCip(){
-        Principal principal = httpServletRequest.getUserPrincipal();
-        Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
-        Etudiant etudiant = new Etudiant();
-        etudiant.setCip(principal.getName());
-        etudiant.setNom((String)details.get("nomFamille"));
-        etudiant.setPrenom((String)details.get("prenom"));
-        etudiant.setCourriel((String)details.get("courriel"));
+    /**
+     * Permet d'aller chercher le dernier index de commande
+     * @return l'index pour ajouter une nouvelle commande
+     */
+    public int getIndexCommande(){
+        int index = 0;
 
-        return etudiant.getCip();
+        String SQL = "SELECT MAX(id_commande) FROM commande" ;
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)){
+            rs.next();
+            index = rs.getInt(1);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return index+1;
+    }
+
+    /**
+     * Permet d'aller chercher le dernier index de item_commander
+     * @return l'index pour ajouter un nouvel item_commander
+     */
+    public int getIndexItemCommande(){
+        int index = 0;
+
+        String SQL = "SELECT MAX(id_item_commander) FROM item_commander" ;
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)){
+            rs.next();
+            index = rs.getInt(1);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return index+1;
     }
 
     /**
      * Methode qui permet de commander un item individuel
      * @param id id du produit a commander
      */
-    public void CommanderItem(int id, int quantite){
-        System.out.println("Sale pute :" + id + " : " + quantite);
+    public void CommanderItem(int id, int quantite, String cip){
+        String SQL = "INSERT INTO COMMANDE VALUES(?,?,?,?,?)";
+        int index = getIndexCommande();
+        int prixTotal = getProduit(id).getPrix()*quantite;
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setDate(1, new Date(System.currentTimeMillis()));
+            stmt.setInt(2, index);
+            stmt.setInt(3, prixTotal);
+            stmt.setString(4, cip);
+            stmt.setInt(5, 1);
+
+            stmt.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        String SQL2 = "INSERT INTO item_commander VALUES(?,?,?,?,?,?)";
+
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
+
+            stmt2.setInt(1, getIndexItemCommande());
+            stmt2.setInt(2, quantite);
+            stmt2.setInt(3, prixTotal);
+            stmt2.setInt(4, index);
+            stmt2.setInt(5, id);
+            stmt2.setInt(6,1);
+
+            stmt2.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        System.out.println("ca marche i guess");
     }
 
     public Connection connect() throws SQLException {

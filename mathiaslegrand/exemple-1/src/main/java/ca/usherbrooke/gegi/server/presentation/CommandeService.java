@@ -2,10 +2,15 @@ package ca.usherbrooke.gegi.server.presentation;
 
 import ca.usherbrooke.gegi.server.business.Commande;
 import ca.usherbrooke.gegi.server.business.Item_Commander;
+import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import java.security.Principal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 
 /**
@@ -20,6 +25,8 @@ import java.util.ArrayList;
  */
 @Path("/commande")
 public class CommandeService {
+    @Context
+    HttpServletRequest httpServletRequest;
     //localhost:8080/exemple-1/api/produit/salut
 
     public Connection connect() throws SQLException {
@@ -161,7 +168,10 @@ public class CommandeService {
     @Path("/commander_item")
     public void commanderItem(@FormParam("id") int idProduit, @FormParam("quantite") int quantite){
         DataBase dataBase = DataBase.getInstance();
-        dataBase.CommanderItem(idProduit, quantite);
+        Principal principal = httpServletRequest.getUserPrincipal();
+        Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
+
+        dataBase.CommanderItem(idProduit, quantite, principal.getName());
     }
 }
 

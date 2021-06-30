@@ -42,7 +42,7 @@ public class ProduitService extends Application {
     public Produit getProduit(@FormParam("cip") int idProduit)
     {
         DataBase database = DataBase.getInstance();
-        System.out.println(idProduit);
+        System.out.println("ariel2.0: "+ idProduit);
         return database.getProduit(idProduit);
     }
 }
