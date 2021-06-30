@@ -135,7 +135,7 @@ webix.ready(function() {
                             url:$$("url").getValue(),
                             quantite:$$("quantite").getValue()}
                         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-                        var datatexte = ('nom='+data.nom + '&description='+data.description + '&prix='+data.prix + '&taille='+data.taille + '&couleur='+data.couleur + '&visibilite='+data.visibilite + '&etat='+data.etat+ '&url='+data.url);
+                        var datatexte = ('nom='+data.nom + '&description='+data.description + '&prix='+data.prix + '&taille='+data.taille + '&couleur='+data.couleur + '&visibilite='+data.visibilite + '&etat='+data.etat+ '&url='+data.url + '&quantite='+data.quantite);
                         xhr.send(datatexte);
                         xhr.onload = () =>{
                             console.log(xhr.response);
@@ -144,7 +144,7 @@ webix.ready(function() {
                 }
             ],
             autoheight: true,
-            width: 500
+            autowidth:true
         }
     })
 });

@@ -1,14 +1,17 @@
+
+
 webix.ready(function() {
     if (webix.CustomScroll)
         webix.CustomScroll.init();
     webix.ui({
+
         rows: [
             {
                 view: "toolbar", css: "webix_dark", elements: [
                     {view: "button", type: "icon", icon: "wxi-angle-double-down", width: 30, align: "left",click: function(){
                             $$("$sidebar1").toggle();}},
                     {view: "label", label: "Menu", align: "left"},
-                    { view: "button", type: "icon", icon: "wxi-user", width: 40, align: "right" },  
+                    { view: "button", type: "icon", icon: "wxi-user", width: 40, align: "right"},
                     {view: "button", type: "icon", icon: "mdi mdi-email", width: 40, align: "right"}
                 ]
             },
@@ -61,8 +64,4 @@ const getData = () => {
         console.log(reponseData);
     }));
 };
-
-const PageAccueil = () => {
-    window.location.replace("http://www.w3schools.com");
-}
 

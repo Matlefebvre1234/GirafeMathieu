@@ -103,7 +103,7 @@ public class DataBase {
     }
 
 
-    public void insertProduitDB( String nom, String description, String taille, float prix,String couleur, int visibilite,  int etat, String url) {
+    public void insertProduitDB(String nom, String description, String taille, float prix, String couleur, int visibilite, int etat, String url, int quantite) {
         String SQL = "INSERT INTO produit(nomitem, idproduit, description, prix, taille, couleur, visibilite_site, id_etat)" + " VALUES(?,?,?,?,?,?,?,?)";
 
         int index = getLastIndex();
@@ -127,6 +127,7 @@ public class DataBase {
 
 
         insertImageProduitDb(url, index);
+        ajouterItemInventaire(index, quantite);
     }
 
 
