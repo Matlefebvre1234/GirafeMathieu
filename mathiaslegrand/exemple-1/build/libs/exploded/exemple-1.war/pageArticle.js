@@ -1,65 +1,56 @@
-webix.ready(function() {
-    //webix.html.addCss($$("agegTitre").$view, "red");
-    if (webix.CustomScroll)
-        webix.CustomScroll.init();
-    webix.ui({
-        view: "scrollview",
-        id: "scrollview",
-        scroll: "y",
-        height: "80%",
-        width: "80%", body: {
-            cols: [
-                {
-                    view: "sidemenu",
-                    id: "menu",
-                    width: 200,
-                    position: "top",
-                    state: function (state) {
-                        state.top = $$("toolbar").$height;
+
+
+webix.ready( function () {
+
+    var queryString = decodeURIComponent(window.location.search);
+    queryString = queryString.substring(1);
+    var intermediaire;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:8080/exemple-1/api/produit/getProduit');
+    var data = {cip: queryString}
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    var datatexte = ('cip=' + data.cip)
+    xhr.send(datatexte);
+    xhr.onload =  () => {
+        intermediaire =  xhr.response;
+        console.log(intermediaire);
+        var titre = JSON.parse(intermediaire);
+        titre = titre.nomitem;
+
+        console.log(titre);
+
+        if (webix.CustomScroll)
+            webix.CustomScroll.init();
+
+        webix.ui({
+            view: "scrollview",
+            id: "scrollview",
+            scroll: "y",
+            body: {
+                rows: [
+                    {
+                        view: "label",
+                        id: "nomProduit",
+                        name: "nomProduit",
+                        height: 200,
+                        label: titre,
+                        css: "titre",
+                        align: "left"
+                        //label: "Bas De texte"
                     },
-                    css: "my_menu",
-                    body: {
-                        borderless: true,
-                        margin: 5,
+                    {
                         cols: [
                             {
-
                                 rows: [
-                                    {
-                                        view: "list",
-                                        scroll: false,
-                                        layout: "x",
-
-                                        template: "<span class='webix_icon mdi mdi-#icon#'></span> #value#",
-                                        data: [
-                                            {id: 1, value: "Customers", icon: "account"},
-                                            {id: 2, value: "Products", icon: "cube"},
-                                            {id: 3, value: "Reports", icon: "chart-bar"},
-                                            {id: 4, value: "Archives", icon: "database"},
-                                            {id: 5, value: "Settings", icon: "cogs"}
-                                        ],
-                                        select: true,
-                                        type: {
-                                            width: "auto",
-                                            height: 40
-                                        }
-                                    },
-                                    {
-                                        view: "label",
-                                        id: "nomProduit",
-                                        height: 200,
-                                        label: "Legging",
-                                        css: "titre",
-                                        align: "left"
-                                        //label: "Bas De texte"
-                                    },
                                     {
                                         view: "carousel",
                                         css: "webix_dark",
                                         id: "carousel",
+                                        filespace: true,
                                         scrollSpeed: "500ms",
-                                        width: "auto",
+                                        autoWidth: true,
                                         height: 500,
+                                        borderless: true,
                                         align: "left",
                                         cols: [
                                             {
@@ -88,74 +79,117 @@ webix.ready(function() {
                                                 data: {src: "https://drive.google.com/uc?export=view&id=1JLcyOWfbtUFUMPBedtEcO9nw0wAn87A1"}
                                             }
                                         ]
-                                    },
-
-                                ],
+                                    }
+                                ]
                             },
                             {
                                 rows: [
                                     {
-                                        view: "label",
-                                        id: "description",
-                                        height: 100,
+                                        view: "textarea",
                                         label: "Description",
-                                        css: "titre",
-                                        align: "left"
-                                        //label: "Bas De texte"
+                                        labelPosition: "top",
+                                        id: "txtdescription",
+                                        readonly: true,
+                                        height: 180,
                                     },
                                     {
-                                        view: "label",
-                                        id: "taille",
-                                        height: 100,
-                                        label: "Taille",
-                                        css: "titre",
-                                        align: "left"
-                                        //label: "Bas De texte"
+                                        cols: [
+                                            {
+                                                cols: [
+                                                    {
+                                                        view: "richselect",
+                                                        label: "Taille",
+                                                        id: "choixtaille",
+                                                        value: "Taille",
+                                                        options: [
+                                                            {"id": 1, "value": "XS"},
+                                                            {"id": 2, "value": "S"},
+                                                            {"id": 3, "value": "M"}],
+                                                        //TODO Connecter avec la base de donnees
+                                                        height: 50,
+                                                        width: 150,
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                cols: [
+                                                    {
+                                                        view: "richselect",
+                                                        label: "Quantite",
+                                                        id: "quantiteProduit",
+                                                        options: [
+                                                            {"id": 1, "value": "1"},
+                                                            {"id": 2, "value": "2"},
+                                                            {"id": 3, "value": "3"}],
+                                                        //TODO Connecter avec la base de donnees et rajouter des options
+                                                        height: 50,
+                                                        width: 150,
+                                                    }
+                                                ]
+                                            }
+                                        ]
                                     },
                                     {
-                                        view: "label",
-                                        id: "prix",
-                                        height: 100,
+                                        view: "text",
                                         label: "Prix",
-                                        css: "titre",
-                                        align: "left"
-                                        //label: "Bas De texte"
+                                        id: "prixunitaire",
+                                        value: 19.99,
+                                        readonly: true,
+                                        height: 50,
+                                        width: 300
                                     },
                                     {
-                                        view: "label",
-                                        id: "inventaire",
-                                        height: 100,
-                                        label: "Inventaire",
-                                        css: "titre",
-                                        align: "left"
-                                        //label: "Bas De texte"
-                                    }
-
+                                        view: "textarea",
+                                        label: "Informations",
+                                        id: "information",
+                                        labelPosition: "top",
+                                        borderless: true,
+                                        readonly: true,
+                                        height: 200,
+                                        width: 300
+                                    },
 
                                 ]
-
-                            }]
-                    },
-                }]
-        }
-    })
-}
-)
+                            }
+                        ]
+                    }
 
 
+                ]
+
+            }
+        })
+    };
+    //console.log(intermediaire);
+
+    /*fetch('http//localhost:8080/exemple-1/api/produit/getProduit', {
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(
+            {
+                nom: queryString
+            }
+        )
+    }).then(res=>{
+        return res.json()
+    }).then(data => console.log(data))*/
+    //sendData(queryString,'http//localhost:8080/exemple-1/api/produit/getProduit');
 
 
+    //var titre  = intermediaire["nomitem"];
+    //webix.html.addCss($$("agegTitre").$view, "red");
 
 
-
-
-
+})
 
 
 
 function img(obj){
     return '<img src="'+obj.src+'" alt="centered image" class = "carousel_image"/>'
 }
+
 const sendHttpRequest  = (method, url, data) =>{
     const xhr = new XMLHttpRequest();
     xhr.open(method, url);
@@ -173,8 +207,8 @@ const sendHttpRequest  = (method, url, data) =>{
     xhr.send(JSON.stringify(data));
 };
 
-const sendData = (cipVal) => {
-    sendHttpRequest('POST', 'http://localhost:8080/exemple-1/api/insert_admin', {
+function sendData(cipVal, url){
+    sendHttpRequest('POST', url, {
         cip: cipVal
     }).then(responseData => {
         console.log(responseData);

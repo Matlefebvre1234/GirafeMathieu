@@ -461,6 +461,14 @@ public class DataBase {
         return etudiant.getCip();
     }
 
+    /**
+     * Methode qui permet de commander un item individuel
+     * @param id id du produit a commander
+     */
+    public void CommanderItem(int id, int quantite){
+
+    }
+
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
     }
