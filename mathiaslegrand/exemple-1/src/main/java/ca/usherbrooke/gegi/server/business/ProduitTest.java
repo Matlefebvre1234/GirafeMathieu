@@ -156,11 +156,11 @@ class ProduitTest {
         Produit produit = new Produit();
         produit.setCouleur("Rouge");
         Assertions.assertEquals("Rouge", produit.getCouleur());
-        produit.setTaille("Vert");
+        produit.setCouleur("Vert");
         Assertions.assertEquals("Vert", produit.getCouleur());
-        produit.setTaille("Bleu");
+        produit.setCouleur("Bleu");
         Assertions.assertEquals("Bleu", produit.getCouleur());
-        produit.setTaille("Jaune");
+        produit.setCouleur("Jaune");
         Assertions.assertEquals("Jaune", produit.getCouleur());
     }
 
@@ -169,11 +169,11 @@ class ProduitTest {
         Produit produit = new Produit();
         produit.setCouleur("Rouge");
         Assertions.assertEquals("Rouge", produit.getCouleur());
-        produit.setTaille("Vert");
+        produit.setCouleur("Vert");
         Assertions.assertEquals("Vert", produit.getCouleur());
-        produit.setTaille("Bleu");
+        produit.setCouleur("Bleu");
         Assertions.assertEquals("Bleu", produit.getCouleur());
-        produit.setTaille("Jaune");
+        produit.setCouleur("Jaune");
         Assertions.assertEquals("Jaune", produit.getCouleur());
 
     }
