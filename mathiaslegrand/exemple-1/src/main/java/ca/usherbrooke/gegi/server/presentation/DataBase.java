@@ -227,6 +227,23 @@ public class DataBase {
             System.out.println(e.getMessage());
         }
 
+        String SQL2 = "SELECT url FROM produit_photo WHERE idproduit = ?";
+
+        try {Connection conn2 = connect();
+            PreparedStatement stmt = conn2.prepareStatement(SQL2);
+            stmt.setInt(1, id);
+            ResultSet rs2 = stmt.executeQuery();
+            while(rs2.next()){
+                System.out.println("allo: " + rs2.getString(1));
+                p.addPhoto(rs2.getString(1));
+            }
+
+
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
         return  p;
     }
 
