@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public interface BuilderCommande {
     void reset();
-    void construireCommande(int idCcommande, String cip, Date date, int prixTotal, int idEtatCommande, ArrayList<Item_Commander> liste);
+    Commande construireCommande(int idCcommande, String cip, Date date, int prixTotal, int idEtatCommande, ArrayList<Item_Commander> liste);
     void constuireItemCommander();
     void construireProduit();
 }
