@@ -36,6 +36,15 @@ public class ProduitService extends Application {
         return database.getInventaire();
     }
 
+    @GET
+    @Path("/inventaire")
+    @Produces("application/json")
+    public int getItemInventaire()
+    {
+        DataBase database = DataBase.getInstance();
+        return 10;
+    }
+
     @POST
     @Path("/getProduit")
     @Produces("application/json")
