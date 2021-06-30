@@ -133,7 +133,13 @@ webix.ready( function () {
                                         height: 200,
                                         width: 300
                                     },
-
+                                    {
+                                        view:"button",
+                                        id:"my_button",
+                                        value:"Commander",
+                                        css:"webix_primary",
+                                        inputWidth:100
+                                    }
                                 ]
                             }
                         ]

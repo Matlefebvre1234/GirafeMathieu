@@ -11,23 +11,24 @@ import java.util.Date;
  */
 
 public class Commande {
-    private Date date;
+
     private int id_commande;
     private float prix_total;
     private String cip;
     private int id_etat_commande;
+    private String date;
     private ArrayList<Item_Commander> listeItem;
 
     public Commande(){
         listeItem = new ArrayList<>();
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+       return date;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = date.toString();
     }
 
     public float getPrix_total() {
