@@ -9,7 +9,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4cca78b-6aab-4f67-8912-0f21c3f11b86" name="Default Changelist" comment="" />
+    <list default="true" id="e4cca78b-6aab-4f67-8912-0f21c3f11b86" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/CommandeTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduitTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/EtudiantTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_CommanderTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_inventaireTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/CommandeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduitTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/EtudiantTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_CommanderTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_inventaireTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Commande.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Commande.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduit.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Etudiant.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Etudiant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_Commander.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_Commander.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_inventaire.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_inventaire.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Produit.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Produit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/ProduitTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/ProduitTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exemple-1.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exemple-1.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Commande.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Commande.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Etudiant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Etudiant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_Commander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_Commander.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_inventaire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_inventaire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Produit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Produit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ProduitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ProduitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/injection/RestApplicationPathConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/injection/RestApplicationPathConfig.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,6 +51,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectId" id="1ugCAvtnxjlh804Ye26zPICRtlu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -117,6 +145,7 @@
       <option name="presentableId" value="Default" />
       <updated>1625077704716</updated>
       <workItem from="1625077706137" duration="2999000" />
+      <workItem from="1625083132661" duration="11000" />
     </task>
     <servers />
   </component>
