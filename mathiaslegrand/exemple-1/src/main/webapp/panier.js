@@ -15,15 +15,15 @@ webix.ready(function(){
                             { "view": "label", "height": 0, "borderless": 0 },
                             { "view": "label", "height": 0, "borderless": 0 },
                             { "view": "label", "height": 0, "borderless": 0 },
-                            { "view": "label", "height": 0, "borderless": 0 },
+                            { "label": "Quantité","view": "label", "height": 0, "borderless": 0 , align : "center"},
                             {
                                 "height": 48,
                                 "rows": [
-                                    { "label": "Click me", "view": "button", "height": 0 },
-                                    { "label": "Click me", "view": "button", "height": 0 }
+                                    { "label": "+", "view": "button", "height": 0 },
+                                    { "label": "-", "view": "button", "height": 0 }
                                 ]
                             },
-                            { "label": "Click me", "view": "button", "height": 48 }
+                            { "label": "Retirer l'article", "view": "button", "height": 48 }
                         ]
                     },
                     {
