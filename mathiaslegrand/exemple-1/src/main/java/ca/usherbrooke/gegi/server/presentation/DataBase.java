@@ -342,6 +342,82 @@ public class DataBase {
         }
     }
 
+    public ArrayList<Commande> getCommande()
+    {
+        ConcreteBuilderCommande builder = new ConcreteBuilderCommande();
+        ArrayList<Commande> malisteCommande = new ArrayList<Commande>();
+
+        String SQL1 = "SELECT Commande.id_commande,cip,Commande.prix_total,Commande.date,Commande.id_etat_commande FROM commande";
+        try {Connection conn = connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL1);
+
+            while (rs.next())
+            {
+                Commande c = builder.construireCommande(rs.getInt(1),rs.getString(2),rs.getDate(4),rs.getInt(3),rs.getInt(5),new ArrayList<Item_Commander>());
+                malisteCommande.add(c);
+            }
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        ConcreteBuilderProduit productbuilder = new ConcreteBuilderProduit();
+        ArrayList<Item_Commander> listeItem = new ArrayList<Item_Commander>();
+        String SQL = "SELECT Commande.id_commande,cip,Commande.prix_total,Commande.date,Commande.id_etat_commande, item_commander.id_item_commander," +
+                "item_commander.quantite,item_commander.prixtotal,item_commander.id_etat_commande," +
+                "item_commander.idproduit,produit.nomitem,produit.taille,produit.couleur,produit.id_etat FROM Commande JOIN item_commander" +
+                " ON Commande.id_commande = item_commander.id_commande JOIN produit ON item_commander.idproduit = produit.idproduit order by Commande.id_commande";
+        try {Connection conn = connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL);
+
+            int indexTemp = 0;
+            while(rs.next())
+            {
+
+
+                for(int i =0;i<malisteCommande.size();i++)
+                {
+                    System.out.println("Test :" + malisteCommande.get(i).getId_commande() + "rs " + rs.getInt(1) );
+                    if(malisteCommande.get(i).getId_commande() == rs.getInt(1))
+                    {
+                        System.out.println("INDEX CHANGE TO " + i);
+                        indexTemp = i;
+                    }
+
+                }
+
+                System.out.println("INdex " + indexTemp);
+                Item_Commander item = new Item_Commander();
+                item.setId_item_commander(rs.getInt(6));
+                item.setQuantite(rs.getInt(7));
+                item.setPrixtotal(rs.getInt(8));
+                System.out.println("itemset : " + rs.getInt(9));
+                item.setId_commande(rs.getInt(1));
+                System.out.println("commande : " + item.getId_commande());
+                item.setId_etat_commade(rs.getInt(9));
+                Produit p = productbuilder.construireProduitLogique(rs.getInt(10), rs.getString(11),0,0, rs.getInt(14));
+                p.setCouleur(rs.getString(13));
+                p.setTaille(rs.getString(12));
+                item.setProduit(p);
+
+                malisteCommande.get(indexTemp).getListeItem().add(item);
+
+            }
+
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        return  malisteCommande;
+
+    }
+
+
+
+
 
     public ArrayList<Produit> getListeProduit()
     {

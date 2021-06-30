@@ -145,5 +145,18 @@ public class CommandeService {
         DataBase database = DataBase.getInstance();
         return database.getItem_Commander();
     }
+
+
+    @GET
+    @Path("/commande")
+    @Produces("application/json")
+    public ArrayList<Commande> getCommande()
+    {
+        DataBase database = DataBase.getInstance();
+       //System.out.println(database.getCommande(.get(0).getId_comm)ande());
+        return database.getCommande();
+    }
+
+
 }
 
