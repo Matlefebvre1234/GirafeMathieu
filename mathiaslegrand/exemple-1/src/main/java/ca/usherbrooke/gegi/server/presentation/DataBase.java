@@ -628,6 +628,28 @@ public class DataBase {
         System.out.println("ca marche i guess");
     }
 
+    public void ajouterItemCommander(int id, int quantite, int idCommande){
+        String SQL2 = "INSERT INTO item_commander VALUES(?,?,?,?,?,?)";
+        int prixTotal = getProduit(id).getPrix()*quantite;
+
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
+
+            stmt2.setInt(1, getIndexItemCommande());
+            stmt2.setInt(2, quantite);
+            stmt2.setInt(3, prixTotal);
+            stmt2.setInt(4, idCommande);
+            stmt2.setInt(5, id);
+            stmt2.setInt(6,1);
+
+            stmt2.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        System.out.println("ca marche i guess");
+    }
+
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
     }
