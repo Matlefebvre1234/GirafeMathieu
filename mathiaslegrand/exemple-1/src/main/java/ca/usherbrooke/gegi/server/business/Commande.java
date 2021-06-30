@@ -12,11 +12,11 @@ import java.util.Date;
 
 public class Commande {
 
-    private int id_commande;
-    private float prix_total;
+    private int idCommande;
+    private float prixTotal;
     private String cip;
     private int id_etat_commande;
-    private String date;
+    private Date date;
     private ArrayList<Item_Commander> listeItem;
 
     public Commande(){
@@ -27,17 +27,15 @@ public class Commande {
      * Cette fonction retourne la date de la commande
      * @return
      */
-    public String getDate() {
+    public Date getDate() {
        return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date.toString();
     /**
      * Cette fonction change la date de la commande
      * @param date
      */
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -45,32 +43,32 @@ public class Commande {
      * Cette fonction retourne le prix total de la commande
      * @return
      */
-    public float getPrix_total() {
-        return prix_total;
+    public float getPrixTotal() {
+        return prixTotal;
     }
 
     /**
      * Cette fonction change le prix total de la commande
-     * @param prix_total
+     * @param prixTotal
      */
-    public void setPrix_total(float prix_total) {
-        this.prix_total = prix_total;
+    public void setPrixTotal(float prixTotal) {
+        this.prixTotal = prixTotal;
     }
 
     /**
      * Cette fonction retourne l'id de la commande
      * @return
      */
-    public int getId_commande() {
-        return id_commande;
+    public int getIdCommande() {
+        return idCommande;
     }
 
     /**
      * Cette fonction change l'id de la commande
-     * @param id_commande
+     * @param idCommande
      */
-    public void setId_commande(int id_commande) {
-        this.id_commande = id_commande;
+    public void setIdCommande(int idCommande) {
+        this.idCommande = idCommande;
     }
 
     /**
@@ -93,7 +91,7 @@ public class Commande {
      * Cette fonction retourne l'id de l'etat de la commande
      * @return
      */
-    public int getId_etat_commande() {
+    public int getIdEtatCommande() {
         return id_etat_commande;
     }
 
@@ -101,14 +99,22 @@ public class Commande {
      * Cette fonction change l'id de l'etat de la commande
      * @param id_etat_commande
      */
-    public void setId_etat_commande(int id_etat_commande) {
+    public void setIdEtatCommande(int id_etat_commande) {
         this.id_etat_commande = id_etat_commande;
     }
 
+    /**
+     * Cette fonction change la liste d'item commander
+     * @param listeItem
+     */
     public void setListeItem(ArrayList<Item_Commander> listeItem) {
         this.listeItem = listeItem;
     }
 
+    /**
+     * Cette fonction retourne la liste d'item commander
+     * @return
+     */
     public ArrayList<Item_Commander> getListeItem() {
         return listeItem;
     }

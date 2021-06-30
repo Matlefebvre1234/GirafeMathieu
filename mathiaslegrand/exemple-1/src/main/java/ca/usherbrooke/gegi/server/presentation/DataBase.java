@@ -1,16 +1,11 @@
 package ca.usherbrooke.gegi.server.presentation;
 
 import ca.usherbrooke.gegi.server.business.*;
-import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.core.Context;
-import javax.xml.crypto.Data;
-import java.security.Principal;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Contient toutes les methodes qui communiquent avec la base de donnees
@@ -400,7 +395,7 @@ public class DataBase {
                 for(int i =0;i<malisteCommande.size();i++)
                 {
 
-                    if(malisteCommande.get(i).getId_commande() == rs.getInt(1))
+                    if(malisteCommande.get(i).getIdCommande() == rs.getInt(1))
                     {
                         indexTemp = i;
                     }
