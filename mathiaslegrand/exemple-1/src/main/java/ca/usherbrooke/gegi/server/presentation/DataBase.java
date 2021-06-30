@@ -219,8 +219,25 @@ public class DataBase {
             PreparedStatement stmt = conn.prepareStatement(SQL);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
+            rs.next();
+            p = builder.construireProduitInterface(rs.getInt(2),rs.getString(1),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8));
 
-            p = builder.construireProduitInterface(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8));
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        String SQL2 = "SELECT url FROM produit_photo WHERE idproduit = ?";
+
+        try {Connection conn2 = connect();
+            PreparedStatement stmt = conn2.prepareStatement(SQL2);
+            stmt.setInt(1, id);
+            ResultSet rs2 = stmt.executeQuery();
+            while(rs2.next()){
+                System.out.println("allo: " + rs2.getString(1));
+                p.addPhoto(rs2.getString(1));
+            }
+
 
         }catch (SQLException e)
         {
@@ -535,6 +552,14 @@ public class DataBase {
         etudiant.setCourriel((String)details.get("courriel"));
 
         return etudiant.getCip();
+    }
+
+    /**
+     * Methode qui permet de commander un item individuel
+     * @param id id du produit a commander
+     */
+    public void CommanderItem(int id, int quantite){
+
     }
 
     public Connection connect() throws SQLException {

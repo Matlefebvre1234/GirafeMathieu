@@ -3,9 +3,7 @@ package ca.usherbrooke.gegi.server.presentation;
 import ca.usherbrooke.gegi.server.business.Commande;
 import ca.usherbrooke.gegi.server.business.Item_Commander;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -158,5 +156,12 @@ public class CommandeService {
     }
 
 
+
+    @POST
+    @Path("/commander_item")
+    public void commanderItem(@FormParam("id") int idProduit){
+        DataBase dataBase = DataBase.getInstance();
+        //dataBase.CommanderItem(idProduit);
+    }
 }
 

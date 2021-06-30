@@ -1,14 +1,12 @@
 
 webix.ready(function(){
 	//webix.html.addCss($$("agegTitre").$view, "red");
-	if (webix.CustomScroll)
-		webix.CustomScroll.init();
 	webix.ui({
 		view:"scrollview",
 		id:"scrollview",
+		enable: true,
 		scroll:"y",
-		height:"80%",
-		width:"80%",body:{
+		body:{
 			rows:[
 				{
 				view: "label",
@@ -104,7 +102,7 @@ webix.ready(function(){
 	});
 	$$("dataview1").attachEvent("onAfterSelect", function(id){
 		var value1= $$("dataview1").getItem(id);
-		var value = value1["idproduit"]
+		var value = value1["idproduit"];
 		var queryString = "?" + value;
 		window.location.href = "pageArticles.html" + queryString;
 	}
