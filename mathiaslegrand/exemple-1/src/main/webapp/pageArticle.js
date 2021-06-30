@@ -14,14 +14,24 @@ webix.ready( function () {
     xhr.onload =  () => {
         intermediaire =  xhr.response;
         console.log(intermediaire);
-        var titre = JSON.parse(intermediaire);
-        titre = titre.nomitem;
+        intermediaire = JSON.parse(intermediaire);
+        var titre = intermediaire.nomitem;
+        var description = intermediaire.description;
+        var prix = intermediaire.prix;
+        var photos = intermediaire["arrayPhoto"];
+        console.log(photos);
 
-        console.log(titre);
+        var viewsArray = [];
+        for(var i = 0; i < photos.length; i++){
+            viewsArray.push({
+                id: i,
+                css: "image",
+                template:img,
+                data: {src:photos[i]}
+            });
+        }
 
-        if (webix.CustomScroll)
-            webix.CustomScroll.init();
-
+        console.log(viewsArray);
         webix.ui({
             view: "scrollview",
             id: "scrollview",
@@ -52,33 +62,7 @@ webix.ready( function () {
                                         height: 500,
                                         borderless: true,
                                         align: "left",
-                                        cols: [
-                                            {
-                                                css: "images",
-                                                template: img,
-                                                data: {src: "https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}
-                                            },
-                                            {
-                                                css: "images",
-                                                template: img,
-                                                data: {src: "https://drive.google.com/uc?export=view&id=1GVDq4TWYwS35es9k7IdcN4s76PV1JRE3"}
-                                            },
-                                            {
-                                                css: "images",
-                                                template: img,
-                                                data: {src: "https://drive.google.com/uc?export=view&id=1GtqJ-uWW_aq8nIL6lYnLnG91PNQcwOxL"}
-                                            },
-                                            {
-                                                css: "images",
-                                                template: img,
-                                                data: {src: "https://drive.google.com/uc?export=view&id=1juGpKhUP184DaYzEferp7eOPAXzC3qWn"}
-                                            },
-                                            {
-                                                css: "images",
-                                                template: img,
-                                                data: {src: "https://drive.google.com/uc?export=view&id=1JLcyOWfbtUFUMPBedtEcO9nw0wAn87A1"}
-                                            }
-                                        ]
+                                        cols: viewsArray
                                     }
                                 ]
                             },
@@ -91,6 +75,7 @@ webix.ready( function () {
                                         id: "txtdescription",
                                         readonly: true,
                                         height: 180,
+                                        value: description
                                     },
                                     {
                                         cols: [
@@ -133,7 +118,7 @@ webix.ready( function () {
                                         view: "text",
                                         label: "Prix",
                                         id: "prixunitaire",
-                                        value: 19.99,
+                                        value: prix,
                                         readonly: true,
                                         height: 50,
                                         width: 300
@@ -160,27 +145,6 @@ webix.ready( function () {
             }
         })
     };
-    //console.log(intermediaire);
-
-    /*fetch('http//localhost:8080/exemple-1/api/produit/getProduit', {
-        method:'POST',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(
-            {
-                nom: queryString
-            }
-        )
-    }).then(res=>{
-        return res.json()
-    }).then(data => console.log(data))*/
-    //sendData(queryString,'http//localhost:8080/exemple-1/api/produit/getProduit');
-
-
-    //var titre  = intermediaire["nomitem"];
-    //webix.html.addCss($$("agegTitre").$view, "red");
-
 
 })
 
