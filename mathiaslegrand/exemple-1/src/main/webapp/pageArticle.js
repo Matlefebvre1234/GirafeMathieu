@@ -26,8 +26,7 @@ webix.ready( function () {
             view: "scrollview",
             id: "scrollview",
             scroll: "y",
-            height: "80%",
-            width: "80%", body: {
+            body: {
                 rows: [
                     {
                         view: "label",
