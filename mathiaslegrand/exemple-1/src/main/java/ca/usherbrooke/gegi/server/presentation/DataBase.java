@@ -650,6 +650,44 @@ public class DataBase {
         System.out.println("ca marche i guess");
     }
 
+    /**
+     * Permet d'aller chercher le dernier index de item_commander
+     * @return l'index pour ajouter un nouvel item_commander
+     */
+    public int getIndexItemInventaire(){
+        int index = 0;
+
+        String SQL = "SELECT MAX(id_envnetaire_produit) FROM inventaire_produit" ;
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)){
+            rs.next();
+            index = rs.getInt(1);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return index+1;
+    }
+
+    public void ajouterItemInventaire(int idProduit, int quantite){
+        String SQL2 = "INSERT INTO inventaire_produit VALUES(?,?,?)";
+
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
+
+            stmt2.setInt(1, quantite);
+            stmt2.setInt(2, getIndexItemInventaire());
+            stmt2.setInt(3, idProduit);
+
+            stmt2.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
     }
