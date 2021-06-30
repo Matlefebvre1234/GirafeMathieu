@@ -26,7 +26,7 @@ webix.ready(function() {
                             {
                             view: "multiview",
                                 cells: [
-                                    { id: "Inventaire", "rows": [Inventaire] },
+                                    { id: "Inventaire", "rows": [Inventaire_buttons,Inventaire] },
                                     { id: "Precommande", "rows": [Precommande] },
                                     { id: "Commande", "rows": [Commande] },
                                     { id: "Log", "rows": [log] }
