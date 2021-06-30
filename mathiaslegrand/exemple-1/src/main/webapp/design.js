@@ -1,14 +1,12 @@
 
 webix.ready(function(){
 	//webix.html.addCss($$("agegTitre").$view, "red");
-	if (webix.CustomScroll)
-		webix.CustomScroll.init();
 	webix.ui({
 		view:"scrollview",
 		id:"scrollview",
+		enable: true,
 		scroll:"y",
-		height:"80%",
-		width:"80%",body:{
+		body:{
 			rows:[
 				{
 				view: "label",
