@@ -53,9 +53,9 @@ async function fetchGetCommande() {
         }
         Commande_data.push({
             id_commande: data[i].id_commande,
-            prix_total: data[i].prixtotal,
+            prix_total: data[i].prix_total,
             cip: data[i].cip,
-            id_etat_commande: data[i].id_etat_commade,
+            id_etat_commande: data[i].id_etat_commande,
             date: data[i].date,
             listeItem: currentListeItem
         });

@@ -24,11 +24,11 @@ var Inventaire = {
 var Commande = {
 
     "columns": [
-        { "id": "id_commande","header":[{ text: "#" }], width: 50, "sort": "int" },
-        { "id": "prixtotal","header":[{ text: "PrixTotal" }, { content: "textFilter" }], "fillspace": true, sort: "int" },
+        { "id": "id_commande","header":[{ text: "#" },{ content: "textFilter" }], "autowidth": true, "sort": "int" },
+        { "id": "prix_total","header":[{ text: "PrixTotal" }],autowidth: true, sort: "int" },
         { "id": "cip", "header": "Cip", "sort": "string" },
-        { "id": "id_etat_commande", "header": "id_etat_commande", "sort": "int" },
-        { "id": "date", "header": "Date", "sort": "date" }
+        { "id": "id_etat_commande", "header": "id_etat_commande", "sort": "int",width: 150 },
+        { "id": "date", "header": "Date", "sort": "date",fillspace: true }
     ],
     "view": "datatable",
     id: "commandeTable",
