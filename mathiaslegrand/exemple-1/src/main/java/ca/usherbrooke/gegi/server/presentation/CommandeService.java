@@ -146,9 +146,9 @@ public class CommandeService {
 
     @POST
     @Path("/commander_item")
-    public void commanderItem(@FormParam("id") int idProduit){
+    public void commanderItem(@FormParam("id") int idProduit, @FormParam("quantite") int quantite){
         DataBase dataBase = DataBase.getInstance();
-        //dataBase.CommanderItem(idProduit);
+        dataBase.CommanderItem(idProduit, quantite);
     }
 }
 

@@ -102,6 +102,7 @@ webix.ready( function () {
                                                         view: "richselect",
                                                         label: "Quantite",
                                                         id: "quantiteProduit",
+                                                        value: "0",
                                                         options: [
                                                             {"id": 1, "value": "1"},
                                                             {"id": 2, "value": "2"},
@@ -138,7 +139,18 @@ webix.ready( function () {
                                         id:"my_button",
                                         value:"Commander",
                                         css:"webix_primary",
-                                        inputWidth:100
+                                        inputWidth:100,
+                                        click: function (){
+                                            const xhr = new XMLHttpRequest();
+                                            xhr.open('POST', 'http://localhost:8080/exemple-1/api/commande/commander_item');
+                                            var data = {id:queryString, quantite:$$("quantiteProduit").getValue()}
+                                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                                            var datatexte = ('id='+data.id + '&quantite='+data.quantite)
+                                            xhr.send(datatexte);
+                                            xhr.onload = () =>{
+                                                console.log(xhr.response);
+                                            };
+                                        }
                                     }
                                 ]
                             }

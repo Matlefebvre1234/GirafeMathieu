@@ -483,7 +483,7 @@ public class DataBase {
      * @param id id du produit a commander
      */
     public void CommanderItem(int id, int quantite){
-
+        System.out.println("Sale pute :" + id + " : " + quantite);
     }
 
     public Connection connect() throws SQLException {
