@@ -21,19 +21,21 @@ var Inventaire = {
     ]
 }   
 
-var Precommande = {
+var Commande = {
 
     "columns": [
-        { "id": "Id", "header": [{ text: "#" }], width: 50, "sort": "int" },
-        { "id": "Nom", "header": [{ text: "Nom" }, { content: "textFilter" }], "fillspace": true, sort: "string" },
-        { "id": "QtePrec", "header": "Quantite", "sort": "string" },
-        { "id": "DebutPrec", "header": "Debut", "sort": "string" },
-        { "id": "FinPrec", "header": "Fin", "sort": "string" }
+        { "id": "id_commande","header":[{ text: "#" },{ content: "textFilter" }], "autowidth": true, "sort": "int" },
+        { "id": "prix_total","header":[{ text: "PrixTotal" }],autowidth: true, sort: "int" },
+        { "id": "cip", "header": "Cip", "sort": "string" },
+        { "id": "id_etat_commande", "header": "id_etat_commande", "sort": "int",width: 150 },
+        { "id": "date", "header": "Date", "sort": "date",fillspace: true }
     ],
-    "view": "datatable"
+    "view": "datatable",
+    id: "commandeTable",
+    data: Commande_data,
 }
 
-var Commande = {
+var Precommande = {
 
     "columns": [
         { "id": "NoCommande", "header": [{ text: "#" }], width: 50, "sort": "int" },

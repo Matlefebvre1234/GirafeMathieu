@@ -139,6 +139,7 @@ webix.ready( function () {
                                         id:"my_button",
                                         value:"Commander",
                                         css:"webix_primary",
+<<<<<<< HEAD
                                         inputWidth:100,
                                         click: function (){
                                             const xhr = new XMLHttpRequest();
@@ -151,6 +152,9 @@ webix.ready( function () {
                                                 console.log(xhr.response);
                                             };
                                         }
+=======
+                                        inputWidth:100
+>>>>>>> LESAUVEUR
                                     }
                                 ]
                             }

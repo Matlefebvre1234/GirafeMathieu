@@ -371,8 +371,10 @@ public class DataBase {
 
             while (rs.next())
             {
+                System.out.println(rs.getDate(4));
                 Commande c = builder.construireCommande(rs.getInt(1),rs.getString(2),rs.getDate(4),rs.getInt(3),rs.getInt(5),new ArrayList<Item_Commander>());
                 malisteCommande.add(c);
+                System.out.println("date c : " + c.getDate());
             }
         }catch (SQLException e)
         {
@@ -396,23 +398,20 @@ public class DataBase {
 
                 for(int i =0;i<malisteCommande.size();i++)
                 {
-                    System.out.println("Test :" + malisteCommande.get(i).getId_commande() + "rs " + rs.getInt(1) );
+
                     if(malisteCommande.get(i).getId_commande() == rs.getInt(1))
                     {
-                        System.out.println("INDEX CHANGE TO " + i);
                         indexTemp = i;
                     }
 
                 }
 
-                System.out.println("INdex " + indexTemp);
+
                 Item_Commander item = new Item_Commander();
                 item.setId_item_commander(rs.getInt(6));
                 item.setQuantite(rs.getInt(7));
                 item.setPrixtotal(rs.getInt(8));
-                System.out.println("itemset : " + rs.getInt(9));
                 item.setId_commande(rs.getInt(1));
-                System.out.println("commande : " + item.getId_commande());
                 item.setId_etat_commade(rs.getInt(9));
                 Produit p = productbuilder.construireProduitLogique(rs.getInt(10), rs.getString(11),0,0, rs.getInt(14));
                 p.setCouleur(rs.getString(13));
