@@ -10,12 +10,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4cca78b-6aab-4f67-8912-0f21c3f11b86" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/exemple-1.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exemple-1.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/pageArticle.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/pageArticle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/CommandeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/CommandeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/Admin/WEB-INF/beans.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/Admin/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/Admin/Webix/myApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/Admin/Webix/myApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/Admin/Webix/views/Main_multiviews.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/Admin/Webix/views/Main_multiviews.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/EtudiantService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/EtudiantService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/presentation/EtudiantService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/presentation/EtudiantService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/DataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pageArticle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pageArticle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/EtudiantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/EtudiantService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/WEB-INF/beans.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/beans.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/Webix/myApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/Webix/myApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/Webix/views/Main_multiviews.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/Webix/views/Main_multiviews.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +65,25 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Utilisateur\Desktop\Documents\projetS3\GirafeMathieu\mathiaslegrand\exemple-1\src\main\webapp" />
+    </key>
+  </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="JBoss/WildFly 19.1.0.Final" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="JBoss/WildFly 19.1.0.Final" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/exemple-1/" />
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -153,5 +184,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

@@ -1,4 +1,45 @@
+
+var ajouterAdmin = {
+    "cols": [
+        {
+            "view": "text",
+            "placeholder": "Type here...",
+            "label": "Cip",
+            name: "cip",
+            id:"cip",
+            "labelWidth": 100
+        },
+        {
+            "label": "Ajouter Admin",
+            "view": "button",
+            "height": 38,
+            click: function (){
+
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', 'http://localhost:8080/exemple-1/api/insert_admin');
+                var data = {cip:$$("cip").getValue()}
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                var datatexte = ('cip='+data.cip)
+                xhr.send(datatexte);
+                xhr.onload = () =>{
+                    console.log(xhr.response);
+                    if(xhr.response == "true")
+                    {
+                        alert("Admin ajouté");
+                    }
+                    else {
+                        alert(" erreur de connetion");
+                    }
+                };
+            }
+        }
+    ]
+
+
+}
+
 var Inventaire = {
+
     cols: [
         {
            "columns": [
@@ -123,6 +164,7 @@ webix.ready(function() {
                     "view": "button",
                     "height": 38,
                     click: function (){
+
                         const xhr = new XMLHttpRequest();
                         xhr.open('POST', 'http://localhost:8080/exemple-1/api/insert_produit');
                         var data = {nom:$$("nom").getValue(),
@@ -140,6 +182,7 @@ webix.ready(function() {
                         xhr.onload = () =>{
                             console.log(xhr.response);
                         };
+
                     }
                 }
             ],

@@ -109,9 +109,10 @@ public class EtudiantService {
 
     @POST
     @Path("insert_admin")
-    public void insertAdminDB(@FormParam("cip") String cip){
+    public boolean insertAdminDB(@FormParam("cip") String cip){
         DataBase database = DataBase.getInstance();
-        database.insertAdminDB(cip);
+        System.out.println(database.insertAdminDB(cip));
+         return database.insertAdminDB(cip);
     }
 
     @GET
