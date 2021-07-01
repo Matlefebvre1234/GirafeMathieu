@@ -11,7 +11,7 @@ import java.util.Date;
 public class Item_Commander {
 
     private int id_item_commander;
-    private Date date;
+    private String date;
     private int quantite;
     private float prixtotal;
     private int id_commande;
@@ -115,19 +115,35 @@ public class Item_Commander {
         this.id_etat_commade = id_etat_commade;
     }
 
+    /**
+     * Cette fonction retourne le produit commander
+     * @return
+     */
     public Produit getProduit() {
         return produit;
     }
 
+    /**
+     * Cette fonction change le produit commander
+     * @param produit
+     */
     public void setProduit(Produit produit) {
         this.produit = produit;
     }
 
-    public void setDate(Date date) {
+    /**
+     * Cette fonction change la date de la commande
+     * @param date
+     */
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Date getDate() {
+    /**
+     * Cette fonction retourne la date de la commande
+     * @return
+     */
+    public String getDate() {
         return date;
     }
 }

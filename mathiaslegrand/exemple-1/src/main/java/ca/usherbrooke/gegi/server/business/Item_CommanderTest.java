@@ -1,7 +1,10 @@
 package ca.usherbrooke.gegi.server.business;
 
 import org.jasig.cas.client.validation.Assertion;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -137,5 +140,37 @@ class Item_CommanderTest {
         assertEquals(6,item_commander.getId_etat_commade());
         item_commander.setId_etat_commade(99);
         assertEquals(99,item_commander.getId_etat_commade());
+    }
+
+    @Test
+    void getProduit(){
+        Produit produit = new Produit();
+        Item_Commander item_commander = new Item_Commander();
+        item_commander.setProduit(produit);
+        Assertions.assertEquals(produit,item_commander.getProduit());
+    }
+
+    @Test
+    void setProduit(){
+        Produit produit = new Produit();
+        Item_Commander item_commander = new Item_Commander();
+        item_commander.setProduit(produit);
+        Assertions.assertEquals(produit,item_commander.getProduit());
+    }
+
+    @Test
+    void getDate(){
+        Date date = new Date(5,6,7);
+        Item_Commander item_commander = new Item_Commander();
+        item_commander.setDate("date");
+        Assertions.assertEquals("date",item_commander.getDate());
+    }
+
+    @Test
+    void setDate(){
+
+        Item_Commander item_commander = new Item_Commander();
+        item_commander.setDate("date");
+        Assertions.assertEquals("date",item_commander.getDate());
     }
 }
