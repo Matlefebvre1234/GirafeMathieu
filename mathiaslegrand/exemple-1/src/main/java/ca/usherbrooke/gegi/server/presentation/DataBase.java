@@ -607,7 +607,7 @@ public class DataBase {
         return index+1;
     }
 
-    public int getId(int id, String taille){
+    public int getIdTaille(int id, String taille){
         int idTaille = 0;
         String nomitem = null;
 
@@ -643,11 +643,12 @@ public class DataBase {
 
     /**
      * Methode qui permet de commander un item individuel
-     * @param id id du produit a commander
+     * @param id2 id du produit a commander
      */
-    public void CommanderItem(int id, int quantite, String taille, String cip){
+    public void CommanderItem(int id2, int quantite, String taille, String cip){
         String SQL = "INSERT INTO COMMANDE VALUES(?,?,?,?,?)";
         int index = getIndexCommande();
+        int id = getIdTaille(id2, taille);
         int prixTotal = getProduit(id).getPrix()*quantite;
         try(Connection conn = connect();
             PreparedStatement stmt = conn.prepareStatement(SQL)){

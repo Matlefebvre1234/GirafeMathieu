@@ -116,7 +116,6 @@ webix.ready( function () {
                                                             view: "richselect",
                                                             label: "Taille",
                                                             id: "choixtaille",
-                                                            value: "Taille",
                                                             options: tailles,
                                                             //TODO Connecter avec la base de donnees
                                                             height: 50,
@@ -130,7 +129,6 @@ webix.ready( function () {
                                                             view: "richselect",
                                                             label: "Quantite",
                                                             id: "quantiteProduit",
-                                                            value: "0",
                                                             options: quantites,
                                                             //TODO Connecter avec la base de donnees et rajouter des options
                                                             height: 50,
@@ -168,9 +166,11 @@ webix.ready( function () {
                                             click: function (){
                                                 const xhr = new XMLHttpRequest();
                                                 xhr.open('POST', 'http://localhost:8080/exemple-1/api/commande/commander_item');
-                                                var data = {id:queryString, quantite:$$("quantiteProduit").getValue()}
+                                                var data = {id:queryString, quantite:$$("quantiteProduit").getText(), taille:$$("choixtaille").getText()}
+                                                console.log(data.taille)
+                                                console.log(data.quantite)
                                                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-                                                var datatexte = ('id='+data.id + '&quantite='+data.quantite)
+                                                var datatexte = ('id='+data.id + '&quantite='+data.quantite + '&taille='+data.taille)
                                                 xhr.send(datatexte);
                                                 xhr.onload = () =>{
                                                     console.log(xhr.response);
