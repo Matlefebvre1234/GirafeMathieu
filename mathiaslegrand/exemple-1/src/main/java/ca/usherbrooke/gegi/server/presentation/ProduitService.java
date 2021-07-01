@@ -40,7 +40,7 @@ public class ProduitService extends Application {
 
         for(int i = 0; i < produits.size(); i++){
             for(int y = 0; y < produitsDistincts.size(); y++){
-                if(produits.get(i).getNomitem().equals(produitsDistincts.get(y).getNomitem()),){
+                if(produits.get(i).getNomitem().equals(produitsDistincts.get(y).getNomitem())){
                     doublons = true;
                     System.out.println("doublons");
                 }
