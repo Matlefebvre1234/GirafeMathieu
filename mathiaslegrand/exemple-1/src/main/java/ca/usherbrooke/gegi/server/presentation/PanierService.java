@@ -17,7 +17,7 @@ public class PanierService {
     {
         DataBase database = DataBase.getInstance();
         Panier panier;
-        panier = database.getPanier(cip);
+        panier = database.getPanierFromCIP(cip);
         return panier;
     }
 

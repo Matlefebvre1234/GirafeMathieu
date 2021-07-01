@@ -725,37 +725,45 @@ public class DataBase {
     }
 
     public Panier getPanierFromCIP(String cip){
-        String SQL = "SELECT nomitem, taille, prix, quantite FROM produit, item_panier WHERE item_panier.idproduit= produit.idproduit AND client.idproduit = item_panier.idproduit AND cip=?";
+        System.out.println("Avant Query");
+        String SQL = "SELECT produit.nomitem, produit.taille, produit.prix, item_panier.quantite, item_panier.idpanier " +
+                     "FROM produit, item_panier, panier  " +
+                     "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND panier.cip=?";
+
         Panier panier = new Panier();
         ArrayList<ItemPanier> itemArray = new ArrayList<>();
 
         try(Connection conn = connect();
             PreparedStatement stmt = conn.prepareStatement(SQL)){
-
+            System.out.println(cip);
             stmt.setString(1,cip);
+
+           System.out.println("Après Query");
             ResultSet rs = stmt.executeQuery();
-            panier.setCip(cip);
 
             while(rs.next()){
                 ItemPanier item = new ItemPanier();
                 Produit produit = new Produit();
 
-                produit.setNomitem(rs.getString(1));
+                String nomItem = rs.getString(1);
+                System.out.println(nomItem);
+                produit.setNomitem(nomItem);
                 produit.setTaille(rs.getString(2));
                 produit.setPrix(rs.getInt(3));
                 item.addQuantite(rs.getInt(4));
                 item.setProduit(produit);
-
+                panier.setIdPanier(rs.getInt(5));
                 itemArray.add(item);
             }
-
-
-            panier.setItems(itemArray);
 
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
 
         }
+        panier.setCip(cip);
+        panier.setItems(itemArray);
+
+
 
         return panier;
     }

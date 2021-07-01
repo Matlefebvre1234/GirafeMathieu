@@ -1,64 +1,86 @@
 
-webix.ready(function(){
+webix.ready(function () {
 
-   /* var produit;
-
-    var queryString = decodeURIComponent(window.location.search);
-    queryString = queryString.substring(1);
-    var intermediaire;
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:8080/exemple-1/api/ItemPanier/getQuantite');
-    var data = {cip: queryString}
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    var datatexte = ('cip=' + data.cip)
-    xhr.send(datatexte);
-    xhr.onload =  () => {
-/*    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '"http://localhost:8080/exemple-1/api/ItemPanier/getQuantite"');
-    //var data = {cip: queryString}
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    //var datatexte = ('cip=' + data.cip)
-    xhr.send(datatexte);*/
+    xhr.open('GET', 'http://localhost:8080/exemple-1/api/getUtilisateur');
+    xhr.send();
+    xhr.onload = () =>{
+        var cip = xhr.response;
 
+        cip = JSON.parse(cip);
+        cip = cip.cip;
+
+        console.log(cip);
+
+        const xhr2 = new XMLHttpRequest();
+        xhr2.open('POST', 'http://localhost:8080/exemple-1/api/Panier/getPanier');
+        var data = {cip: cip}
+        xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+        var datatexte = ('cip=' + data.cip)
+        xhr2.send(datatexte);
+
+        xhr2.onload =  () => {
+             var panier = xhr2.response
+             console.log(panier);
+             panier = JSON.parse(panier);
+             var item = panier.items[0];
+             console.log(item);
+             var produit = item.produit;
+             var quantite = item.quantite;
+             var nomItem = produit.nomitem;
+             var taille = produit.taille;
+             var prix = produit.prix;
 
     webix.ui({
         "cols": [
             {
                 "rows": [
-                    { "label": "Menu Panier", "view": "label", "height": 75, "borderless": 0 },
-                    { "label": "Votre Panier", "view": "label", "height": 47, "borderless": 0 },
+                    {"label": "Menu Panier", "view": "label", "height": 75, "borderless": 0},
+                    {"label": "Votre Panier", "view": "label", "height": 47, "borderless": 0},
                     {
                         "rows": [
-                            { "height":100,
+                            {
+                                "height": 100,
                                 "cols": [
                                     {
                                         css: "images",
                                         template: img,
                                         data: {src: "https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}
                                     },
-                                    { "label": "Description:",  "view": "label","height": 0, "borderless": 0 },
-                                    { "label": "Taille:",  "view": "label","height": 0, "borderless": 0 },
-                                    { "label": "Prix Unitaire:", "view": "label","height": 0, "borderless": 0 },
-                                    { "label": "Quantité:","view": "label", "height": 0, "borderless": 0 , align : "center"},
+                                    {"label": "Description:                                                                                            " + nomItem, "view": "label", "height": 0, "borderless": 0},
+                                    {"label": "Taille: " + taille, "view": "label", "height": 0, "borderless": 0},
+                                    {"label": "Prix Unitaire: " + prix, "view": "label", "height": 0, "borderless": 0},
+                                    {
+                                        "label": "Quantité: " + quantite,
+                                        "view": "label",
+                                        "height": 0,
+                                        "borderless": 0,
+                                        align: "center"
+                                    },
                                     //"text", id:'field_a', attributes:{ maxlength:10 }}
                                     {
                                         "height": 48,
                                         "rows": [
-                                            { "label": "+", "view": "button", "height": 0 },
-                                            { "label": "-", "view": "button", "height": 0 }
+                                            {"label": "+", "view": "button", "height": 0},
+                                            {"label": "-", "view": "button", "height": 0}
                                         ]
                                     },
-                                    { "label": "Retirer l'article", "view": "button", "height": 48 }
+                                    {"label": "Retirer l'article", "view": "button", "height": 48}
                                 ]
                             },
                             {
                                 "height": 63,
                                 "cols": [
-                                    { "label": "Total:", "view": "label", "height": 0, "css": "a" },
-                                    { "view": "label", "height": 0, "borderless": 0 }
+                                    {"label": "Total:", "view": "label", "height": 0, "css": "a"},
+                                    {"view": "label", "height": 0, "borderless": 0}
                                 ]
                             },
-                            { "view": "template", "template": "You can place any widget here..", "role": "placeholder", "height": 308 }
+                            {
+                                "view": "template",
+                                "template": "You can place any widget here..",
+                                "role": "placeholder",
+                                "height": 308
+                            }
                         ]
                     }
                 ]
@@ -66,7 +88,10 @@ webix.ready(function(){
         ],
         "css": "text-align"
     });
-    function getQt(){
+
+        }
+    }
+    function getQt() {
 
         //This sends a get request to executeInit.jsp
         //
@@ -74,13 +99,14 @@ webix.ready(function(){
 
     }
 
-    function img(obj){
-        return '<img src="'+obj.src+'" alt="centered image" class = "carousel_image"/>'
+    function img(obj) {
+        return '<img src="' + obj.src + '" alt="centered image" class = "carousel_image"/>'
     }
 
 
     let quantite;
-    async function Qt(){
+
+    async function Qt() {
 
         let response = await fetch("http://localhost:8080/exemple-1/api/ItemPanier/getQuantite")
         quantite = await response.json();
