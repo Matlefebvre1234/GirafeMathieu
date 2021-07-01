@@ -45,5 +45,14 @@ public class ProduitService extends Application {
         System.out.println("ariel2.0: "+ idProduit);
         return database.getProduit(idProduit);
     }
+
+    @POST
+    @Path("/getTaillesProduit")
+    @Produces("application/json")
+    public ArrayList<String> getTaillesProduit(@FormParam("id") int idProduit)
+    {
+        DataBase database = DataBase.getInstance();
+        return database.getTailleProduit(2);
+    }
     
 }

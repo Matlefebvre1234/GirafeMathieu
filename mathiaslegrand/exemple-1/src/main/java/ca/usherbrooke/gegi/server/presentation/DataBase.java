@@ -248,7 +248,26 @@ public class DataBase {
         return  p;
     }
 
+    public ArrayList<String> getTailleProduit(int id){
+        ArrayList<String> listeTailles = new ArrayList<>();
+        String SQL = "SELECT taille FROM produit WHERE idproduit = ?";
 
+        try{
+            Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL);
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                listeTailles.add(rs.getString(1));
+            }
+        }
+
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return listeTailles;
+    }
 
     public ArrayList<Item_inventaire> getInventaire()
     {
