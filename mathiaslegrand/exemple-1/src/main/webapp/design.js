@@ -53,7 +53,7 @@ webix.ready(function(){
 					xCount:3,
 					scroll: "y",
 					select:true,
-					url : "http://localhost:8080/exemple-1/api/produit/listeproduits",
+					url : "http://localhost:8080/exemple-1/api/produit/listeproduitsdistinct",
 					type: {
 						height: 200,
 						width:"auto"
