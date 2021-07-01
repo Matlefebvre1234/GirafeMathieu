@@ -42,7 +42,7 @@ public class ConcreteBuilderCommande implements BuilderCommande{
         resultat = new Commande();
         resultat.setIdCommande(idCcommande);
         resultat.setCip(cip);
-        resultat.setDate(date);
+        resultat.setDate(date.toString());
         resultat.setPrixTotal(prixTotal);
         resultat.setIdEtatCommande(idEtatCommande);
         resultat.setListeItem(liste);

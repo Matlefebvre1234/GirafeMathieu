@@ -3,6 +3,8 @@ package ca.usherbrooke.gegi.server.business;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 class CommandeTest {
 
     @Test
@@ -74,4 +76,20 @@ class CommandeTest {
         commande.setIdEtatCommande(2);
         Assertions.assertEquals(2,commande.getIdEtatCommande());
     }
+
+    @Test
+    void setListeItem() {
+        Commande commande = new Commande();
+        ArrayList<Item_Commander> arrayList = new ArrayList<>();
+        commande.setListeItem(arrayList);
+        Assertions.assertEquals(arrayList,commande.getListeItem());
+    }
+    @Test
+    void getListeItem() {
+        Commande commande = new Commande();
+        ArrayList<Item_Commander> arrayList = new ArrayList<>();
+        commande.setListeItem(arrayList);
+        Assertions.assertEquals(arrayList,commande.getListeItem());
+    }
+
 }

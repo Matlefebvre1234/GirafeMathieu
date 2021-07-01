@@ -16,7 +16,7 @@ public class Commande {
     private float prixTotal;
     private String cip;
     private int id_etat_commande;
-    private Date date;
+    private String date;
     private ArrayList<Item_Commander> listeItem;
 
     public Commande(){
@@ -27,7 +27,7 @@ public class Commande {
      * Cette fonction retourne la date de la commande
      * @return
      */
-    public Date getDate() {
+    public String getDate() {
        return date;
     }
 
@@ -35,7 +35,7 @@ public class Commande {
      * Cette fonction change la date de la commande
      * @param date
      */
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

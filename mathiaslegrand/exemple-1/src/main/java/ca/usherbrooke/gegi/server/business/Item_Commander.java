@@ -11,7 +11,7 @@ import java.util.Date;
 public class Item_Commander {
 
     private int id_item_commander;
-    private Date date;
+    private String date;
     private int quantite;
     private float prixtotal;
     private int id_commande;
@@ -135,7 +135,7 @@ public class Item_Commander {
      * Cette fonction change la date de la commande
      * @param date
      */
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -143,7 +143,7 @@ public class Item_Commander {
      * Cette fonction retourne la date de la commande
      * @return
      */
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 }

@@ -20,7 +20,7 @@ import java.util.Map;
  * @see DataBase
  */
 
-/**
+/**Microservice
  * Methode qui permet d'aller chercher l'index d'identification le plus gros dans les commandes
  */
 @Path("/commande")
@@ -29,9 +29,19 @@ public class CommandeService {
     HttpServletRequest httpServletRequest;
     //localhost:8080/exemple-1/api/produit/salut
 
+    /**
+     * Cette fonction permet de se connecter a la base de donnees SQL/Postgress
+     * @return
+     * @throws SQLException
+     */
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
     }
+
+    /**
+     * Cette fonction permet d'obtenir le dernier index dans la liste de produits presente dans la base de donnees SQL
+     * @return
+     */
     public int getLastIndex(){
         int index = 0;
         String SQL = "SELECT MAX(idproduit) FROM produit" ;
@@ -48,7 +58,8 @@ public class CommandeService {
     }
 
     /**
-     * Methode qui permet de retourner la liste des produits contenus dans la base de donnees, ainsi que leurs informations
+     * Methode qui permet de retourner la liste des produits contenus dans la base de donnees,
+     * ainsi que leurs informations. En plus de mettre les informations dans la classe commande
      * @return liste des produits
      */
     @GET
@@ -66,7 +77,7 @@ public class CommandeService {
             while (rs.next()) {
 
                 maliste.add(new Commande());
-                maliste.get(index).setDate(rs.getDate(1));
+                maliste.get(index).setDate(rs.getDate(1).toString());
                 maliste.get(index).setIdCommande(rs.getInt(2));
                 maliste.get(index).setPrixTotal(rs.getInt(3));
                 maliste.get(index).setCip(rs.getString(4));
@@ -82,6 +93,11 @@ public class CommandeService {
         return maliste;
     }
 
+    /**
+     * Cette fonction permet de d'associer les informations sur les commandes et les items commandes
+     * present dans la base de donnees et les associe au code Java(de commande)
+     * @return
+     */
     @GET
     @Path("/item_commander")
     @Produces("application/JSON")
@@ -93,11 +109,15 @@ public class CommandeService {
         String SQL2 = "SELECT * FROM commande";
         //String SQL3 = "SELECT * FROM etat__commande";
         String SQL3 = "SELECT * FROM etat__commande JOIN commande ON commande.id_etat_commande=etat__commande.id_etat_commande";
+
+        /**
+         * Cette Query permet d'aller chercher le prix total pour un produit commandee et le mettre dans la base de donnees, ainsi que dans le code Back-End en Java(Quantite x Prix du produit)
+         */
         try {
             Connection conn = connect();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(SQL);
-
+            //
             while (rs.next()) {
                 maliste.add(new Commande());
                 maliste.get(index).setPrixTotal(rs.getInt(1));
@@ -111,14 +131,20 @@ public class CommandeService {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        //
         index=0;
+
+
+        /**
+         * Cette Query permet de donner les informations necessaire a la classe Commande comme l'id de la commande, la date de la commande...
+         */
         try{
             Connection conn2 = connect();
             Statement stmt2 = conn2.createStatement();
             ResultSet rs2 = stmt2.executeQuery(SQL2);
             while (rs2.next()) {
                 maliste.get(index).setIdCommande(rs2.getInt(2));
-                maliste.get(index).setDate(rs2.getDate(1));
+                maliste.get(index).setDate(rs2.getDate(1).toString());
                 maliste.get(index).setIdEtatCommande(rs2.getInt(5));
                 maliste.get(index).setCip(rs2.getString(4));
                 index++;
@@ -126,6 +152,10 @@ public class CommandeService {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        /**
+         * Cette fonction permet d'ajouter l'id de l'etat de la commande a la classe commande
+         */
         index=0;
         try{
             Connection conn3 = connect();
@@ -143,6 +173,10 @@ public class CommandeService {
         return maliste;
     }
 
+    /**
+     * TODO
+     * @return
+     */
     @GET
     @Path("/item_commander")
     @Produces("application/JSON")
@@ -152,6 +186,10 @@ public class CommandeService {
     }
 
 
+    /**
+     * TODO
+     * @return
+     */
     @GET
     @Path("/commande")
     @Produces("application/json")
@@ -163,7 +201,11 @@ public class CommandeService {
     }
 
 
-
+    /**
+     * TODO
+     * @param idProduit
+     * @param quantite
+     */
     @POST
     @Path("/commander_item")
     public void commanderItem(@FormParam("id") int idProduit, @FormParam("quantite") int quantite){

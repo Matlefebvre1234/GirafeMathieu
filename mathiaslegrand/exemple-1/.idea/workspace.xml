@@ -10,17 +10,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4cca78b-6aab-4f67-8912-0f21c3f11b86" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ItemPanierTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/PanierTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/CommandeServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exemple-1.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exemple-1.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Commande.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Commande.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/ConcreteBuilderCommande.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/ConcreteBuilderCommande.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduit.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Etudiant.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Etudiant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/ItemPanier.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/ItemPanier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_inventaire.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_inventaire.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Panier.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Panier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Produit.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Produit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/ProduitTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/ProduitTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/injection/RestApplicationPathConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/injection/RestApplicationPathConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/CommandeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/CommandeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/DataBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/DataBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Commande.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Commande.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/CommandeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/CommandeTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Commande.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Commande.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/CommandeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/CommandeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ConcreteBuilderCommande.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ConcreteBuilderCommande.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ItemPanier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ItemPanier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_Commander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_Commander.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Panier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Panier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_CommanderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_CommanderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_inventaireTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_inventaireTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/CommandeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/CommandeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/DataBase.java" afterDir="false" />
     </list>
@@ -51,6 +68,13 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
@@ -61,16 +85,29 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ca.usherbrooke.gegi.server.presentation" />
+      <recent name="ca.usherbrooke.gegi.server.business" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.Item_CommanderTest.setDate">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -154,6 +191,103 @@
         </option>
       </method>
     </configuration>
+    <configuration name="CommandeServiceTest.connect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exemple-1.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.usherbrooke.gegi.server.presentation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ca.usherbrooke.gegi.server.presentation" />
+      <option name="MAIN_CLASS_NAME" value="ca.usherbrooke.gegi.server.presentation.CommandeServiceTest" />
+      <option name="METHOD_NAME" value="connect" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommandeServiceTest.getLastIndex" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exemple-1.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.usherbrooke.gegi.server.presentation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ca.usherbrooke.gegi.server.presentation" />
+      <option name="MAIN_CLASS_NAME" value="ca.usherbrooke.gegi.server.presentation.CommandeServiceTest" />
+      <option name="METHOD_NAME" value="getLastIndex" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommandeServiceTest.listeProduits" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exemple-1.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.usherbrooke.gegi.server.presentation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ca.usherbrooke.gegi.server.presentation" />
+      <option name="MAIN_CLASS_NAME" value="ca.usherbrooke.gegi.server.presentation.CommandeServiceTest" />
+      <option name="METHOD_NAME" value="listeProduits" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Item_CommanderTest.setDate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exemple-1.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.usherbrooke.gegi.server.business.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ca.usherbrooke.gegi.server.business" />
+      <option name="MAIN_CLASS_NAME" value="ca.usherbrooke.gegi.server.business.Item_CommanderTest" />
+      <option name="METHOD_NAME" value="setDate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PanierTest.removeItem" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exemple-1.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.usherbrooke.gegi.server.business.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ca.usherbrooke.gegi.server.business" />
+      <option name="MAIN_CLASS_NAME" value="ca.usherbrooke.gegi.server.business.PanierTest" />
+      <option name="METHOD_NAME" value="removeItem" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JBoss/WildFly Server.JBoss/WildFly 19.1.0.Final" />
+      <item itemvalue="JUnit.CommandeServiceTest.connect" />
+      <item itemvalue="JUnit.CommandeServiceTest.getLastIndex" />
+      <item itemvalue="JUnit.PanierTest.removeItem" />
+      <item itemvalue="JUnit.CommandeServiceTest.listeProduits" />
+      <item itemvalue="JUnit.Item_CommanderTest.setDate" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Item_CommanderTest.setDate" />
+        <item itemvalue="JUnit.CommandeServiceTest.listeProduits" />
+        <item itemvalue="JUnit.CommandeServiceTest.getLastIndex" />
+        <item itemvalue="JUnit.CommandeServiceTest.connect" />
+        <item itemvalue="JUnit.PanierTest.removeItem" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -165,7 +299,9 @@
       <updated>1625077704716</updated>
       <workItem from="1625077706137" duration="2999000" />
       <workItem from="1625083132661" duration="11000" />
-      <workItem from="1625083370044" duration="2112000" />
+      <workItem from="1625083370044" duration="3311000" />
+      <workItem from="1625089310081" duration="397000" />
+      <workItem from="1625154490779" duration="6156000" />
     </task>
     <servers />
   </component>
