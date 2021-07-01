@@ -33,6 +33,7 @@ public class Commande {
 
     public void setDate(Date date) {
         this.date = date.toString();
+    }
     /**
      * Cette fonction change la date de la commande
      * @param date
