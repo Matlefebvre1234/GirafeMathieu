@@ -45,4 +45,5 @@ public class ProduitService extends Application {
         System.out.println("ariel2.0: "+ idProduit);
         return database.getProduit(idProduit);
     }
+    
 }

@@ -17,6 +17,7 @@ public class Produit {
     private int visibilite_site;
     private int id_etat;
     private ArrayList<String> arrayPhoto;
+    private String tailleCool;
 
 
     /**
@@ -190,5 +191,13 @@ public class Produit {
      */
     public void setId_etat(int id_etat) {
         this.id_etat = id_etat;
+    }
+
+    public String getTailleCool() {
+        return tailleCool;
+    }
+
+    public void setTailleCool(String tailleCool) {
+        this.tailleCool = tailleCool;
     }
 }

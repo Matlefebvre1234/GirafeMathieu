@@ -125,6 +125,8 @@ public class EtudiantService {
     @Path("insert_produit")
     public void insertProduitDB(@FormParam("nom") String nom, @FormParam("description") String description, @FormParam("taille") String taille, @FormParam("prix") float prix, @FormParam("couleur") String couleur, @FormParam("visibilite") int visibilite, @FormParam("etat") int etat, @FormParam("url") String url, @FormParam("quantite") int quantite) {
         DataBase database = DataBase.getInstance();
+        String url1 = "https://drive.google.com/uc?export=view&id=" + url;
+        //System.out.println(url1);
         database.insertProduitDB( nom,description,taille,prix,couleur,visibilite, etat,url, quantite);
     }
 
