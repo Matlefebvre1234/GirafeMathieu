@@ -12,13 +12,8 @@
     <list default="true" id="290ee36e-cbd4-43fe-b24a-6c546c9bedde" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/exemple-1.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exemple-1.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/CommandeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/CommandeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/DataBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/DataBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/pageArticle.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/pageArticle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/presentation/CommandeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/presentation/CommandeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/presentation/DataBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/presentation/DataBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/CommandeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/CommandeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/DataBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/pageArticle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pageArticle.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -164,6 +164,10 @@ webix.ready( function () {
                                             css:"webix_primary",
                                             inputWidth:100,
                                             click: function (){
+                                                webix.alert({
+                                                    titre: "Commande",
+                                                    text: "La commande a ete enregistree!"
+                                                });
                                                 const xhr = new XMLHttpRequest();
                                                 xhr.open('POST', 'http://localhost:8080/exemple-1/api/commande/commander_item');
                                                 var data = {id:queryString, quantite:$$("quantiteProduit").getText(), taille:$$("choixtaille").getText()}
