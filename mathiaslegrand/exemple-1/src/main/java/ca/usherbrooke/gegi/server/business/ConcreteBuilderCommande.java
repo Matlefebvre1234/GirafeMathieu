@@ -24,7 +24,7 @@ public class ConcreteBuilderCommande implements BuilderCommande{
     /**
      * Item_Commander construits pour construire la commande
      */
-    private ArrayList<Item_Commander> listeItems;
+    private ArrayList<itemCommander> listeItems;
 
     /**
      * Methode qui permet de reset la commande cree
@@ -38,7 +38,7 @@ public class ConcreteBuilderCommande implements BuilderCommande{
      * Methode qui permet de construire la commande
      */
     @Override
-    public Commande construireCommande(int idCcommande, String cip, Date date, int prixTotal, int idEtatCommande, ArrayList<Item_Commander> liste) {
+    public Commande construireCommande(int idCcommande, String cip, Date date, int prixTotal, int idEtatCommande, ArrayList<itemCommander> liste) {
         resultat = new Commande();
         resultat.setIdCommande(idCcommande);
         resultat.setCip(cip);

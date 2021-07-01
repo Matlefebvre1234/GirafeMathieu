@@ -1,13 +1,12 @@
 package ca.usherbrooke.gegi.server.business;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Classe qui regroupe toutes les informations d'une commande
  * @author Patrick Normandin
  * @version 1.0
- * @see Item_Commander
+ * @see itemCommander
  */
 
 public class Commande {
@@ -17,7 +16,7 @@ public class Commande {
     private String cip;
     private int id_etat_commande;
     private String date;
-    private ArrayList<Item_Commander> listeItem;
+    private ArrayList<itemCommander> listeItem;
 
     public Commande(){
         listeItem = new ArrayList<>();
@@ -107,7 +106,7 @@ public class Commande {
      * Cette fonction change la liste d'item commander
      * @param listeItem
      */
-    public void setListeItem(ArrayList<Item_Commander> listeItem) {
+    public void setListeItem(ArrayList<itemCommander> listeItem) {
         this.listeItem = listeItem;
     }
 
@@ -115,7 +114,7 @@ public class Commande {
      * Cette fonction retourne la liste d'item commander
      * @return
      */
-    public ArrayList<Item_Commander> getListeItem() {
+    public ArrayList<itemCommander> getListeItem() {
         return listeItem;
     }
 }

@@ -10,6 +10,11 @@ import java.util.ArrayList;
 @Path("/Panier")
 public class PanierService {
 
+    /**
+     * Cette fonction permet d'aller chercher le panier associer a un cip suite a une demande sur l'interface
+     * @param cip
+     * @return
+     */
     @POST
     @Path("/getPanier")
     @Produces("application/json")
@@ -21,6 +26,10 @@ public class PanierService {
         return panier;
     }
 
+    /**
+     * Cette fonction permet d'ajouter un panier pour un cip suite a une demande de l'interface
+     * @param cip
+     */
     @POST
     @Path("/ajouterPanier")
     public void ajouterPanier(@FormParam("cip") String cip){
@@ -34,6 +43,11 @@ public class PanierService {
         }
     }
 
+    /**
+     * Cette fonction permet d'ajouter des item au panier
+     * @param quantite
+     * @param idproduit
+     */
     @POST
     @Path("/ajouterItemPanier")
     public void ajouterItemPanier(@FormParam("quantite") int quantite, @FormParam("idproduit") int idproduit){

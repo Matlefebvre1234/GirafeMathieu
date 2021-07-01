@@ -8,7 +8,7 @@ import java.util.Date;
  * @version 1.0
  * @see Produit
  */
-public class Item_Commander {
+public class itemCommander {
 
     private int id_item_commander;
     private String date;

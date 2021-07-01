@@ -1,7 +1,7 @@
 package ca.usherbrooke.gegi.server.presentation;
 
 import ca.usherbrooke.gegi.server.business.Commande;
-import ca.usherbrooke.gegi.server.business.Item_Commander;
+import ca.usherbrooke.gegi.server.business.itemCommander;
 import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,7 +57,7 @@ public class CommandeService {
         return index+1;
     }
 
-    /**
+    /** Microservice
      * Methode qui permet de retourner la liste des produits contenus dans la base de donnees,
      * ainsi que leurs informations. En plus de mettre les informations dans la classe commande
      * @return liste des produits
@@ -93,7 +93,7 @@ public class CommandeService {
         return maliste;
     }
 
-    /**
+    /** Microservice
      * Cette fonction permet de d'associer les informations sur les commandes et les items commandes
      * present dans la base de donnees et les associe au code Java(de commande)
      * @return
@@ -173,21 +173,21 @@ public class CommandeService {
         return maliste;
     }
 
-    /**
-     * TODO
+    /** Microservice
+     * Cette fonction permet d'aller chercher des items commander avec l'aide de la database
      * @return
      */
     @GET
     @Path("/item_commander")
     @Produces("application/JSON")
-    public ArrayList<Item_Commander> getListeItemCommander(){
+    public ArrayList<itemCommander> getListeItemCommander(){
         DataBase database = DataBase.getInstance();
-        return database.getItem_Commander();
+        return database.getItemCommander();
     }
 
 
     /**
-     * TODO
+     * Cette fonction permet d'aller chercher des commandes avec l'aide de la base de donnee
      * @return
      */
     @GET
@@ -202,7 +202,8 @@ public class CommandeService {
 
 
     /**
-     * TODO
+     * Cette fonction permet de commander des items, d'introduire ces commandes dans la base de donnes et
+     * de relier webix
      * @param idProduit
      * @param quantite
      */

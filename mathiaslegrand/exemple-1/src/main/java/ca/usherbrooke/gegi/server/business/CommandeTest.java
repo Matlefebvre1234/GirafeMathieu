@@ -80,14 +80,14 @@ class CommandeTest {
     @Test
     void setListeItem() {
         Commande commande = new Commande();
-        ArrayList<Item_Commander> arrayList = new ArrayList<>();
+        ArrayList<itemCommander> arrayList = new ArrayList<>();
         commande.setListeItem(arrayList);
         Assertions.assertEquals(arrayList,commande.getListeItem());
     }
     @Test
     void getListeItem() {
         Commande commande = new Commande();
-        ArrayList<Item_Commander> arrayList = new ArrayList<>();
+        ArrayList<itemCommander> arrayList = new ArrayList<>();
         commande.setListeItem(arrayList);
         Assertions.assertEquals(arrayList,commande.getListeItem());
     }

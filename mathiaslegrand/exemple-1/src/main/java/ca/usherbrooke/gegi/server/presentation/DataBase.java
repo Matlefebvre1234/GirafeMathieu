@@ -44,7 +44,7 @@ public class DataBase {
     }
 
     /**
-     * Cette fonction permet de donner des droits d'administration a des cip et de le modifier dans la database
+     * Cette fonction permet de savoir si une personne possede les droits d'administrations
      * @param cip
      * @return
      */
@@ -58,8 +58,10 @@ public class DataBase {
             stmt.setString(1, cip);
             ResultSet rs2 = stmt.executeQuery();
             rs2.next();
-            if(rs2.getInt(1) == 1)return true;
-            else return false;
+            if(rs2.getInt(1) == 1)
+                return true;
+            else
+                return false;
 
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
@@ -178,7 +180,7 @@ public class DataBase {
     }
 
     /**
-     * Cette fonction permet de donner le numero de l'index de la dernier photo
+     * Cette fonction permet de donner le numero de l'index du dernier produit
      * @return
      */
     public int getLastIndex(){
@@ -199,6 +201,10 @@ public class DataBase {
         return index+1;
     }
 
+    /**
+     * Cette fonction permet de retirer un produit de la database
+     * @param idproduit
+     */
     public void removeProduitDB(int idproduit)
     {
         String SQL = "DELETE FROM produit WHERE idproduit = ?";
@@ -214,6 +220,10 @@ public class DataBase {
 
     }
 
+    /**
+     * Cette fonction permet de changer les droits d'administration d'un client.
+     * @param cip
+     */
     public void insertAdminDB( String cip){
         String SQL = "UPDATE client SET id_fonction = 1 WHERE cip = ?";
 
@@ -228,7 +238,10 @@ public class DataBase {
         }
     }
 
-
+    /**
+     * Cette fonction permet de retirer les droits d'administrations d'un client
+     * @param cip
+     */
     public void removeAdminDB(String cip)
     {
         String SQL = "UPDATE client SET id_fonction = 2 WHERE cip = ?";
@@ -243,6 +256,11 @@ public class DataBase {
 
     }
 
+    /**
+     * Cette fonction permet de construire des produits a l'aide de la base de donnee pour un futur affichage sur Webix
+     * @param id
+     * @return
+     */
     public Produit getProduit(int id){
         ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
         String SQL = "SELECT * FROM produit WHERE idproduit = ?";
@@ -280,8 +298,10 @@ public class DataBase {
         return  p;
     }
 
-
-
+    /**
+     * Cette fonction permet de construire des item_inventaire a l'aide de la base de donne pour une futur utilisation avec Webix
+     * @return
+     */
     public ArrayList<Item_inventaire> getInventaire()
     {
         ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
@@ -309,8 +329,12 @@ public class DataBase {
 
     }
 
-    public ArrayList<Item_Commander> getItem_Commander(){
-        ArrayList<Item_Commander> listeItems = new ArrayList<>();
+    /**
+     * Cette fonction permet de construire des item commander a l'aide de la base de donnee pour une future utilisation avec Webix
+     * @return
+     */
+    public ArrayList<itemCommander> getItemCommander(){
+        ArrayList<itemCommander> listeItems = new ArrayList<>();
         String SQL = "SELECT commande.date, id_item_commander, idproduit,quantite, prixtotal, item_commander.id_commande, item_commander.id_etat_commande FROM item_commander JOIN commande ON commande.id_commande = item_commander.id_commande";
 
         try {Connection conn = connect();
@@ -319,7 +343,7 @@ public class DataBase {
 
             while(rs.next())
             {
-                Item_Commander item = new Item_Commander();
+                itemCommander item = new itemCommander();
                 item.setDate(rs.getDate(1).toString());
                 item.setId_item_commander(rs.getInt(2));
                 item.setIdproduit(rs.getInt(3));
@@ -339,6 +363,10 @@ public class DataBase {
         return listeItems;
     }
 
+    /**
+     * Cette fonction permet de donner le numero de l'index du dernier item_panier
+     * @return
+     */
     public int getIndexItemPanier(){
         int index = 0;
 
@@ -357,6 +385,10 @@ public class DataBase {
         return index+1;
     }
 
+    /**
+     * Cette fonction permet de donner le numero de l'index du dernier panier
+     * @return
+     */
     public int getIndexPanier(){
         int index = 0;
 
@@ -375,6 +407,12 @@ public class DataBase {
         return index+1;
     }
 
+    /**
+     * Cette fonction permet d'ajouter des produits dans un panie
+     * @param quantite
+     * @param panier
+     * @param produit
+     */
     public void ajouterPanier(int quantite, Panier panier, Produit produit){
         String SQL = "INSERT INTO item_panier VALUES(?,?,?,?)";
 
@@ -392,6 +430,10 @@ public class DataBase {
         }
     }
 
+    /**
+     * Cette fonction retourne les commandes avec toutes les informations pertinentes.
+     * @return
+     */
     public ArrayList<Commande> getCommande()
     {
         ConcreteBuilderCommande builder = new ConcreteBuilderCommande();
@@ -405,7 +447,7 @@ public class DataBase {
             while (rs.next())
             {
                 System.out.println(rs.getDate(4));
-                Commande c = builder.construireCommande(rs.getInt(1),rs.getString(2),rs.getDate(4),rs.getInt(3),rs.getInt(5),new ArrayList<Item_Commander>());
+                Commande c = builder.construireCommande(rs.getInt(1),rs.getString(2),rs.getDate(4),rs.getInt(3),rs.getInt(5),new ArrayList<itemCommander>());
                 malisteCommande.add(c);
                 System.out.println("date c : " + c.getDate());
             }
@@ -415,7 +457,7 @@ public class DataBase {
         }
 
         ConcreteBuilderProduit productbuilder = new ConcreteBuilderProduit();
-        ArrayList<Item_Commander> listeItem = new ArrayList<Item_Commander>();
+        ArrayList<itemCommander> listeItem = new ArrayList<itemCommander>();
         String SQL = "SELECT Commande.id_commande,cip,Commande.prix_total,Commande.date,Commande.id_etat_commande, item_commander.id_item_commander," +
                 "item_commander.quantite,item_commander.prixtotal,item_commander.id_etat_commande," +
                 "item_commander.idproduit,produit.nomitem,produit.taille,produit.couleur,produit.id_etat FROM Commande JOIN item_commander" +
@@ -440,7 +482,7 @@ public class DataBase {
                 }
 
 
-                Item_Commander item = new Item_Commander();
+                itemCommander item = new itemCommander();
                 item.setId_item_commander(rs.getInt(6));
                 item.setQuantite(rs.getInt(7));
                 item.setPrixtotal(rs.getInt(8));
@@ -465,9 +507,10 @@ public class DataBase {
     }
 
 
-
-
-
+    /**
+     * Cette fonction permet de retourner la liste des produits
+     * @return
+     */
     public ArrayList<Produit> getListeProduit()
     {
         ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
@@ -486,8 +529,8 @@ public class DataBase {
             Connection conn2= connect();
             PreparedStatement stmt2 = conn.prepareStatement(sqlPhoto);
 
-            for (Produit p:maliste
-            ) {try {
+            for (Produit p:maliste) {
+                try {
 
                 stmt2.setInt(1,p.getIdproduit());
                 ResultSet rs2 = stmt2.executeQuery();
@@ -558,6 +601,11 @@ public class DataBase {
 
     }
 
+    /**
+     * Cette fonction permet de rajouter un nouveau produit dans item_panier
+     * @param quantite
+     * @param idProduit
+     */
     public void insertItemPanier(int quantite, int idProduit){
         String SQL = "INSERT INTO item_panier VALUES(?,?,?,?)";
         try(Connection conn = connect();
@@ -660,6 +708,12 @@ public class DataBase {
         System.out.println("ca marche i guess");
     }
 
+    /**
+     * Cette fonction permet d'ajouter un item commander dans la base de donnees pour une futur utilisation
+     * @param id
+     * @param quantite
+     * @param idCommande
+     */
     public void ajouterItemCommander(int id, int quantite, int idCommande){
         String SQL2 = "INSERT INTO item_commander VALUES(?,?,?,?,?,?)";
         int prixTotal = getProduit(id).getPrix()*quantite;
@@ -704,6 +758,11 @@ public class DataBase {
         return index+1;
     }
 
+    /**
+     * Cette fonction permet d'ajouter un nouvel item dans l'inventaire
+     * @param idProduit
+     * @param quantite
+     */
     public void ajouterItemInventaire(int idProduit, int quantite){
         String SQL2 = "INSERT INTO inventaire_produit VALUES(?,?,?)";
 
@@ -720,6 +779,11 @@ public class DataBase {
         }
     }
 
+    /**
+     * Cette fonction serre a la connexion a la base de donnee
+     * @return
+     * @throws SQLException
+     */
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
     }
