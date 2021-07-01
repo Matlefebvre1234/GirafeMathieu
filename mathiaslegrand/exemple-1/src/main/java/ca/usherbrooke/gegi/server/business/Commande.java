@@ -1,5 +1,6 @@
 package ca.usherbrooke.gegi.server.business;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +36,7 @@ public class Commande {
      * @param date
      */
     public void setDate(String date) {
-        this.date = date.toString();
+        this.date = date;
     }
 
     /**
