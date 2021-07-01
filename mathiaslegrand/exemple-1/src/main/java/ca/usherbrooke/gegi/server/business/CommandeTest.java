@@ -3,20 +3,35 @@ package ca.usherbrooke.gegi.server.business;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 class CommandeTest {
 
     @Test
     void getDate() {
         Commande commande = new Commande();
-        commande.setDate("41-05");
-        Assertions.assertEquals("41-05",commande.getDate());
+        try{
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998");
+            commande.setDate(date);
+            Assertions.assertEquals(date,commande.getDate());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
     @Test
     void setDate() {
         Commande commande = new Commande();
-        commande.setDate("41-05");
-        Assertions.assertEquals("41-05",commande.getDate());
+        try{
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998");
+            commande.setDate(date);
+            Assertions.assertEquals(date,commande.getDate());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Test
