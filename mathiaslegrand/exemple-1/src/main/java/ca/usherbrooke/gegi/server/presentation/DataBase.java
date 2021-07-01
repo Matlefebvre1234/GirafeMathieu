@@ -250,14 +250,34 @@ public class DataBase {
         return  p;
     }
 
+    public String getNomProduit(int id){
+        String nomitem = null;
+
+        String SQL = "SELECT nomitem FROM produit WHERE idproduit = ?";
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            nomitem = rs.getString(1);
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        return nomitem;
+    }
+
     public ArrayList<String> getTailleProduit(int id){
         ArrayList<String> listeTailles = new ArrayList<>();
-        String SQL = "SELECT taille FROM produit WHERE idproduit = ?";
-
+        String SQL = "SELECT taille FROM produit WHERE nomitem = ?";
+        System.out.println("Id du produit: " + id);
+        String nomItem = getNomProduit(id);
         try{
             Connection conn = connect();
             PreparedStatement stmt = conn.prepareStatement(SQL);
-            stmt.setInt(1,id);
+            stmt.setString(1,nomItem);
             ResultSet rs = stmt.executeQuery();
 
             while(rs.next()){
@@ -609,20 +629,9 @@ public class DataBase {
 
     public int getIdTaille(int id, String taille){
         int idTaille = 0;
-        String nomitem = null;
+        String nomitem;
 
-        String SQL = "SELECT nomitem FROM produit WHERE idproduit = ?";
-        try(Connection conn = connect();
-            PreparedStatement stmt = conn.prepareStatement(SQL)){
-
-            stmt.setInt(1, id);
-
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            nomitem = rs.getString(1);
-        } catch (SQLException ex){
-            System.out.println(ex.getMessage());
-        }
+        nomitem = getNomProduit(id);
 
         String SQL2 = "SELECT idproduit FROM produit WHERE nomitem = ? AND taille = ?";
         try(Connection conn = connect();
@@ -713,7 +722,7 @@ public class DataBase {
     public int getIndexItemInventaire(){
         int index = 0;
 
-        String SQL = "SELECT MAX(id_envnetaire_produit) FROM inventaire_produit" ;
+        String SQL = "SELECT MAX(id_inventaire_produit) FROM inventaire_produit" ;
 
         try (Connection conn = connect();
              Statement stmt = conn.createStatement();

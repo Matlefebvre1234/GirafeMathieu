@@ -52,7 +52,7 @@ public class ProduitService extends Application {
     public ArrayList<String> getTaillesProduit(@FormParam("id") int idProduit)
     {
         DataBase database = DataBase.getInstance();
-        return database.getTailleProduit(2);
+        return database.getTailleProduit(idProduit);
     }
     
 }
