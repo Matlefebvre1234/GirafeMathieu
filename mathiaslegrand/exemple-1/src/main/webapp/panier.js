@@ -1,7 +1,18 @@
 
 webix.ready(function(){
 
-    var produit;
+   /* var produit;
+
+    var queryString = decodeURIComponent(window.location.search);
+    queryString = queryString.substring(1);
+    var intermediaire;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:8080/exemple-1/api/ItemPanier/getQuantite');
+    var data = {cip: queryString}
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    var datatexte = ('cip=' + data.cip)
+    xhr.send(datatexte);
+    xhr.onload =  () => {
 /*    const xhr = new XMLHttpRequest();
     xhr.open('POST', '"http://localhost:8080/exemple-1/api/ItemPanier/getQuantite"');
     //var data = {cip: queryString}

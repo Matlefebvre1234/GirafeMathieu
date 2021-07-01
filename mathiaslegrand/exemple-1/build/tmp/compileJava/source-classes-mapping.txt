@@ -56,3 +56,5 @@ ca/usherbrooke/gegi/server/business/Item_CommanderTest.java
  ca.usherbrooke.gegi.server.business.Item_CommanderTest
 ca/usherbrooke/gegi/server/presentation/DataBase.java
  ca.usherbrooke.gegi.server.presentation.DataBase
+ca/usherbrooke/gegi/server/injection/MyBatisSqlSessionFactoryProducer.java
+ ca.usherbrooke.gegi.server.injection.MyBatisSqlSessionFactoryProducer
