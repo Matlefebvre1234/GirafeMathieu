@@ -182,7 +182,7 @@ public class DataBase {
 
     }
 
-    public void insertAdminDB( String cip){
+    public boolean insertAdminDB( String cip){
         String SQL = "UPDATE client SET id_fonction = 1 WHERE cip = ?";
 
         try(Connection conn = connect();
@@ -191,8 +191,10 @@ public class DataBase {
             stmt.setString(1, cip);
 
             stmt.executeUpdate();
+            return true;
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
+            return false;
         }
     }
 
