@@ -35,7 +35,7 @@ public class Commande {
      * @param date
      */
     public void setDate(String date) {
-        this.date = date;
+        this.date = date.toString();
     }
 
     /**
