@@ -166,12 +166,12 @@ public class CommandeService {
 
     @POST
     @Path("/commander_item")
-    public void commanderItem(@FormParam("id") int idProduit, @FormParam("quantite") int quantite){
+    public void commanderItem(@FormParam("id") int idProduit, @FormParam("quantite") int quantite, @FormParam("taille") String taille){
         DataBase dataBase = DataBase.getInstance();
         Principal principal = httpServletRequest.getUserPrincipal();
         Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
 
-        dataBase.CommanderItem(idProduit, quantite, principal.getName());
+        dataBase.CommanderItem(idProduit, quantite, taille, principal.getName());
     }
 }
 

@@ -168,9 +168,9 @@ webix.ready( function () {
                                             click: function (){
                                                 const xhr = new XMLHttpRequest();
                                                 xhr.open('POST', 'http://localhost:8080/exemple-1/api/commande/commander_item');
-                                                var data = {id:queryString, quantite:$$("quantiteProduit").getValue()}
+                                                var data = {id:queryString, quantite:$$("quantiteProduit").getValue(), taille:$$("choixtaille").getValue()}
                                                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-                                                var datatexte = ('id='+data.id + '&quantite='+data.quantite)
+                                                var datatexte = ('id='+data.id + '&quantite='+data.quantite, '&taille='+data.taille)
                                                 xhr.send(datatexte);
                                                 xhr.onload = () =>{
                                                     console.log(xhr.response);

@@ -605,11 +605,45 @@ public class DataBase {
         return index+1;
     }
 
+    public int getId(int id, String taille){
+        int idTaille = 0;
+        String nomitem = null;
+
+        String SQL = "SELECT nomitem FROM produit WHERE idproduit = ?";
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            nomitem = rs.getString(1);
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        String SQL2 = "SELECT idproduit FROM produit WHERE nomitem = ? AND taille = ?";
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL2)){
+
+            stmt.setString(1, nomitem);
+            stmt.setString(2, taille);
+
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            nomitem = rs.getString(1);
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        return idTaille;
+    }
+
     /**
      * Methode qui permet de commander un item individuel
      * @param id id du produit a commander
      */
-    public void CommanderItem(int id, int quantite, String cip){
+    public void CommanderItem(int id, int quantite, String taille, String cip){
         String SQL = "INSERT INTO COMMANDE VALUES(?,?,?,?,?)";
         int index = getIndexCommande();
         int prixTotal = getProduit(id).getPrix()*quantite;

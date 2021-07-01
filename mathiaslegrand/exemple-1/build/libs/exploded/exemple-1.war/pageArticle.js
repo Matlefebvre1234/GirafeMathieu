@@ -55,7 +55,7 @@ webix.ready( function () {
 
             var quantites = [];
 
-            for(var i = 1; i < 99; i++){
+            for(var i = 1; i < 100; i++){
                 quantites.push({
                     id: i,
                     value: i
