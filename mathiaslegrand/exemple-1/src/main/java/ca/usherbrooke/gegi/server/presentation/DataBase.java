@@ -1,16 +1,11 @@
 package ca.usherbrooke.gegi.server.presentation;
 
 import ca.usherbrooke.gegi.server.business.*;
-import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.core.Context;
-import javax.xml.crypto.Data;
-import java.security.Principal;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Contient toutes les methodes qui communiquent avec la base de donnees
@@ -276,6 +271,28 @@ public class DataBase {
 
     }
 
+    public int getItemInventaire(int id){
+        String SQL = "SELECT quantite FROM inventaire_produit WHERE idproduit = ?";
+        int quantite = 0;
+
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL)){
+
+            stmt2.setInt(1, id);
+
+            ResultSet rs = stmt2.executeQuery();
+
+            rs.next();
+
+            quantite = rs.getInt(1);
+
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        return quantite;
+    }
+
     public ArrayList<Item_Commander> getItem_Commander(){
         ArrayList<Item_Commander> listeItems = new ArrayList<>();
         String SQL = "SELECT commande.date, id_item_commander, idproduit,quantite, prixtotal, item_commander.id_commande, item_commander.id_etat_commande FROM item_commander JOIN commande ON commande.id_commande = item_commander.id_commande";
@@ -399,7 +416,7 @@ public class DataBase {
                 for(int i =0;i<malisteCommande.size();i++)
                 {
 
-                    if(malisteCommande.get(i).getId_commande() == rs.getInt(1))
+                    if(malisteCommande.get(i).getIdCommande() == rs.getInt(1))
                     {
                         indexTemp = i;
                     }
@@ -656,7 +673,7 @@ public class DataBase {
     public int getIndexItemInventaire(){
         int index = 0;
 
-        String SQL = "SELECT MAX(id_envnetaire_produit) FROM inventaire_produit" ;
+        String SQL = "SELECT MAX(id_inventaire_produit) FROM inventaire_produit" ;
 
         try (Connection conn = connect();
              Statement stmt = conn.createStatement();

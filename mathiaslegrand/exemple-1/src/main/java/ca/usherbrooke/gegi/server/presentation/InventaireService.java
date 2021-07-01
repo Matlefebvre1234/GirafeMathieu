@@ -35,6 +35,15 @@ public class InventaireService extends Application {
         return database.getInventaire();
     }
 
+    @GET
+    @Path("/inventaire")
+    @Produces("application/json")
+    public int getItemInventaire()
+    {
+        DataBase database = DataBase.getInstance();
+        return 10;
+    }
+
     @POST
     @Path("/insererProduitInventaire")
     public void insererProduitInventaire(@FormParam("id") int idProduit, @FormParam("quantite") int quantite){

@@ -10,32 +10,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4cca78b-6aab-4f67-8912-0f21c3f11b86" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/CommandeTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduitTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/EtudiantTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_CommanderTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_inventaireTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/CommandeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduitTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/EtudiantTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_CommanderTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_inventaireTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Commande.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Commande.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduit.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Etudiant.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Etudiant.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_Commander.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_Commander.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_inventaire.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Item_inventaire.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Produit.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/Produit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/ProduitTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ca/usherbrooke/gegi/server/business/ProduitTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exemple-1.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exemple-1.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Commande.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Commande.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ConcreteBuilderProduit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Etudiant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Etudiant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/CommandeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/CommandeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ConcreteBuilderCommande.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ConcreteBuilderCommande.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ItemPanier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ItemPanier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_Commander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_Commander.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_inventaire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_inventaire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Produit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Produit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ProduitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ProduitTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/injection/RestApplicationPathConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/injection/RestApplicationPathConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Panier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Panier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/CommandeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/CommandeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/DataBase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +33,23 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="exemple-1" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -61,8 +65,23 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="JBoss/WildFly 19.1.0.Final" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="JBoss/WildFly 19.1.0.Final" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/exemple-1/" />
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -146,6 +165,7 @@
       <updated>1625077704716</updated>
       <workItem from="1625077706137" duration="2999000" />
       <workItem from="1625083132661" duration="11000" />
+      <workItem from="1625083370044" duration="2112000" />
     </task>
     <servers />
   </component>

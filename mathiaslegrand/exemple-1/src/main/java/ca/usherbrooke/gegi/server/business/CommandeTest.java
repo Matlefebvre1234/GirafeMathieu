@@ -1,53 +1,65 @@
 package ca.usherbrooke.gegi.server.business;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 class CommandeTest {
 
     @Test
     void getDate() {
         Commande commande = new Commande();
-        commande.setDate("41-05");
-        Assertions.assertEquals("41-05",commande.getDate());
+        try{
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998");
+            commande.setDate(date);
+            Assertions.assertEquals(date,commande.getDate());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
     @Test
     void setDate() {
         Commande commande = new Commande();
-        commande.setDate("41-05");
-        Assertions.assertEquals("41-05",commande.getDate());
+        try{
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998");
+            commande.setDate(date);
+            Assertions.assertEquals(date,commande.getDate());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Test
     void getPrix_total() {
         Commande commande = new Commande();
-        commande.setPrix_total(2000);
-        Assertions.assertEquals(2000,commande.getPrix_total());
+        commande.setPrixTotal(2000);
+        Assertions.assertEquals(2000,commande.getPrixTotal());
     }
 
     @Test
     void setPrix_total() {
         Commande commande = new Commande();
-        commande.setPrix_total(2000);
-        Assertions.assertEquals(2000,commande.getPrix_total());
+        commande.setPrixTotal(2000);
+        Assertions.assertEquals(2000,commande.getPrixTotal());
     }
 
     @Test
     void getId_commande() {
         Commande commande = new Commande();
-        commande.setId_commande(2000);
-        Assertions.assertEquals(2000,commande.getId_commande());
+        commande.setIdCommande(2000);
+        Assertions.assertEquals(2000,commande.getIdCommande());
     }
 
     @Test
     void setId_commande() {
         Commande commande = new Commande();
-        commande.setId_commande(2000);
-        Assertions.assertEquals(2000,commande.getId_commande());
+        commande.setIdCommande(2000);
+        Assertions.assertEquals(2000,commande.getIdCommande());
     }
 
     @Test
@@ -67,14 +79,14 @@ class CommandeTest {
     @Test
     void getId_etat_commande() {
         Commande commande = new Commande();
-        commande.setId_etat_commande(2);
-        Assertions.assertEquals(2,commande.getId_etat_commande());
+        commande.setIdEtatCommande(2);
+        Assertions.assertEquals(2,commande.getIdEtatCommande());
     }
 
     @Test
     void setId_etat_commande() {
         Commande commande = new Commande();
-        commande.setId_etat_commande(2);
-        Assertions.assertEquals(2,commande.getId_etat_commande());
+        commande.setIdEtatCommande(2);
+        Assertions.assertEquals(2,commande.getIdEtatCommande());
     }
 }
