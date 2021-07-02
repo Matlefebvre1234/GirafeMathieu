@@ -170,7 +170,6 @@ public class CommandeService {
         DataBase dataBase = DataBase.getInstance();
         Principal principal = httpServletRequest.getUserPrincipal();
         Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
-
         dataBase.CommanderItem(idProduit, quantite, taille, principal.getName());
     }
 }

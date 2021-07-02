@@ -7,6 +7,7 @@ import ca.usherbrooke.gegi.server.business.Produit;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.xml.crypto.Data;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -58,9 +59,15 @@ public class PanierService {
 
         Principal principal = httpServletRequest.getUserPrincipal();
 
+        Panier panier = getPanier(principal.getName());
+
+        System.out.println("idProduit: " + idProduit);
         System.out.println("quantite: " + quantite);
-        System.out.println("id: " + idProduit);
+        System.out.println("idPanier: " + panier.getIdPanier());
         System.out.println("taille: " + taille);
+
+        DataBase database = DataBase.getInstance();
+        database.ajouterItemPanier(idProduit, quantite, panier.getIdPanier(), taille);
 
     }
 }

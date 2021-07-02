@@ -713,6 +713,24 @@ public class DataBase {
         }
     }
 
+    public void ajouterItemPanier(int id2, int quantite, int idPanier, String taille){
+        String SQL2 = "INSERT INTO item_panier VALUES(?,?,?,?)";
+        int id = getIdTaille(id2, taille);
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
+
+            stmt2.setInt(1, quantite);
+            stmt2.setInt(2, getIndexItemPanier());
+            stmt2.setInt(3, id);
+            stmt2.setInt(4, idPanier);
+
+
+            stmt2.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
     /**
      * Permet d'aller chercher le dernier index de item_commander
      * @return l'index pour ajouter un nouvel item_commander
