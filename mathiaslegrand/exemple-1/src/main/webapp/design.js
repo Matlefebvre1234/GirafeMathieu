@@ -144,6 +144,12 @@ const sendData = (cipVal) => {
 };
 
 fetchisAdmin();
+fetchAjouterEtudiant();
+
+async function fetchAjouterEtudiant()
+{
+	let response = await fetch("http://localhost:8080/exemple-1/api/insert_etudiant");
+}
 async function fetchisAdmin()
 {
 	let response2 = await fetch("http://localhost:8080/exemple-1/api/isAdmin");

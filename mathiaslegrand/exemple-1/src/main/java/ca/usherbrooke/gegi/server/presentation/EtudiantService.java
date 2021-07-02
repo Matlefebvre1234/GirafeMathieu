@@ -72,8 +72,6 @@ public class EtudiantService {
 
         DataBase database = DataBase.getInstance();
         database.insertEtudiantDB(etudiant);
-
-
         return etudiant;
     }
 
