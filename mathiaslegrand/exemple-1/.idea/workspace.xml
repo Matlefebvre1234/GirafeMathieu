@@ -77,6 +77,12 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Utilisateur\Desktop\Documents\projetS3\GirafeMathieu\mathiaslegrand\exemple-1\src\main\webapp" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ca.usherbrooke.gegi.server.business" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="JBoss/WildFly 19.1.0.Final" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="JBoss/WildFly 19.1.0.Final" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">

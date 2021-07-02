@@ -17,6 +17,11 @@ public class PanierService {
     @Context
     HttpServletRequest httpServletRequest;
 
+    /**
+     * Cette fonction permet d'aller chercher le panier associer a un cip suite a une demande sur l'interface
+     * @param cip
+     * @return
+     */
     @POST
     @Path("/getPanier")
     @Produces("application/json")
@@ -53,6 +58,11 @@ public class PanierService {
         }
     }
 
+    /**
+     * Cette fonction permet d'ajouter des item au panier
+     * @param quantite
+     * @param idproduit
+     */
     @POST
     @Path("/ajouterItemPanier")
     public void ajouterItemPanier(@FormParam("id") int idProduit, @FormParam("quantite") int quantite, @FormParam("taille") String taille){

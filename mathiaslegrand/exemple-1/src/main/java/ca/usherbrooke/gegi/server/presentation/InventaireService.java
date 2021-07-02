@@ -14,9 +14,17 @@ import java.util.ArrayList;
  * @version 1.0
  * @see DataBase
  */
+
+/**
+ * NOTES IMPORTANTES TOUS LES API SERVENT G/N/RALEMENT DE LIEN ENTRE L'INTERFACE GRAPHIQUE ET LE CODE EN JAVA/BASE DE DONNEES
+ */
 @Path("/inventaire")
 public class InventaireService extends Application {
 
+    /**Microservice
+     * Cette fonction permet de recuperer tous les produits
+     * @return
+     */
     @GET
     @Path("/listeproduits")
     @Produces("application/json")
@@ -26,6 +34,10 @@ public class InventaireService extends Application {
         return database.getListeProduit();
     }
 
+    /**
+     * Cette fonction permet de recuperer les items dans l'inventaire
+     * @return
+     */
     @GET
     @Path("/inventaire")
     @Produces("application/json")
@@ -35,6 +47,11 @@ public class InventaireService extends Application {
         return database.getInventaire();
     }
 
+    /**
+     * Cette fonction permet d'inserer des nouveaux  produits dans la base de donnees via l'interface graphique
+     * @param idProduit
+     * @param quantite
+     */
     @POST
     @Path("/insererProduitInventaire")
     public void insererProduitInventaire(@FormParam("id") int idProduit, @FormParam("quantite") int quantite){

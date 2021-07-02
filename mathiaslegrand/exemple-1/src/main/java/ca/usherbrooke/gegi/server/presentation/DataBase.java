@@ -34,6 +34,10 @@ public class DataBase {
 
     }
 
+    /**
+     * Cette fonction retourne une instance de la database
+     * @return
+     */
     public static DataBase getInstance()
     {
         if(instance == null)
@@ -44,7 +48,11 @@ public class DataBase {
         else return instance;
     }
 
-
+    /**
+     * Cette fonction permet de savoir si une personne possede les droits d'administrations
+     * @param cip
+     * @return
+     */
     public boolean isAdmin(String cip)
     {
         String SQL = "SELECT id_fonction from Client WHERE cip = ?" ;
@@ -63,6 +71,11 @@ public class DataBase {
         }
         return false;
     }
+
+    /**
+     * Cette fonction permet d'inserer des clients dans la database
+     * @param etudiant
+     */
     public void insertEtudiantDB(Etudiant etudiant){
         String SQL = "INSERT INTO client(cip, courriel, nom, adresse, prenom, id_fonction)" + " VALUES(?,?,?,?,?,?)" ;
 
@@ -82,7 +95,11 @@ public class DataBase {
         }
     }
 
-
+    /**
+     * Cette fonction permet d'ajouter des images a des produits dans la database.
+     * @param url
+     * @param idProduit
+     */
     public void insertImageProduitDb(String url, int idProduit)
     {
         String SQL = "INSERT INTO produit_photo(id_photo, url, idproduit)" + " VALUES(?,?,?)";
@@ -103,6 +120,18 @@ public class DataBase {
     }
 
 
+    /**
+     * Cette fonction permet d'ajouter des produits dans la database.
+     * @param nom
+     * @param description
+     * @param taille
+     * @param prix
+     * @param couleur
+     * @param visibilite
+     * @param etat
+     * @param url
+     * @param quantite
+     */
     public void insertProduitDB(String nom, String description, String taille, float prix, String couleur, int visibilite, int etat, String url, int quantite) {
         String SQL = "INSERT INTO produit(nomitem, idproduit, description, prix, taille, couleur, visibilite_site, id_etat)" + " VALUES(?,?,?,?,?,?,?,?)";
 
@@ -130,7 +159,10 @@ public class DataBase {
         ajouterItemInventaire(index, quantite);
     }
 
-
+    /**
+     * Cette fonction permet de donner le numero de l'index de la dernier photo
+     * @return
+     */
     public int getLastIndexPhoto(){
         int index = 0;
 
@@ -149,6 +181,11 @@ public class DataBase {
         return index+1;
 
     }
+
+    /**
+     * Cette fonction permet de donner le numero de l'index du dernier produit
+     * @return
+     */
     public int getLastIndex(){
         int index = 0;
 
@@ -167,6 +204,10 @@ public class DataBase {
         return index+1;
     }
 
+    /**
+     * Cette fonction permet de retirer un produit de la database
+     * @param idproduit
+     */
     public void removeProduitDB(int idproduit)
     {
         String SQL = "DELETE FROM produit WHERE idproduit = ?";
@@ -182,6 +223,10 @@ public class DataBase {
 
     }
 
+    /**
+     * Cette fonction permet de changer les droits d'administration d'un client.
+     * @param cip
+     */
     public boolean insertAdminDB( String cip){
         String SQL = "UPDATE client SET id_fonction = 1 WHERE cip = ?";
 
@@ -198,7 +243,10 @@ public class DataBase {
         }
     }
 
-
+    /**
+     * Cette fonction permet de retirer les droits d'administrations d'un client
+     * @param cip
+     */
     public void removeAdminDB(String cip)
     {
         String SQL = "UPDATE client SET id_fonction = 2 WHERE cip = ?";
@@ -213,6 +261,11 @@ public class DataBase {
 
     }
 
+    /**
+     * Cette fonction permet de construire des produits a l'aide de la base de donnee pour un futur affichage sur Webix
+     * @param id
+     * @return
+     */
     public Produit getProduit(int id){
         ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
         String SQL = "SELECT * FROM produit WHERE idproduit = ?";
@@ -289,6 +342,10 @@ public class DataBase {
         return listeTailles;
     }
 
+    /**
+     * Cette fonction permet de construire des item_inventaire a l'aide de la base de donne pour une futur utilisation avec Webix
+     * @return
+     */
     public ArrayList<Item_inventaire> getInventaire()
     {
         ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
@@ -316,6 +373,10 @@ public class DataBase {
 
     }
 
+    /**
+     * Cette fonction permet de construire des item commander a l'aide de la base de donnee pour une future utilisation avec Webix
+     * @return
+     */
     public ArrayList<Item_Commander> getItem_Commander(){
         ArrayList<Item_Commander> listeItems = new ArrayList<>();
         String SQL = "SELECT commande.date, id_item_commander, idproduit,quantite, prixtotal, item_commander.id_commande, item_commander.id_etat_commande FROM item_commander JOIN commande ON commande.id_commande = item_commander.id_commande";
@@ -346,6 +407,10 @@ public class DataBase {
         return listeItems;
     }
 
+    /**
+     * Cette fonction permet de donner le numero de l'index du dernier item_panier
+     * @return
+     */
     public int getIndexItemPanier(){
         int index = 0;
 
@@ -364,6 +429,10 @@ public class DataBase {
         return index+1;
     }
 
+    /**
+     * Cette fonction permet de donner le numero de l'index du dernier panier
+     * @return
+     */
     public int getIndexPanier(){
         int index = 0;
 
@@ -382,6 +451,12 @@ public class DataBase {
         return index+1;
     }
 
+    /**
+     * Cette fonction permet d'ajouter des produits dans un panie
+     * @param quantite
+     * @param panier
+     * @param produit
+     */
     public void ajouterPanier(int quantite, Panier panier, Produit produit){
         String SQL = "INSERT INTO item_panier VALUES(?,?,?,?)";
 
@@ -399,6 +474,10 @@ public class DataBase {
         }
     }
 
+    /**
+     * Cette fonction retourne les commandes avec toutes les informations pertinentes.
+     * @return
+     */
     public ArrayList<Commande> getCommande()
     {
         ConcreteBuilderCommande builder = new ConcreteBuilderCommande();
@@ -469,10 +548,10 @@ public class DataBase {
 
     }
 
-
-
-
-
+    /**
+     * Cette fonction permet de retourner la liste des produits
+     * @return
+     */
     public ArrayList<Produit> getListeProduit()
     {
         ConcreteBuilderProduit builder = new ConcreteBuilderProduit();
@@ -565,6 +644,11 @@ public class DataBase {
 
     }
 
+    /**
+     * Cette fonction permet de rajouter un nouveau produit dans item_panier
+     * @param quantite
+     * @param idProduit
+     */
     public void insertItemPanier(int quantite, int idProduit){
         String SQL = "INSERT INTO item_panier VALUES(?,?,?,?)";
         try(Connection conn = connect();
@@ -733,6 +817,12 @@ public class DataBase {
         }
     }
 
+    /**
+     * Cette fonction permet d'ajouter un item commander dans la base de donnees pour une futur utilisation
+     * @param id
+     * @param quantite
+     * @param idCommande
+     */
     public void ajouterItemCommander(int id, int quantite, int idCommande){
         String SQL2 = "INSERT INTO item_commander VALUES(?,?,?,?,?,?)";
         int prixTotal = getProduit(id).getPrix()*quantite;
@@ -793,6 +883,11 @@ public class DataBase {
         return index+1;
     }
 
+    /**
+     * Cette fonction permet d'ajouter un nouvel item dans l'inventaire
+     * @param idProduit
+     * @param quantite
+     */
     public void ajouterItemInventaire(int idProduit, int quantite){
         String SQL2 = "INSERT INTO inventaire_produit VALUES(?,?,?)";
 
@@ -809,6 +904,11 @@ public class DataBase {
         }
     }
 
+    /**
+     * Cette fonction serre a la connexion a la base de donnee
+     * @return
+     * @throws SQLException
+     */
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
     }

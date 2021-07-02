@@ -110,7 +110,7 @@ public class Commande {
         this.listeItem = listeItem;
     }
 
-    public ArrayList<Item_Commander> getListeItem() {
-        return listeItem;
+        public ArrayList<Item_Commander> getListeItem() {
+            return listeItem;
+        }
     }
-}
