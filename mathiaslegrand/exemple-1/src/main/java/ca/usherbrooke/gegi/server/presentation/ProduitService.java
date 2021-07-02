@@ -75,6 +75,14 @@ public class ProduitService extends Application {
     }
 
     @POST
+    @Path("/modifierProduit")
+    @Produces("application/json")
+    public void modifierProduit(@FormParam("id")int idProduit, @FormParam("nom") String nom, @FormParam("description") String description, @FormParam("taille") String taille, @FormParam("prix") float prix, @FormParam("couleur") String couleur, @FormParam("visibilite") int visibilite, @FormParam("etat") int etat, @FormParam("url") String url, @FormParam("quantite") int quantite)
+    {
+        DataBase database = DataBase.getInstance();
+        //return database.getProduit(idProduit);
+    }
+    @POST
     @Path("/getTaillesProduit")
     @Produces("application/json")
     public ArrayList<String> getTaillesProduit(@FormParam("id") int idProduit)

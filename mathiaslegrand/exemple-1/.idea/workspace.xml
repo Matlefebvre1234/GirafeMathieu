@@ -10,25 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4cca78b-6aab-4f67-8912-0f21c3f11b86" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/BooleanMat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/app2.McotAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/app2.McotAA.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/information_schema.FNRwLQ.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/information_schema.FNRwLQ.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/pg_catalog.0S1ZNQ.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/pg_catalog.0S1ZNQ.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0889b738-dcbe-4291-8cdb-815a684a3637/storage_v2/_src_/database/s3iprojet04.Ga3oIQ/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exemple-1.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exemple-1.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/CommandeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/CommandeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/DataBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/presentation/DataBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/pageArticle.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/pageArticle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/presentation/CommandeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/presentation/CommandeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/presentation/DataBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/presentation/DataBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/CommandeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/CommandeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/DataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pageArticle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pageArticle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/ProduitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/presentation/ProduitService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +148,7 @@
       <workItem from="1625158414281" duration="2064000" />
       <workItem from="1625174287873" duration="2242000" />
       <workItem from="1625234362382" duration="7355000" />
-      <workItem from="1625246209127" duration="7861000" />
+      <workItem from="1625246209127" duration="9195000" />
     </task>
     <servers />
   </component>

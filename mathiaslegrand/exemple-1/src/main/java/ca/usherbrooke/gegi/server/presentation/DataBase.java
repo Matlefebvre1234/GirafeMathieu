@@ -130,6 +130,63 @@ public class DataBase {
         ajouterItemInventaire(index, quantite);
     }
 
+    public void modifierProduit(int idProduit, String nom, String description, String taille, float prix, String couleur, int visibilite, int etat, String url, int quantite){
+        String SQL = "UPDATE produit SET nomitem = ?, description = ?, prix = ?, taille = ?, couleur = ?, visibilite_site = ?, id_etat = ? WHERE idproduit = ?";
+
+        try (Connection conn = connect();
+             PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, nom);
+            stmt.setString(2, description);
+            stmt.setFloat(3, prix);
+            stmt.setString(4, taille);
+            stmt.setString(5, couleur);
+            stmt.setInt(6, visibilite);
+            stmt.setInt(7, etat);
+            stmt.setInt(8, idProduit);
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        //modifierImageProduitDb();
+    }
+
+    public void modifierImageProduitDb(String url, int id){
+        String SQL = "UPDATE produit_photo SET url = ? WHERE id_photo = ? AND idproduit = ?";
+        int id2 = getIndexPhotoIdProduit(id);
+        try (Connection conn = connect();
+             PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, url);
+            stmt.setInt(2, id2);
+            stmt.setInt(3, id);
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public int getIndexPhotoIdProduit(int idProduit){
+        String SQL = "SELECT id_photo WHERE idProduit = ?";
+        int id = 0;
+        try (Connection conn = connect();
+             PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setInt(1, idProduit);
+
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            id = rs.getInt(1);
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return id;
+    }
+
 
     public int getLastIndexPhoto(){
         int index = 0;
