@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CommandeTest {
@@ -77,4 +79,20 @@ class CommandeTest {
         commande.setId_etat_commande(2);
         Assertions.assertEquals(2,commande.getId_etat_commande());
     }
+
+    @Test
+    void setListeItem() {
+        Commande commande = new Commande();
+        ArrayList<Item_Commander> arrayList = new ArrayList<>();
+        commande.setListeItem(arrayList);
+        Assertions.assertEquals(arrayList,commande.getListeItem());
+    }
+    @Test
+    void getListeItem() {
+        Commande commande = new Commande();
+        ArrayList<Item_Commander> arrayList = new ArrayList<>();
+        commande.setListeItem(arrayList);
+        Assertions.assertEquals(arrayList,commande.getListeItem());
+    }
+
 }
