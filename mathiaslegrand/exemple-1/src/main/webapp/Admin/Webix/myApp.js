@@ -29,7 +29,7 @@ webix.ready(function() {
                             {
                             view: "multiview",
                                 cells: [
-                                    { id: "GestionAdmin", "rows": [ajouterAdmin, retirerAdmin, datatableAdmin] },
+                                    { id: "Admin", padding: 30,"rows": [ajouterAdmin, retirerAdmin, datatableAdmin] },
                                     { id: "Inventaire", "rows": [Inventaire_buttons,Inventaire] },
                                     { id: "Precommande", "rows": [Precommande_buttons, Precommande] },
                                     { id: "Commande", "rows": [Commande_buttons,Commande] },
@@ -49,6 +49,8 @@ webix.ready(function() {
         window.location.href = "pageArticles.html" + queryString;
     };
     $$("inventaireTable").on_click.modifbtn=function(e, id, trg){
+        var value1= $$("inventaireTable").getItem(id);
+        modifId(value1.idproduit);
         $$("window_modif").show();
     };
 });

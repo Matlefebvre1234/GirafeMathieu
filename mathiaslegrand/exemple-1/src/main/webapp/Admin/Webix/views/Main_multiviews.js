@@ -1,12 +1,12 @@
 
 var ajouterAdmin = {
     cols: [
-            {"view": "text", "placeholder": "Type here...", "label": "Cip", name: "cip", id:"cip", "labelWidth": 100, width: 400},
+            {"view": "text", "placeholder": "Type here...", "label": "Cip", name: "cip", id:"cipRajouter", "labelWidth": 100, width: 400},
             {"label": "Ajouter Admin", "view": "button", "height": 38, width: 200, align: "right",
                 click: function (){
                     const xhr = new XMLHttpRequest();
                     xhr.open('POST', 'http://localhost:8080/exemple-1/api/insert_admin');
-                    var data = {cip:$$("cip").getValue()}
+                    var data = {cip:$$("cipRajouter").getValue()}
                     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
                     var datatexte = ('cip='+data.cip)
                     xhr.send(datatexte);
@@ -27,12 +27,12 @@ var ajouterAdmin = {
 
 var retirerAdmin = {
     cols: [
-                {"view": "text", "placeholder": "Type here...", "label": "Cip", name: "cip", id:"cip", "labelWidth": 100, width: 400},
+                {"view": "text", "placeholder": "Type here...", "label": "Cip", name: "cip", id:"cipRetirer", "labelWidth": 100, width: 400},
                 {"label": "Retirer Admin", "view": "button", "height": 38, width: 200, align: "right",
                     click: function (){
                         const xhr = new XMLHttpRequest();
                         xhr.open('POST', 'http://localhost:8080/exemple-1/api/remove_admin');
-                        var data = {cip:$$("cip").getValue()}
+                        var data = {cip:$$("cipRetirer").getValue()}
                         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
                         var datatexte = ('cip='+data.cip)
                         xhr.send(datatexte);
@@ -240,36 +240,66 @@ webix.ready(function() {
             view:"toolbar", cols:[
                 { width:4 },
                 { view:"label", label: "Modifier" },
-                { view:"button", label: "Fermer", autowidth: true, align: 'right', click:function(){ $$('window_form').hide(); }}
+                { view:"button", label: "Fermer", autowidth: true, align: 'right', click:function(){ $$('window_modif').hide(); }}
             ]
         },
         left: 400, top: 150,
         body: {
-            /*
             view: "form",elements:[
-                {"label": "Nom", "view": "text", name: "nom", id:"nom", "height": 38, required: true, placeholder:"Taper ici le nom de l'article"},
-                {"label": "Description", "view": "text", name: "description", id:"description", "height": 38, required: true, placeholder:"Taper ici la description de l'article"},
-                {"label": "Prix", "view": "text", name: "prix", id:"prix", "height": 38, required: true, placeholder:"Taper ici le prix de l'article"},
-                {"label": "Taille", "view": "text", name: "taille", id:"taille", "height": 38, required: true, placeholder:"Taper ici la taille de l'article"},
-                {"label": "Couleur", "view": "text", name: "couleur", id:"couleur", "height": 38, required: true, placeholder:"Taper ici la couleur de l'article"},
-                {"label": "Visibilité", "view": "text", name: "visibilite", id:"visibilite", "height": 38, required: true, placeholder:"Taper ici la visibilite de l'article"},
-                {"label": "État", "view": "text", name: "etat", id:"etat", "height": 38, required: true, placeholder:"Taper ici l'etat de l'article"},
-                {"label": "Url photo", "view": "text", name: "url", id:"url", "height": 38, required: true, placeholder:"Taper ici l'url de l'article"},
-                {"label": "Quantite", "view": "text", name: "quantite", id:"quantite", "height": 38, required: true, placeholder:"Taper ici la quantite de l'article"},
+                {"label": "Nom", "view": "text", name: "nom", id:"nomModif", "height": 38, placeholder:"Taper ici le nom de l'article"},
+                {"label": "Description", "view": "text", name: "description", id:"descriptionModif", "height": 38, placeholder:"Taper ici la description de l'article"},
+                {"label": "Prix", "view": "text", name: "prix", id:"prixModif", "height": 38, placeholder:"Taper ici le prix de l'article"},
+                {"label": "Taille", "view": "text", name: "taille", id:"tailleModif", "height": 38, placeholder:"Taper ici la taille de l'article"},
+                {"label": "Couleur", "view": "text", name: "couleur", id:"couleurModif", "height": 38, placeholder:"Taper ici la couleur de l'article"},
+                {"label": "Visibilité", "view": "text", name: "visibilite", id:"visibiliteModif", "height": 38, placeholder:"Taper ici la visibilite de l'article"},
+                {"label": "État", "view": "text", name: "etat", id:"etatModif", "height": 38, placeholder:"Taper ici l'etat de l'article"},
+                {"label": "Quantite", "view": "text", name: "quantite", id:"quantiteModif", "height": 38, placeholder:"Taper ici la quantite de l'article"},
                 {
                     "label": "Modifier article",
                     "view": "button",
                     "height": 38,
-                    click: function (){
+                    click: function (id){
+                        var record = $$("commandeTable").getItem(id);
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('POST', 'http://localhost:8080/exemple-1/api/produit/modifierProduit');
+                        var data = {
+                            idproduit:$$("id"),
+                            nom:$$("nomModif").getValue(),
+                            description:$$("descriptionModif").getValue(),
+                            prix:$$("prixModif").getValue(),
+                            taille:$$("tailleModif").getValue(),
+                            couleur:$$("couleurModif").getValue(),
+                            visibilite:$$("visibiliteModif").getValue(),
+                            etat:$$("etatModif").getValue(),
+                            quantite:$$("quantiteModif").getValue()}
+                        console.log(data);
+                        data.idproduit = getId();
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                        var datatexte = ('id='+data.idproduit + '&nom='+data.nom + '&description='+data.description + '&prix='+data.prix + '&taille='+data.taille + '&couleur='+data.couleur + '&visibilite='+data.visibilite + '&etat='+data.etat + '&quantite='+data.quantite);
+                        xhr.send(datatexte);
+                        xhr.onload = () =>{
+                            console.log(xhr.response);
+                        };
                     }
                 }
             ],
             autoheight: true,
             autowidth:true
-            */
+
 
         }
     })
 });
 
+var ModifId;
 
+const modifId = (id) => {
+    ModifId = id;
+    console.log(ModifId);
+}
+
+const getId = () =>{
+    console.log(ModifId);
+    return ModifId;
+
+}
