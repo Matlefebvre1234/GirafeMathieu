@@ -52,6 +52,10 @@ public class EtudiantService {
         return etudiants.get(0).toString();
     }*/
 
+    /**Microservice
+     *Cette fonction permet de prendre l'information de l'interface graphique et de creer un etudiant et de l'inserer dans la database
+     * @return
+     */
     @GET
     @Path("insert_etudiant")
     @Produces("application/json")
@@ -71,6 +75,10 @@ public class EtudiantService {
         return etudiant;
     }
 
+    /**
+     * Cette fonction permet de retourner le cip ecrit sur l'interface graphique
+     * @return
+     */
     public String getCip() {
         Principal principal = httpServletRequest.getUserPrincipal();
         Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
@@ -78,6 +86,10 @@ public class EtudiantService {
         return principal.getName();
     }
 
+    /**Microservice
+     * CEtte fonction permet de retourner l'utilisateur creer avec certaines de ses informations
+     * @return
+     */
     @GET
     @Path("getUtilisateur")
     @Produces("application/json")
@@ -92,6 +104,11 @@ public class EtudiantService {
         return etudiant;
     }
 
+    /**Microservices
+     * Cette fonction permet de recuperer de l'information de l'interface graphique et savoir si une personne
+     * est un admin
+     * @return
+     */
     @GET
     @Path("isAdmin")
     @Produces("application/json")
@@ -107,6 +124,10 @@ public class EtudiantService {
         return database.isAdmin(principal.getName());
     }
 
+    /** Microservice
+     *  Cette fonction permet d'insert des admin dans la database
+     * @param cip
+     */
     @POST
     @Path("insert_admin")
     public boolean insertAdminDB(@FormParam("cip") String cip){
@@ -115,6 +136,10 @@ public class EtudiantService {
          return database.insertAdminDB(cip);
     }
 
+    /** Microservice
+     *  Cette fonction permet d'enlever des admin dans la database
+     * @param cip
+     */
     @GET
     @Path("remove_admin")
     public void removeAdminDB(@FormParam("cip") String cip){
@@ -122,6 +147,18 @@ public class EtudiantService {
         database.removeAdminDB(cip);
     }
 
+    /**Microservice
+     * Cette fonction permet de rajouter des items dans la database avec l'interface graphique
+     * @param nom
+     * @param description
+     * @param taille
+     * @param prix
+     * @param couleur
+     * @param visibilite
+     * @param etat
+     * @param url
+     * @param quantite
+     */
     @POST
     @Path("insert_produit")
     public void insertProduitDB(@FormParam("nom") String nom, @FormParam("description") String description, @FormParam("taille") String taille, @FormParam("prix") float prix, @FormParam("couleur") String couleur, @FormParam("visibilite") int visibilite, @FormParam("etat") int etat, @FormParam("url") String url, @FormParam("quantite") int quantite) {
@@ -131,6 +168,10 @@ public class EtudiantService {
         database.insertProduitDB( nom,description,taille,prix,couleur,visibilite, etat,url, quantite);
     }
 
+    /**Microservice
+     * Cette fonction permet de retirer un produit de la base de donnee par l'interface graphique =
+     * @param idproduit
+     */
     @GET
     @Path("remove_produit")
     public void removeProduitDB(@FormParam("idproduit") int idproduit) {

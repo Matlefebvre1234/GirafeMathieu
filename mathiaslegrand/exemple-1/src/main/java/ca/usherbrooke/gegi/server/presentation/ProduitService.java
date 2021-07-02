@@ -27,6 +27,10 @@ public class ProduitService extends Application {
         return database.getListeProduit();
     }
 
+    /**
+     * Cette fonction permet de recuperer les produits dans l'inventaire dans la database
+     * @return
+     */
     @GET
     @Path("/inventaire")
     @Produces("application/json")
@@ -36,6 +40,11 @@ public class ProduitService extends Application {
         return database.getInventaire();
     }
 
+    /**
+     * Cette fonction permet de recuperer un produit en particulier
+     * @param idProduit
+     * @return
+     */
     @POST
     @Path("/getProduit")
     @Produces("application/json")
