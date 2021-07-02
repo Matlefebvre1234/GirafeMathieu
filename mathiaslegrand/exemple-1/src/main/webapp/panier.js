@@ -25,6 +25,12 @@ webix.ready(function () {
              panier = JSON.parse(panier);
              var item = panier.items[0];
              console.log(item);
+             var produit = item.produit;
+             var quantite = item.quantite;
+             var nomItem = produit.nomitem;
+             var taille = produit.taille;
+             var prix = produit.prix;
+             var photo = produit["arrayPhoto"];
 
              if(item!=null){
                  var produit = item.produit;
@@ -51,7 +57,7 @@ webix.ready(function () {
                                     {
                                         css: "images",
                                         template: img,
-                                        data: {src: "https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}
+                                        data: {src: photo[0]}
                                     },
                                     {"label": "Produit: " + nomItem, "view": "label", "height": 0, "borderless": 0},
                                     {"label": "Taille: " + taille, "view": "label", "height": 0, "borderless": 0},
@@ -134,9 +140,4 @@ webix.ready(function () {
         return '<img src="' + obj.src + '" alt="centered image" class = "carousel_image"/>'
     }
 
-
-
-    async function TotalPrix(a, b){
-        $$("TOT").setValue(total);
-    }
 })

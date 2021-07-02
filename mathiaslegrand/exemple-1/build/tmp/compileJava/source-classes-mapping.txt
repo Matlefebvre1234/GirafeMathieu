@@ -20,10 +20,17 @@ ca/usherbrooke/gegi/server/injection/MyBatisSqlSessionFactoryProducer.java
  ca.usherbrooke.gegi.server.injection.MyBatisSqlSessionFactoryProducer
 ca/usherbrooke/gegi/server/business/ConcreteBuilderProduitTest.java
  ca.usherbrooke.gegi.server.business.ConcreteBuilderProduitTest
+<<<<<<< HEAD
 ca/usherbrooke/gegi/server/business/builderProduit.java
  ca.usherbrooke.gegi.server.business.builderProduit
 ca/usherbrooke/gegi/server/business/ProduitTest.java
  ca.usherbrooke.gegi.server.business.ProduitTest
+=======
+ca/usherbrooke/gegi/server/business/BuilderCommande.java
+ ca.usherbrooke.gegi.server.business.BuilderCommande
+ca/usherbrooke/gegi/server/business/Panier.java
+ ca.usherbrooke.gegi.server.business.Panier
+>>>>>>> panier
 ca/usherbrooke/gegi/server/business/ConcreteBuilderCommande.java
  ca.usherbrooke.gegi.server.business.ConcreteBuilderCommande
 ca/usherbrooke/gegi/server/business/ConcreteBuilderProduit.java
@@ -38,12 +45,21 @@ ca/usherbrooke/gegi/server/business/Produit.java
  ca.usherbrooke.gegi.server.business.Produit
 ca/usherbrooke/gegi/server/business/Item_inventaire.java
  ca.usherbrooke.gegi.server.business.Item_inventaire
+<<<<<<< HEAD
 ca/usherbrooke/gegi/server/business/ItemPanierTest.java
  ca.usherbrooke.gegi.server.business.ItemPanierTest
 ca/usherbrooke/gegi/server/business/PanierTest.java
  ca.usherbrooke.gegi.server.business.PanierTest
 ca/usherbrooke/gegi/server/business/Panier.java
  ca.usherbrooke.gegi.server.business.Panier
+=======
+ca/usherbrooke/gegi/server/business/ProduitTest.java
+ ca.usherbrooke.gegi.server.business.ProduitTest
+ca/usherbrooke/gegi/server/business/Item_Commander.java
+ ca.usherbrooke.gegi.server.business.Item_Commander
+ca/usherbrooke/gegi/server/business/Item_CommanderTest.java
+ ca.usherbrooke.gegi.server.business.Item_CommanderTest
+>>>>>>> panier
 ca/usherbrooke/gegi/server/presentation/ProduitService.java
  ca.usherbrooke.gegi.server.presentation.ProduitService
 ca/usherbrooke/gegi/server/business/ItemPanier.java
