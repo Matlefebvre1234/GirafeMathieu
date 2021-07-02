@@ -166,11 +166,17 @@ public class CommandeService {
 
     @POST
     @Path("/commander_item")
-    public void commanderItem(@FormParam("id") int idProduit, @FormParam("quantite") int quantite, @FormParam("taille") String taille){
+    @Produces("application/json")
+    public ArrayList<Integer> commanderItem(@FormParam("id") int idProduit, @FormParam("quantite") int quantite, @FormParam("taille") String taille){
         DataBase dataBase = DataBase.getInstance();
         Principal principal = httpServletRequest.getUserPrincipal();
         Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
-        dataBase.CommanderItem(idProduit, quantite, taille, principal.getName());
+        int reste = dataBase.CommanderItem(idProduit, quantite, taille, principal.getName());
+
+        ArrayList<Integer> liste = new ArrayList<>();
+        liste.add(reste);
+
+        return liste;
     }
 }
 

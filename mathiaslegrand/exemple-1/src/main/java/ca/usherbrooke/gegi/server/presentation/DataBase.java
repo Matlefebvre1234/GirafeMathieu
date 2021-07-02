@@ -265,14 +265,12 @@ public class DataBase {
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
         }
-
         return nomitem;
     }
 
     public ArrayList<String> getTailleProduit(int id){
         ArrayList<String> listeTailles = new ArrayList<>();
         String SQL = "SELECT taille FROM produit WHERE nomitem = ?";
-        System.out.println("Id du produit: " + id);
         String nomItem = getNomProduit(id);
         try{
             Connection conn = connect();
@@ -413,10 +411,8 @@ public class DataBase {
 
             while (rs.next())
             {
-                System.out.println(rs.getDate(4));
                 Commande c = builder.construireCommande(rs.getInt(1),rs.getString(2),rs.getDate(4),rs.getInt(3),rs.getInt(5),new ArrayList<Item_Commander>());
                 malisteCommande.add(c);
-                System.out.println("date c : " + c.getDate());
             }
         }catch (SQLException e)
         {
@@ -644,11 +640,10 @@ public class DataBase {
 
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            nomitem = rs.getString(1);
+            idTaille = rs.getInt(1);
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
         }
-
         return idTaille;
     }
 
@@ -656,36 +651,81 @@ public class DataBase {
      * Methode qui permet de commander un item individuel
      * @param id2 id du produit a commander
      */
-    public void CommanderItem(int id2, int quantite, String taille, String cip){
+    public int CommanderItem(int id2, int quantite, String taille, String cip){
         String SQL = "INSERT INTO COMMANDE VALUES(?,?,?,?,?)";
         int index = getIndexCommande();
         int id = getIdTaille(id2, taille);
         int prixTotal = getProduit(id).getPrix()*quantite;
-        try(Connection conn = connect();
-            PreparedStatement stmt = conn.prepareStatement(SQL)){
+        int quantiteInventaire = 2147483647;
+        int idInventaire = 0;
 
-            stmt.setDate(1, new Date(System.currentTimeMillis()));
-            stmt.setInt(2, index);
-            stmt.setInt(3, prixTotal);
-            stmt.setString(4, cip);
-            stmt.setInt(5, 1);
+        String SQL3 = "SELECT quantite, id_inventaire_produit FROM inventaire_produit WHERE idproduit = ?";
 
-            stmt.executeUpdate();
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL3)){
+
+            stmt2.setInt(1, id);
+
+            ResultSet rs = stmt2.executeQuery();
+            rs.next();
+            quantiteInventaire = rs.getInt(1);
+            idInventaire = rs.getInt(2);
+
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
         }
 
-        String SQL2 = "INSERT INTO item_commander VALUES(?,?,?,?,?,?)";
+        if((quantiteInventaire-quantite) < 0){
+            return quantiteInventaire-quantite;
+        }
+
+        else{
+
+            try(Connection conn = connect();
+                PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+                stmt.setDate(1, new Date(System.currentTimeMillis()));
+                stmt.setInt(2, index);
+                stmt.setInt(3, prixTotal);
+                stmt.setString(4, cip);
+                stmt.setInt(5, 1);
+
+                stmt.executeUpdate();
+            } catch (SQLException ex){
+                System.out.println(ex.getMessage());
+            }
+
+            String SQL2 = "INSERT INTO item_commander VALUES(?,?,?,?,?,?)";
+
+            try(Connection conn2 = connect();
+                PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
+
+                stmt2.setInt(1, getIndexItemCommande());
+                stmt2.setInt(2, quantite);
+                stmt2.setInt(3, prixTotal);
+                stmt2.setInt(4, index);
+                stmt2.setInt(5, id);
+                stmt2.setInt(6,1);
+
+                stmt2.executeUpdate();
+            } catch (SQLException ex){
+                System.out.println(ex.getMessage());
+            }
+
+            diminuerQuantiteInventaire(idInventaire, quantiteInventaire-quantite);
+
+            return quantiteInventaire-quantite;
+        }
+    }
+
+    public void diminuerQuantiteInventaire(int idInventaire, int quantite){
+        String SQL2 = "UPDATE inventaire_produit SET quantite = ? WHERE id_inventaire_produit = ?";
 
         try(Connection conn2 = connect();
             PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
 
-            stmt2.setInt(1, getIndexItemCommande());
-            stmt2.setInt(2, quantite);
-            stmt2.setInt(3, prixTotal);
-            stmt2.setInt(4, index);
-            stmt2.setInt(5, id);
-            stmt2.setInt(6,1);
+            stmt2.setInt(1, quantite);
+            stmt2.setInt(2, idInventaire);
 
             stmt2.executeUpdate();
         } catch (SQLException ex){

@@ -186,10 +186,7 @@ webix.ready( function () {
                                                 }
 
                                                 else{
-                                                    webix.alert({
-                                                        titre: "Commande",
-                                                        text: "La commande a ete enregistree!"
-                                                    });
+                                                    var resultat
                                                     const xhr = new XMLHttpRequest();
                                                     xhr.open('POST', 'http://localhost:8080/exemple-1/api/commande/commander_item');
 
@@ -200,6 +197,25 @@ webix.ready( function () {
                                                     xhr.send(datatexte);
                                                     xhr.onload = () =>{
                                                         console.log(xhr.response);
+
+                                                        resultat = xhr.response
+                                                        resultat = JSON.parse(resultat)
+                                                        console.log(resultat)
+                                                        var reste = +resultat[0] + +data.quantite;
+
+                                                        if(resultat[0] >= 0){
+                                                            webix.alert({
+                                                                titre: "Commande",
+                                                                text: "La commande a ete enregistree!"
+                                                            });
+                                                        }
+
+                                                        else{
+                                                            webix.alert({
+                                                                titre: "Commande",
+                                                                text: "Trop grande quantité, il ne reste que " + reste + " items"
+                                                            });
+                                                        }
                                                     };
                                                 }
                                             }
