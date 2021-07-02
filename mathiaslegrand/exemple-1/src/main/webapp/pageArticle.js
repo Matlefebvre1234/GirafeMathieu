@@ -13,13 +13,11 @@ webix.ready( function () {
     xhr.send(datatexte);
     xhr.onload =  () => {
         intermediaire =  xhr.response;
-        console.log(intermediaire);
         intermediaire = JSON.parse(intermediaire);
         var titre = intermediaire.nomitem;
         var description = intermediaire.description;
         var prix = intermediaire.prix;
         var photos = intermediaire["arrayPhoto"];
-        console.log(photos);
 
         var viewsArray = [];
         for(var i = 0; i < photos.length; i++){

@@ -727,24 +727,43 @@ public class DataBase {
     public Panier getPanierFromCIP(String cip){
         System.out.println("Avant Query");
         String SQL = "SELECT produit.nomitem, produit.taille, produit.prix, item_panier.quantite, item_panier.idpanier " +
-                     "FROM produit, item_panier, panier  " +
-                     "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND panier.cip=?";
+                "FROM produit, item_panier, panier  " +
+                "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND panier.cip=?";
 
+
+        String URL ="SELECT produit_photo.url "+
+                    "FROM produit, item_panier, panier, produit_photo "+
+                    "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND produit_photo.idproduit = produit.idproduit  AND panier.cip=?";
         Panier panier = new Panier();
+
         ArrayList<ItemPanier> itemArray = new ArrayList<>();
+        ArrayList<String> arrayPhoto = new ArrayList<>();
 
         try(Connection conn = connect();
             PreparedStatement stmt = conn.prepareStatement(SQL)){
-            System.out.println(cip);
             stmt.setString(1,cip);
-
-           System.out.println("Après Query");
             ResultSet rs = stmt.executeQuery();
+
 
             while(rs.next()){
                 ItemPanier item = new ItemPanier();
                 Produit produit = new Produit();
+                try(Connection conn2 = connect();
+                    PreparedStatement stmt2 = conn2.prepareStatement(URL)) {
+                    System.out.println("Apres Query");
+                    stmt2.setString(1,cip);
+                    ResultSet rs2 = stmt2.executeQuery();
 
+                    while(rs2.next()) {
+
+                        arrayPhoto.add(rs2.getString(1));
+                    }
+
+                    }catch (SQLException e)
+                    {
+                        System.out.println(e.getMessage());
+                    }
+                produit.setArrayPhoto(arrayPhoto);
                 String nomItem = rs.getString(1);
                 System.out.println(nomItem);
                 produit.setNomitem(nomItem);

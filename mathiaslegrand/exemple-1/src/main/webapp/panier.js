@@ -30,6 +30,7 @@ webix.ready(function () {
              var nomItem = produit.nomitem;
              var taille = produit.taille;
              var prix = produit.prix;
+             var photo = produit["arrayPhoto"];
 
     webix.ui({
         "cols": [
@@ -45,7 +46,7 @@ webix.ready(function () {
                                     {
                                         css: "images",
                                         template: img,
-                                        data: {src: "https://drive.google.com/uc?export=view&id=1hKaET_4XQ8-nXZq96YEAHFx-cPPLx6sO"}
+                                        data: {src: photo[0]}
                                     },
                                     {"label": "Description:                                                                                            " + nomItem, "view": "label", "height": 0, "borderless": 0},
                                     {"label": "Taille: " + taille, "view": "label", "height": 0, "borderless": 0},
@@ -103,13 +104,4 @@ webix.ready(function () {
         return '<img src="' + obj.src + '" alt="centered image" class = "carousel_image"/>'
     }
 
-
-    let quantite;
-
-    async function Qt() {
-
-        let response = await fetch("http://localhost:8080/exemple-1/api/ItemPanier/getQuantite")
-        quantite = await response.json();
-
-    }
 })
