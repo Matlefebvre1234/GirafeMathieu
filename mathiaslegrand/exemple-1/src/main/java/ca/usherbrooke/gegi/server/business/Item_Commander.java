@@ -115,19 +115,36 @@ public class Item_Commander {
         this.id_etat_commade = id_etat_commade;
     }
 
+    /**
+     * Cette fonction retourne le produit commander
+     * @return
+     */
     public Produit getProduit() {
         return produit;
     }
 
+    /**
+     * Cette fonction change le produit commander
+     * @param produit
+     */
     public void setProduit(Produit produit) {
         this.produit = produit;
     }
 
+    /**
+     * Cette fonction change la date de la commande
+     * @param date
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * Cette fonction retourne la date de la commande
+     * @return
+     */
     public Date getDate() {
         return date;
     }
+
 }

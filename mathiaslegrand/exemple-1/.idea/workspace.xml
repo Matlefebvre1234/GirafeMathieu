@@ -10,13 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="290ee36e-cbd4-43fe-b24a-6c546c9bedde" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/exemple-1.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exemple-1.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/CommandeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/CommandeTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/CommandeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/CommandeTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Commande.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Commande.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/CommandeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/CommandeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_CommanderTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_CommanderTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Item_CommanderTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Item_CommanderTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_Commander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_Commander.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_CommanderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_CommanderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
