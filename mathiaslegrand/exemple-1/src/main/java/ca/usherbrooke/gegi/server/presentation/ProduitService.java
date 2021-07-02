@@ -28,6 +28,35 @@ public class ProduitService extends Application {
     }
 
     @GET
+    @Path("/listeproduitsdistinct")
+    @Produces("application/json")
+    public ArrayList<Produit> listeProduitsDistinct()
+    {
+        Boolean doublons = false;
+        DataBase database = DataBase.getInstance();
+        ArrayList<Produit> produitsDistincts = new ArrayList<>();
+        ArrayList<Produit> produits = database.getListeProduit();
+        //produitsDistincts.add(produits.get(0));
+
+        for(int i = 0; i < produits.size(); i++){
+            for(int y = 0; y < produitsDistincts.size(); y++){
+                if(produits.get(i).getNomitem().equals(produitsDistincts.get(y).getNomitem())){
+                    doublons = true;
+                }
+            }
+
+            if(doublons == false)
+            {
+                produitsDistincts.add(produits.get(i));
+            }
+
+            doublons = false;
+        }
+
+        return produitsDistincts;
+    }
+
+    @GET
     @Path("/inventaire")
     @Produces("application/json")
     public ArrayList<Item_inventaire> getInventaire()
@@ -42,7 +71,6 @@ public class ProduitService extends Application {
     public Produit getProduit(@FormParam("cip") int idProduit)
     {
         DataBase database = DataBase.getInstance();
-        System.out.println("ariel2.0: "+ idProduit);
         return database.getProduit(idProduit);
     }
 

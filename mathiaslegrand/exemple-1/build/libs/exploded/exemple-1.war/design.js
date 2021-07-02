@@ -1,7 +1,8 @@
 
 webix.ready(function(){
-	//webix.html.addCss($$("agegTitre").$view, "red");
-	webix.ui({
+
+	webix.ui(
+		{
 		view:"scrollview",
 		id:"scrollview",
 		enable: true,
@@ -53,7 +54,7 @@ webix.ready(function(){
 					xCount:3,
 					scroll: "y",
 					select:true,
-					url : "http://localhost:8080/exemple-1/api/produit/listeproduits",
+					url : "http://localhost:8080/exemple-1/api/produit/listeproduitsdistinct",
 					type: {
 						height: 200,
 						width:"auto"

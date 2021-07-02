@@ -535,12 +535,14 @@ public class DataBase {
         PreparedStatement stmt = conn.prepareStatement(SQL)){
             stmt.setString(1, cip);
             ResultSet rs = stmt.executeQuery();
+            rs.next();
             panier.setIdPanier(rs.getInt(1));
 
         }
 
         catch (SQLException ex){
             System.out.println(ex.getMessage());
+            System.out.println("Pas de panier au nom");
             panier.setIdPanier(2147483647);
         }
 
@@ -689,8 +691,6 @@ public class DataBase {
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
         }
-
-        System.out.println("ca marche i guess");
     }
 
     public void ajouterItemCommander(int id, int quantite, int idCommande){
@@ -711,8 +711,24 @@ public class DataBase {
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
         }
+    }
 
-        System.out.println("ca marche i guess");
+    public void ajouterItemPanier(int id2, int quantite, int idPanier, String taille){
+        String SQL2 = "INSERT INTO item_panier VALUES(?,?,?,?)";
+        int id = getIdTaille(id2, taille);
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
+
+            stmt2.setInt(1, quantite);
+            stmt2.setInt(2, getIndexItemPanier());
+            stmt2.setInt(3, id);
+            stmt2.setInt(4, idPanier);
+
+
+            stmt2.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**
