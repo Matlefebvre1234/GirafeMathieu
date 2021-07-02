@@ -28,7 +28,6 @@ async function fetchGetCommande() {
     let response = await fetch("http://localhost:8080/exemple-1/api/commande/commande")
     let data = await response.json();
 
-
     $$("commandeTable").clearAll()
     Commande_data = [];
 

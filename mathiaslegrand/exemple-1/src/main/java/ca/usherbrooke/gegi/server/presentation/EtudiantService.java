@@ -1,5 +1,6 @@
 package ca.usherbrooke.gegi.server.presentation;
 
+import ca.usherbrooke.gegi.server.business.BooleanMat;
 import ca.usherbrooke.gegi.server.persistence.EtudiantMapper;
 import ca.usherbrooke.gegi.server.business.Etudiant;
 import org.jasig.cas.client.authentication.AttributePrincipalImpl;
@@ -11,6 +12,7 @@ import javax.ws.rs.core.Context;
 import javax.xml.crypto.Data;
 import java.security.Principal;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -95,7 +97,7 @@ public class EtudiantService {
     @GET
     @Path("isAdmin")
     @Produces("application/json")
-    public boolean isAdmin() {
+    public ArrayList<BooleanMat> isAdmin() {
         Principal principal = httpServletRequest.getUserPrincipal();
         Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
         Etudiant etudiant = new Etudiant();
@@ -104,7 +106,11 @@ public class EtudiantService {
         etudiant.setPrenom((String)details.get("prenom"));
         etudiant.setCourriel((String)details.get("courriel"));
         DataBase database = DataBase.getInstance();
-        return database.isAdmin(principal.getName());
+        BooleanMat bool = new BooleanMat();
+       bool.setmybool(database.isAdmin(principal.getName()));
+        ArrayList<BooleanMat> test = new ArrayList<BooleanMat>();
+        test.add(bool);
+       return test;
     }
 
     @POST
