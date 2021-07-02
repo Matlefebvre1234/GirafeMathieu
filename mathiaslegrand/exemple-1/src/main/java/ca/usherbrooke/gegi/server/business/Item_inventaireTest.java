@@ -33,5 +33,9 @@ class Item_inventaireTest {
 
     @Test
     void setQuantite() {
+        Produit p = new Produit();
+        Item_inventaire item1 = new Item_inventaire();
+        item1.setQuantite(5);
+        Assertions.assertEquals(5,item1.getQuantite());
     }
 }

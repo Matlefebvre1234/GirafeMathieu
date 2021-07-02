@@ -193,6 +193,7 @@ public class Produit {
         this.id_etat = id_etat;
     }
 
+
     public String getTailleCool() {
         return tailleCool;
     }

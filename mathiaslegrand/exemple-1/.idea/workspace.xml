@@ -9,15 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="290ee36e-cbd4-43fe-b24a-6c546c9bedde" name="Default Changelist" comment="">
+    <list default="true" id="e4cca78b-6aab-4f67-8912-0f21c3f11b86" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ItemPanierTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/PanierTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exemple-1.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exemple-1.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_CommanderTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/exemple-1.war/WEB-INF/classes/ca/usherbrooke/gegi/server/business/Item_CommanderTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Item_Commander.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Item_CommanderTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/ca/usherbrooke/gegi/server/business/Item_CommanderTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_Commander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_Commander.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_CommanderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_CommanderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ItemPanier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/ItemPanier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_inventaireTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Item_inventaireTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Panier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Panier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Produit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/usherbrooke/gegi/server/business/Produit.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +27,13 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -52,12 +58,21 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Utilisateur\Desktop\Documents\projetS3\GirafeMathieu\mathiaslegrand\exemple-1\src\main\webapp" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ca.usherbrooke.gegi.server.business" />
     </key>
   </component>
   <component name="RunManager">
