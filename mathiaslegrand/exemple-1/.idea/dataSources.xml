@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="s3iprojet04@zeus.gel.usherbrooke.ca" uuid="0889b738-dcbe-4291-8cdb-815a684a3637">
+    <data-source source="LOCAL" name="s3iprojet04@zeus.gel.usherbrooke.ca" uuid="fbcd981c-0ff6-4876-ac1d-59421c2fb053">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
