@@ -1,41 +1,71 @@
 
 var ajouterAdmin = {
-    "cols": [
-        {
-            "view": "text",
-            "placeholder": "Type here...",
-            "label": "Cip",
-            name: "cip",
-            id:"cip",
-            "labelWidth": 100
-        },
-        {
-            "label": "Ajouter Admin",
-            "view": "button",
-            "height": 38,
-            click: function (){
-
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', 'http://localhost:8080/exemple-1/api/insert_admin');
-                var data = {cip:$$("cip").getValue()}
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-                var datatexte = ('cip='+data.cip)
-                xhr.send(datatexte);
-                xhr.onload = () =>{
-                    console.log(xhr.response);
-                    if(xhr.response == "true")
-                    {
-                        alert("Admin ajouté");
-                    }
-                    else {
-                        alert(" erreur de connetion");
-                    }
-                };
+    cols: [
+            {"view": "text", "placeholder": "Type here...", "label": "Cip", name: "cip", id:"cip", "labelWidth": 100, width: 400},
+            {"label": "Ajouter Admin", "view": "button", "height": 38, width: 200, align: "right",
+                click: function (){
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'http://localhost:8080/exemple-1/api/insert_admin');
+                    var data = {cip:$$("cip").getValue()}
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                    var datatexte = ('cip='+data.cip)
+                    xhr.send(datatexte);
+                    xhr.onload = () =>{
+                        console.log(xhr.response);
+                        if(xhr.response == "true")
+                        {
+                            alert("Admin ajouté");
+                        }
+                        else {
+                            alert(" erreur de connetion");
+                        }
+                    };
+                }
             }
+    ]
+}
+
+var retirerAdmin = {
+    cols: [
+                {"view": "text", "placeholder": "Type here...", "label": "Cip", name: "cip", id:"cip", "labelWidth": 100, width: 400},
+                {"label": "Retirer Admin", "view": "button", "height": 38, width: 200, align: "right",
+                    click: function (){
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('POST', 'http://localhost:8080/exemple-1/api/remove_admin');
+                        var data = {cip:$$("cip").getValue()}
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                        var datatexte = ('cip='+data.cip)
+                        xhr.send(datatexte);
+                        xhr.onload = () =>{
+                            console.log(xhr.response);
+                            if(xhr.response == "true")
+                            {
+                                alert("Admin ajouté");
+                            }
+                            else {
+                                alert(" erreur de connetion");
+                            }
+                        };
+                    }
+                }
+    ]
+}
+
+var datatableAdmin = {
+    cols: [
+        {
+        "colums":[
+            { "id": "cipAdmin", "header": [{ text: "Cip" }, { content: "textFilter" }], autowidth: true, sort: "string" },
+            { "id": "Prenom", "header": [{ text: "Prenom" }, { content: "textFilter" }], "fillspace": true, sort: "string" },
+            { "id": "nomFamille", "header": [{ text: "NomFamille" }, { content: "textFilter" }], autowidth: true, sort: "string" },
+            { "id": "courriel", "header": [{ text: "courriel" }, { content: "textFilter" }], autowidth: true, sort: "string" }
+        ],
+            view: "datatable",
+            id: "adminTable",
+            scroll: false,
+            select:true
         }
     ]
-
-
 }
 
 var Inventaire = {
@@ -48,42 +78,32 @@ var Inventaire = {
                 { "id": "quantite", "header": [{ text: "Quantite" }], sort: "string", autowidth:true },
               //  { "id": "ModifTime", "header": [{ text: "Temps" }], "sort": "string", autowidth:true },
                 { "id": "prix", "header": [{ text: "Prix Unitaire" }], "sort": "string", autowidth:true },
-                { "id": "Action", "header": [{ text: "Action" }], template: "{common.trashIcon} {common.editIcon}", autowidth:true }
+                { id:"trash", header:"Supprimer", template:"{common.trashIcon()}"},
+               { id:"", template:"<input class='viewbtn' type='button' value='View'>", css:"padding_less", width:100 },
+               { id:"", template:"<input class='modifbtn' type='button' value='Modif'>", css:"padding_less", width:100 }
             ],
             view: "datatable",
             id: "inventaireTable",
             data: Inventaire_data,
             scroll: false,
-            type: {
-                trashIcon: "<span class='webix-icon wxi-trash'></span>",
-                editIcon: "<span class='webix-icon wxi-pencil'></span>"
-            }         
+            select:true,
+            onClick:{
+                "wxi-trash":function(event, id, node){
+                    var record = $$("inventaireTable").getItem(id);
+                    console.log(record.idproduit);
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'http://localhost:8080/exemple-1/api/remove_produit');
+                    var data = record.idproduit;
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                    var datatexte = ('idproduit='+data)
+                    xhr.send(datatexte);
+                }
+            }
         }
     ]
 }
 var Inventaire_buttons = {
     view: "toolbar", height: 100, padding:25, elements : [
-        {view: "button", label: "Supprimer Article", type: "icon", icon:"wxi-trash", width: 200, align: "right", click: function(){
-                webix.confirm({
-                    title:"Title",
-                    id: "confirmMessage",
-                    ok:"Yes", cancel:"No",
-                    text:"Lorem ipsum dolor sit amet, consectetur adipisicing elit"
-                })
-                    .then(function(){
-                        webix.confirm({
-                            title:"Warning!",
-                            type:"confirm-warning",
-                            text:"You are about to agree. Are you sure?"
-                        });
-                    })
-                    .fail(function(){
-                        webix.confirm({
-                            title:"Error!",
-                            type:"confirm-error",
-                            text:"You have no right to cancel this action"
-                        });
-                    });}},
         {view: "button", label: "Ajouter Article",type: "icon", icon:"wxi-plus",width: 200, click: function(){$$("window_form").show()}},
         {view: "button", label: "Refresh Information",type: "icon", icon:"wxi-sync", width: 200, align: "left", click: fetchGetInventaire}
     ]
@@ -96,18 +116,37 @@ var Precommande_buttons = {
         {view: "button", label: "Refresh Information",type: "icon", icon:"wxi-sync", width: 200, align: "left"}
     ]
 }
+
+var Commande_buttons = {
+    view: "toolbar", height: 100, padding:25, elements : [
+        {view: "button", label: "Refresh Information",type: "icon", icon:"wxi-sync", width: 200, align: "left"}
+    ]
+}
 var Commande = {
 
     "columns": [
         { "id": "id_commande","header":[{ text: "#" },{ content: "textFilter" }], "autowidth": true, "sort": "int" },
         { "id": "prix_total","header":[{ text: "PrixTotal" }],autowidth: true, sort: "int" },
-        { "id": "cip", "header": "Cip", "sort": "string" },
+        { "id": "cipCommande", "header": "Cip", "sort": "string" },
         { "id": "id_etat_commande", "header": "id_etat_commande", "sort": "int",width: 150 },
-        { "id": "date", "header": "Date", "sort": "date",fillspace: true }
+        { "id": "date", "header": "Date", "sort": "date",fillspace: true },
+        { id:"trash", header:"", template:"{common.trashIcon()}"}
     ],
     "view": "datatable",
     id: "commandeTable",
     data: Commande_data,
+    onClick:{
+        "wxi-trash":function(event, id, node){
+            var record = $$("commandeTable").getItem(id);
+            console.log(record.id_commande);
+            const xhr = new XMLHttpRequest();
+            //xhr.open('POST', 'http://localhost:8080/exemple-1/api/????);
+            var data = record.id_commande;
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            var datatexte = ('idproduit='+data)
+            xhr.send(datatexte);
+        }
+    }
 }
 
 var Precommande = {
@@ -142,7 +181,7 @@ webix.ready(function() {
         head: {
             view:"toolbar", cols:[
                 { width:4 },
-                { view:"label", label: "Ajouter Article" },
+                { view:"label", label: "Modifier Article" },
                 { view:"button", label: "Fermer", autowidth: true, align: 'right', click:function(){ $$('window_form').hide(); }}
             ]
         },
@@ -191,4 +230,46 @@ webix.ready(function() {
         }
     })
 });
+
+webix.ready(function() {
+    webix.ui({
+        view: "window",
+        id: "window_modif",
+        move: true,
+        head: {
+            view:"toolbar", cols:[
+                { width:4 },
+                { view:"label", label: "Modifier" },
+                { view:"button", label: "Fermer", autowidth: true, align: 'right', click:function(){ $$('window_form').hide(); }}
+            ]
+        },
+        left: 400, top: 150,
+        body: {
+            /*
+            view: "form",elements:[
+                {"label": "Nom", "view": "text", name: "nom", id:"nom", "height": 38, required: true, placeholder:"Taper ici le nom de l'article"},
+                {"label": "Description", "view": "text", name: "description", id:"description", "height": 38, required: true, placeholder:"Taper ici la description de l'article"},
+                {"label": "Prix", "view": "text", name: "prix", id:"prix", "height": 38, required: true, placeholder:"Taper ici le prix de l'article"},
+                {"label": "Taille", "view": "text", name: "taille", id:"taille", "height": 38, required: true, placeholder:"Taper ici la taille de l'article"},
+                {"label": "Couleur", "view": "text", name: "couleur", id:"couleur", "height": 38, required: true, placeholder:"Taper ici la couleur de l'article"},
+                {"label": "Visibilité", "view": "text", name: "visibilite", id:"visibilite", "height": 38, required: true, placeholder:"Taper ici la visibilite de l'article"},
+                {"label": "État", "view": "text", name: "etat", id:"etat", "height": 38, required: true, placeholder:"Taper ici l'etat de l'article"},
+                {"label": "Url photo", "view": "text", name: "url", id:"url", "height": 38, required: true, placeholder:"Taper ici l'url de l'article"},
+                {"label": "Quantite", "view": "text", name: "quantite", id:"quantite", "height": 38, required: true, placeholder:"Taper ici la quantite de l'article"},
+                {
+                    "label": "Modifier article",
+                    "view": "button",
+                    "height": 38,
+                    click: function (){
+                    }
+                }
+            ],
+            autoheight: true,
+            autowidth:true
+            */
+
+        }
+    })
+});
+
 

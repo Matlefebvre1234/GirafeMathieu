@@ -146,7 +146,7 @@ public class EtudiantService {
      *  Cette fonction permet d'enlever des admin dans la database
      * @param cip
      */
-    @GET
+    @POST
     @Path("remove_admin")
     public void removeAdminDB(@FormParam("cip") String cip){
         DataBase database = DataBase.getInstance();
@@ -178,7 +178,7 @@ public class EtudiantService {
      * Cette fonction permet de retirer un produit de la base de donnee par l'interface graphique =
      * @param idproduit
      */
-    @GET
+    @POST
     @Path("remove_produit")
     public void removeProduitDB(@FormParam("idproduit") int idproduit) {
         DataBase dataBase = DataBase.getInstance();
