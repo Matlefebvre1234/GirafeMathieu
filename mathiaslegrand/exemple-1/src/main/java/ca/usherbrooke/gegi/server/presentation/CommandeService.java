@@ -29,9 +29,19 @@ public class CommandeService {
     HttpServletRequest httpServletRequest;
     //localhost:8080/exemple-1/api/produit/salut
 
+    /**
+     * Cette fonction permet de se connecter a la base de donnees SQL/Postgress
+     * @return
+     * @throws SQLException
+     */
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
     }
+
+    /**
+     * Cette fonction permet d'obtenir le dernier index dans la liste de produits presente dans la base de donnees SQL
+     * @return
+     */
     public int getLastIndex(){
         int index = 0;
         String SQL = "SELECT MAX(idproduit) FROM produit" ;
@@ -47,8 +57,9 @@ public class CommandeService {
         return index+1;
     }
 
-    /**
-     * Methode qui permet de retourner la liste des produits contenus dans la base de donnees, ainsi que leurs informations
+    /** Microservice
+     * Methode qui permet de retourner la liste des produits contenus dans la base de donnees,
+     * ainsi que leurs informations. En plus de mettre les informations dans la classe commande
      * @return liste des produits
      */
     @GET
@@ -82,6 +93,11 @@ public class CommandeService {
         return maliste;
     }
 
+    /** Microservice
+     * Cette fonction permet de d'associer les informations sur les commandes et les items commandes
+     * present dans la base de donnees et les associe au code Java(de commande)
+     * @return
+     */
     @GET
     @Path("/item_commander")
     @Produces("application/JSON")
@@ -93,6 +109,10 @@ public class CommandeService {
         String SQL2 = "SELECT * FROM commande";
         //String SQL3 = "SELECT * FROM etat__commande";
         String SQL3 = "SELECT * FROM etat__commande JOIN commande ON commande.id_etat_commande=etat__commande.id_etat_commande";
+
+        /**
+         * Cette Query permet d'aller chercher le prix total pour un produit commandee et le mettre dans la base de donnees, ainsi que dans le code Back-End en Java(Quantite x Prix du produit)
+         */
         try {
             Connection conn = connect();
             Statement stmt = conn.createStatement();
@@ -112,6 +132,10 @@ public class CommandeService {
             throwables.printStackTrace();
         }
         index=0;
+
+        /**
+         * Cette Query permet de donner les informations necessaire a la classe Commande comme l'id de la commande, la date de la commande...
+         */
         try{
             Connection conn2 = connect();
             Statement stmt2 = conn2.createStatement();
@@ -127,6 +151,10 @@ public class CommandeService {
             throwables.printStackTrace();
         }
         index=0;
+
+        /**
+         * Cette fonction permet d'ajouter l'id de l'etat de la commande a la classe commande
+         */
         try{
             Connection conn3 = connect();
             Statement stmt3 = conn3.createStatement();
@@ -143,6 +171,10 @@ public class CommandeService {
         return maliste;
     }
 
+    /** Microservice
+     * Cette fonction permet d'aller chercher des items commander avec l'aide de la database
+     * @return
+     */
     @GET
     @Path("/item_commander")
     @Produces("application/JSON")
@@ -151,7 +183,10 @@ public class CommandeService {
         return database.getItem_Commander();
     }
 
-
+    /**
+     * Cette fonction permet d'aller chercher des commandes avec l'aide de la base de donnee
+     * @return
+     */
     @GET
     @Path("/commande")
     @Produces("application/json")
@@ -162,8 +197,12 @@ public class CommandeService {
         return database.getCommande();
     }
 
-
-
+    /**
+     * Cette fonction permet de commander des items, d'introduire ces commandes dans la base de donnes et
+     * de relier webix
+     * @param idProduit
+     * @param quantite
+     */
     @POST
     @Path("/commander_item")
     public void commanderItem(@FormParam("id") int idProduit, @FormParam("quantite") int quantite, @FormParam("taille") String taille){
