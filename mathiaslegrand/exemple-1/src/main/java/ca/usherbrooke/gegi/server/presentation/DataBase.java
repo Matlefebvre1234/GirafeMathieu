@@ -724,7 +724,7 @@ public class DataBase {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
     }
 
-    public Panier getPanierFromCIP(String cip){
+    public Panier getPanierFromCIP(String cip) throws SQLException {
         System.out.println("Avant Query");
         String SQL = "SELECT produit.nomitem, produit.taille, produit.prix, item_panier.quantite, item_panier.idpanier " +
                      "FROM produit, item_panier, panier  " +
@@ -750,15 +750,14 @@ public class DataBase {
                 produit.setNomitem(nomItem);
                 produit.setTaille(rs.getString(2));
                 produit.setPrix(rs.getInt(3));
-                item.addQuantite(rs.getInt(4));
+                item.setQuantite(rs.getInt(4));
                 item.setProduit(produit);
                 panier.setIdPanier(rs.getInt(5));
                 itemArray.add(item);
             }
 
         } catch (SQLException ex){
-            System.out.println(ex.getMessage());
-
+            return panier;
         }
         panier.setCip(cip);
         panier.setItems(itemArray);
