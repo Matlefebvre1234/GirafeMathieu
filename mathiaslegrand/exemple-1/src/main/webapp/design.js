@@ -1,7 +1,8 @@
 
 webix.ready(function(){
-	//webix.html.addCss($$("agegTitre").$view, "red");
-	webix.ui({
+
+	webix.ui(
+		{
 		view:"scrollview",
 		id:"scrollview",
 		enable: true,

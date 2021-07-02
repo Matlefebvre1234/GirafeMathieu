@@ -2,6 +2,15 @@
 
 webix.ready( function () {
 
+    console.log("Debut")
+    const xhr3 = new XMLHttpRequest();
+    xhr3.open('GET', 'http://localhost:8080/exemple-1/api/Panier/ajouterPanier');
+    xhr3.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr3.send(datatexte);
+    xhr3.onload = () =>{
+    };
+    console.log("Fin")
+
     var queryString = decodeURIComponent(window.location.search);
     queryString = queryString.substring(1);
     var intermediaire;
@@ -116,6 +125,7 @@ webix.ready( function () {
                                                             view: "richselect",
                                                             label: "Taille",
                                                             id: "choixtaille",
+                                                            value: "N/A",
                                                             options: tailles,
                                                             //TODO Connecter avec la base de donnees
                                                             height: 50,
@@ -129,6 +139,7 @@ webix.ready( function () {
                                                             view: "richselect",
                                                             label: "Quantite",
                                                             id: "quantiteProduit",
+                                                            value: "N/A",
                                                             options: quantites,
                                                             //TODO Connecter avec la base de donnees et rajouter des options
                                                             height: 50,
@@ -162,23 +173,74 @@ webix.ready( function () {
                                             id:"my_button",
                                             value:"Commander",
                                             css:"webix_primary",
-                                            inputWidth:100,
+                                            inputWidth:200,
                                             click: function (){
-                                                webix.alert({
-                                                    titre: "Commande",
-                                                    text: "La commande a ete enregistree!"
-                                                });
-                                                const xhr = new XMLHttpRequest();
-                                                xhr.open('POST', 'http://localhost:8080/exemple-1/api/commande/commander_item');
                                                 var data = {id:queryString, quantite:$$("quantiteProduit").getText(), taille:$$("choixtaille").getText()}
-                                                console.log(data.taille)
-                                                console.log(data.quantite)
-                                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-                                                var datatexte = ('id='+data.id + '&quantite='+data.quantite + '&taille='+data.taille)
-                                                xhr.send(datatexte);
-                                                xhr.onload = () =>{
-                                                    console.log(xhr.response);
-                                                };
+                                                console.log(data.quantite);
+                                                if(data.quantite == "" || data.taille == "")
+                                                {
+                                                    webix.alert({
+                                                        titre: "Panier",
+                                                        text: "Il faut choisir une taille et un quantité!"
+                                                    });
+                                                }
+
+                                                else{
+                                                    webix.alert({
+                                                        titre: "Commande",
+                                                        text: "La commande a ete enregistree!"
+                                                    });
+                                                    const xhr = new XMLHttpRequest();
+                                                    xhr.open('POST', 'http://localhost:8080/exemple-1/api/commande/commander_item');
+
+                                                    console.log(data.taille)
+                                                    console.log(data.quantite)
+                                                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                                                    var datatexte = ('id='+data.id + '&quantite='+data.quantite + '&taille='+data.taille)
+                                                    xhr.send(datatexte);
+                                                    xhr.onload = () =>{
+                                                        console.log(xhr.response);
+                                                    };
+                                                }
+                                            }
+                                        },
+
+                                        {
+                                            view:"button",
+                                            id:"boutonPanier",
+                                            value:"Ajouter au panier",
+                                            css:"webix_primary",
+                                            inputWidth:200,
+                                            autoWidth: true,
+                                            click: function (){
+
+                                                var data = {id:queryString, quantite:$$("quantiteProduit").getText(), taille:$$("choixtaille").getText()}
+
+                                                if(data.quantite == "" || data.taille == "")
+                                                {
+                                                    webix.alert({
+                                                        titre: "Panier",
+                                                        text: "Il faut choisir une taille et un quantité!"
+                                                    });
+                                                }
+
+                                                else{
+                                                    webix.alert({
+                                                        titre: "Panier",
+                                                        text: "L'article a été ajouté au panier!"
+                                                    });
+                                                    const xhr = new XMLHttpRequest();
+                                                    xhr.open('POST', 'http://localhost:8080/exemple-1/api/Panier/ajouterItemPanier');
+
+                                                    console.log(data.taille)
+                                                    console.log(data.quantite)
+                                                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                                                    var datatexte = ('id='+data.id + '&quantite='+data.quantite + '&taille='+data.taille)
+                                                    xhr.send(datatexte);
+                                                    xhr.onload = () =>{
+                                                        console.log(xhr.response);
+                                                    };
+                                                }
                                             }
                                         }
                                     ]

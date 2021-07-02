@@ -4,11 +4,17 @@ import ca.usherbrooke.gegi.server.business.ConcreteBuilderProduit;
 import ca.usherbrooke.gegi.server.business.Panier;
 import ca.usherbrooke.gegi.server.business.Produit;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import java.security.Principal;
 import java.util.ArrayList;
 
 @Path("/Panier")
 public class PanierService {
+
+    @Context
+    HttpServletRequest httpServletRequest;
 
     @POST
     @Path("/getPanier")
@@ -21,23 +27,40 @@ public class PanierService {
         return panier;
     }
 
-    @POST
+    public Panier getPanierBackEnd(@FormParam("cip") String cip)
+    {
+        DataBase database = DataBase.getInstance();
+        Panier panier;
+        panier = database.getPanier(cip);
+        return panier;
+    }
+
+    @GET
     @Path("/ajouterPanier")
-    public void ajouterPanier(@FormParam("cip") String cip){
+    public void ajouterPanier(){
+
+        System.out.println("ajouterPanier a ete appelee");
+        Principal principal = httpServletRequest.getUserPrincipal();
+
         Panier panier;
         DataBase dataBase = DataBase.getInstance();
-        panier = dataBase.getPanier(cip);
+        panier = dataBase.getPanier(principal.getName());
 
         if(panier.getIdPanier() == 2147483647){
-            dataBase.creerPanier(cip);
-            dataBase.getPanier(cip);
+            dataBase.creerPanier(principal.getName());
+            dataBase.getPanier(principal.getName());
         }
     }
 
     @POST
     @Path("/ajouterItemPanier")
-    public void ajouterItemPanier(@FormParam("quantite") int quantite, @FormParam("idproduit") int idproduit){
+    public void ajouterItemPanier(@FormParam("id") int idProduit, @FormParam("quantite") int quantite, @FormParam("taille") String taille){
 
+        Principal principal = httpServletRequest.getUserPrincipal();
+
+        System.out.println("quantite: " + quantite);
+        System.out.println("id: " + idProduit);
+        System.out.println("taille: " + taille);
 
     }
 }

@@ -42,15 +42,11 @@ public class ProduitService extends Application {
             for(int y = 0; y < produitsDistincts.size(); y++){
                 if(produits.get(i).getNomitem().equals(produitsDistincts.get(y).getNomitem())){
                     doublons = true;
-                    System.out.println("doublons");
                 }
-
-                System.out.println("produit distinct: " + produitsDistincts.get(y).getNomitem() + " == " + produits.get(i).getNomitem());
             }
 
             if(doublons == false)
             {
-                System.out.println("ajoute: " + produits.get(i).getNomitem());
                 produitsDistincts.add(produits.get(i));
             }
 
@@ -75,7 +71,6 @@ public class ProduitService extends Application {
     public Produit getProduit(@FormParam("cip") int idProduit)
     {
         DataBase database = DataBase.getInstance();
-        System.out.println("ariel2.0: "+ idProduit);
         return database.getProduit(idProduit);
     }
 
