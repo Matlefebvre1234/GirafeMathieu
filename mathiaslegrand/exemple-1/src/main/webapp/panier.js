@@ -23,22 +23,69 @@ webix.ready(function () {
              var panier = xhr2.response
              console.log(panier);
              panier = JSON.parse(panier);
-             var item = panier.items[0];
-             console.log(item);
-             var produit = item.produit;
-             var quantite = item.quantite;
-             var nomItem = produit.nomitem;
-             var taille = produit.taille;
-             var prix = produit.prix;
-             var photo = produit["arrayPhoto"];
 
-             if(item!=null){
-                 var produit = item.produit;
-                 var quantite = item.quantite;
-                 var nomItem = produit.nomitem;
-                 var taille = produit.taille;
-                 var prix = produit.prix;
-                 var total = item.quantite * produit.prix;
+            var item = panier.items;
+            var arrayProduit = [];
+
+
+             for(var i = 0; i < item.length; i++){
+
+                 if(item!=null){
+                     var produit = item[i].produit;
+                     var quantite = item[i].quantite;
+                     var nomItem = produit.nomitem;
+                     var taille = produit.taille;
+                     var prix = produit.prix;
+                     var total = item.quantite * produit.prix;
+                     var photo = produit["arrayPhoto"];
+                 }
+
+                 arrayProduit.push({
+                     "height": 100,
+                     "cols": [
+                         {
+                             css: "images",
+                             template: img,
+                             data: {src: photo[0]}
+                         },
+                         {"label": "Produit: " + nomItem, "view": "label", "height": 0, "borderless": 0},
+                         {"label": "Taille: " + taille, "view": "label", "height": 0, "borderless": 0},
+                         {"label": "Prix Unitaire: " + prix, "view": "label", "height": 0, "borderless": 0},
+                         {"label": "Quantité: " + quantite, "view": "label", "height": 0, "borderless": 0, id:"quantite"},
+                         {
+                             "height": 48,
+                             "rows": [
+                                 {"label": "+", "view": "button", "height": 0,
+                                     click: function plus() {
+                                         {
+                                             quantite++;
+                                             $$("quantite").setValue("Quantite" + ": " + quantite);
+                                             total = quantite*prix;
+                                             $$("TOT").setValue(total+"$");
+
+
+                                         }
+                                     }
+                                 },
+                                 {"label": "-", "view": "button", "height": 0,
+                                     click: function moins() {
+                                         {
+                                             quantite--;
+                                             if(quantite<0){
+                                                 quantite=0;
+                                             }
+                                             $$("quantite").setValue("Quantite" + ": " + quantite);
+                                             total = quantite*prix;
+                                             $$("TOT").setValue(total+"$");
+
+
+                                         }
+                                     }
+                                 }
+
+                             ]
+                         }]});
+
              }
 
 
@@ -49,82 +96,23 @@ webix.ready(function () {
                 "rows": [
                     {"label": "Menu Panier", "view": "label", "height": 75, "borderless": 0},
                     {"label": "Votre Panier", "view": "label", "height": 47, "borderless": 0},
-                    {
-                        "rows": [
-                            {
-                                "height": 100,
-                                "cols": [
-                                    {
-                                        css: "images",
-                                        template: img,
-                                        data: {src: photo[0]}
-                                    },
-                                    {"label": "Produit: " + nomItem, "view": "label", "height": 0, "borderless": 0},
-                                    {"label": "Taille: " + taille, "view": "label", "height": 0, "borderless": 0},
-                                    {"label": "Prix Unitaire: " + prix, "view": "label", "height": 0, "borderless": 0},
-                                    {"label": "Quantité: " + quantite, "view": "label", "height": 0, "borderless": 0, id:"quantite"},
-                                    {
-                                        "height": 48,
-                                        "rows": [
-                                            {"label": "+", "view": "button", "height": 0,
-                                                click: function plus() {
-                                                    {
-                                                        quantite++;
-                                                        $$("quantite").setValue("Quantite" + ": " + quantite);
-                                                        total = quantite*prix;
-                                                        $$("TOT").setValue(total+"$");
 
-
-                                                    }
-                                                }
-                                                },
-                                            {"label": "-", "view": "button", "height": 0,
-                                                click: function moins() {
-                                                    {
-                                                        quantite--;
-                                                        if(quantite<0){
-                                                            quantite=0;
-                                                        }
-                                                        $$("quantite").setValue("Quantite" + ": " + quantite);
-                                                        total = quantite*prix;
-                                                        $$("TOT").setValue(total+"$");
-
-
-                                                    }
-                                                }
-                                            }
-
-                                        ]
-                                    },
-                                    {"label": "Retirer l'article", "view": "button", "height": 48,
-/*                                        click: function poubelle() {
-                                            {
-                                                $$("item").destr
-                                            }
-                                        }*/
-                                    }
-                                ]
-                            },
-                            {
-                                "height": 63,
-                                "cols": [
-                                    {"label": "Total:", "view": "label", "height": 0, "css": "a"},
-                                    {"label": total + "$","view": "label", "height": 0, "borderless": 0, id: "TOT"}
-                                ]
-                            },
-                            {
-                                "view": "template",
-                                "template": "You can place any widget here..",
-                                "role": "placeholder",
-                                "height": 308
-                            }
+                    {"rows": arrayProduit},{
+                        "height": 63,
+                        "cols": [
+                            {"label": "Total:", "view": "label", "height": 0, "css": "a"},
+                            {"label": total + "$","view": "label", "height": 0, "borderless": 0, id: "TOT"}
                         ]
+                    },
+                    {
+                        "view": "template",
+                        "template": "You can place any widget here..",
+                        "role": "placeholder",
+                        "height": 308
                     }
-                ]
-            }
         ],
         "css": "text-align"
-    });
+    }]});
 
         }
     }
