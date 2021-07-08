@@ -14,9 +14,9 @@ webix.ready(function () {
 
         const xhr2 = new XMLHttpRequest();
         xhr2.open('POST', 'http://localhost:8080/exemple-1/api/Panier/getPanier');
-        var data = {cip: cip}
-        xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-        var datatexte = ('cip=' + data.cip)
+        var data = {cip: cip};
+        xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        var datatexte = ('cip=' + data.cip);
         xhr2.send(datatexte);
 
         xhr2.onload =  () => {
@@ -31,6 +31,7 @@ webix.ready(function () {
              var taille = produit.taille;
              var prix = produit.prix;
              var photo = produit["arrayPhoto"];
+
 
     webix.ui({
         "cols": [

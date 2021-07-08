@@ -733,7 +733,7 @@ public class DataBase {
 
         String URL ="SELECT produit_photo.url "+
                     "FROM produit, item_panier, panier, produit_photo "+
-                    "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND produit_photo.idproduit = produit.idproduit  AND panier.cip=?";
+                    "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND produit_photo.idproduit = produit.idproduit AND panier.cip=?";
         Panier panier = new Panier();
 
         ArrayList<ItemPanier> itemArray = new ArrayList<>();
