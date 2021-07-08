@@ -159,6 +159,43 @@ public class DataBase {
         ajouterItemInventaire(index, quantite);
     }
 
+    public void modifierProduit(String nom, String description, String taille, float prix, String couleur, int visibilite, int etat, String url, int quantite, int idProduit){
+        String SQL = "UPDATE produit SET nomitem = ?, description = ?, prix = ?, taille = ?, couleur = ?, visibilite_site = ?, id_etat = ? WHERE idproduit = ?";
+
+        try (Connection conn = connect();
+             PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, nom);
+            stmt.setString(2, description);
+            stmt.setFloat(3, prix);
+            stmt.setString(4, taille);
+            stmt.setString(5, couleur);
+            stmt.setInt(6, visibilite);
+            stmt.setInt(7, etat);
+            stmt.setInt(8, idProduit);
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        modifierInventaire(idProduit, quantite);
+    }
+
+    public void modifierInventaire(int idProduit, int quantite){
+        String SQL = "UPDATE inventaire_produit SET quantite = ? WHERE idproduit = ?";
+
+        try (Connection conn = connect();
+             PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setInt(1, quantite);
+            stmt.setInt(2, idProduit);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     /**
      * Cette fonction permet de donner le numero de l'index de la dernier photo
      * @return

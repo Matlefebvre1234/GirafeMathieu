@@ -1639,7 +1639,11 @@ true posixrules
 1383060||-9223372036854775808|U|G
 1383060||1314555|U|G</Grants>
       <Owner>s3iprojet04</Owner>
+<<<<<<< HEAD
       <IntrospectionStateNumber>1161220</IntrospectionStateNumber>
+=======
+      <IntrospectionStateNumber>1161241</IntrospectionStateNumber>
+>>>>>>> main3.0
       <Current>1</Current>
       <Relations>sequence|table|1383522|1383387|8
 sequence|table|1383532|1383467|7
@@ -1856,6 +1860,7 @@ sequence|table|1383532|1383467|7
       <Owner>postgres</Owner>
       <StateNumber>1</StateNumber>
     </tablespace>
+<<<<<<< HEAD
     <schema id="84" parent="33" name="app2">
       <ObjectId>1383060</ObjectId>
       <Grants>1383377||-9223372036854775808|d|G
@@ -106301,5 +106306,7 @@ idproduit</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>taille_pkey</UnderlyingIndexName>
     </key>
+=======
+>>>>>>> main3.0
   </database-model>
 </dataSource>
