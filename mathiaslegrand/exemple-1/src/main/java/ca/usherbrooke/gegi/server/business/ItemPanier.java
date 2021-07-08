@@ -1,6 +1,7 @@
 package ca.usherbrooke.gegi.server.business;
 import ca.usherbrooke.gegi.server.presentation.DataBase;
 import javax.ws.rs.*;
+import java.sql.SQLException;
 
 @Path("/ItemPanier")
 public class ItemPanier {
@@ -27,8 +28,7 @@ public class ItemPanier {
     @POST
     @Path("/getInfo")
     @Produces("application/json")
-    public Panier getInfo(@FormParam("cip") String cip)
-    {
+    public Panier getInfo(@FormParam("cip") String cip) throws SQLException {
         DataBase database = DataBase.getInstance();
         return database.getPanierFromCIP(cip);
     }

@@ -32,8 +32,18 @@ webix.ready(function () {
              var prix = produit.prix;
              var photo = produit["arrayPhoto"];
 
+             if(item!=null){
+                 var produit = item.produit;
+                 var quantite = item.quantite;
+                 var nomItem = produit.nomitem;
+                 var taille = produit.taille;
+                 var prix = produit.prix;
+                 var total = item.quantite * produit.prix;
+             }
+
 
     webix.ui({
+
         "cols": [
             {
                 "rows": [
@@ -49,32 +59,57 @@ webix.ready(function () {
                                         template: img,
                                         data: {src: photo[0]}
                                     },
-                                    {"label": "Description:                                                                                            " + nomItem, "view": "label", "height": 0, "borderless": 0},
+                                    {"label": "Produit: " + nomItem, "view": "label", "height": 0, "borderless": 0},
                                     {"label": "Taille: " + taille, "view": "label", "height": 0, "borderless": 0},
                                     {"label": "Prix Unitaire: " + prix, "view": "label", "height": 0, "borderless": 0},
-                                    {
-                                        "label": "Quantité: " + quantite,
-                                        "view": "label",
-                                        "height": 0,
-                                        "borderless": 0,
-                                        align: "center"
-                                    },
-                                    //"text", id:'field_a', attributes:{ maxlength:10 }}
+                                    {"label": "Quantité: " + quantite, "view": "label", "height": 0, "borderless": 0, id:"quantite"},
                                     {
                                         "height": 48,
                                         "rows": [
-                                            {"label": "+", "view": "button", "height": 0},
-                                            {"label": "-", "view": "button", "height": 0}
+                                            {"label": "+", "view": "button", "height": 0,
+                                                click: function plus() {
+                                                    {
+                                                        quantite++;
+                                                        $$("quantite").setValue("Quantite" + ": " + quantite);
+                                                        total = quantite*prix;
+                                                        $$("TOT").setValue(total+"$");
+
+
+                                                    }
+                                                }
+                                                },
+                                            {"label": "-", "view": "button", "height": 0,
+                                                click: function moins() {
+                                                    {
+                                                        quantite--;
+                                                        if(quantite<0){
+                                                            quantite=0;
+                                                        }
+                                                        $$("quantite").setValue("Quantite" + ": " + quantite);
+                                                        total = quantite*prix;
+                                                        $$("TOT").setValue(total+"$");
+
+
+                                                    }
+                                                }
+                                            }
+
                                         ]
                                     },
-                                    {"label": "Retirer l'article", "view": "button", "height": 48}
+                                    {"label": "Retirer l'article", "view": "button", "height": 48,
+/*                                        click: function poubelle() {
+                                            {
+                                                $$("item").destr
+                                            }
+                                        }*/
+                                    }
                                 ]
                             },
                             {
                                 "height": 63,
                                 "cols": [
                                     {"label": "Total:", "view": "label", "height": 0, "css": "a"},
-                                    {"view": "label", "height": 0, "borderless": 0}
+                                    {"label": total + "$","view": "label", "height": 0, "borderless": 0, id: "TOT"}
                                 ]
                             },
                             {
