@@ -119,7 +119,7 @@ var Precommande_buttons = {
 
 var Commande_buttons = {
     view: "toolbar", height: 100, padding:25, elements : [
-        {view: "button", label: "Refresh Information",type: "icon", icon:"wxi-sync", width: 200, align: "left"}
+        {view: "button", label: "Refresh Information",type: "icon", icon:"wxi-sync", width: 200, align: "left", click: fetchGetCommande}
     ]
 }
 var Commande = {
@@ -130,7 +130,8 @@ var Commande = {
         { "id": "cipCommande", "header": "Cip", "sort": "string" },
         { "id": "id_etat_commande", "header": "id_etat_commande", "sort": "int",width: 150 },
         { "id": "date", "header": "Date", "sort": "date",fillspace: true },
-        { id:"trash", header:"", template:"{common.trashIcon()}"}
+        { id:"trash", header:"", template:"{common.trashIcon()}"},
+        { id:"", template:"<input class='viewbtn2' type='button' value='View'>", css:"padding_less", width:100 }
     ],
     "view": "datatable",
     id: "commandeTable",
@@ -230,6 +231,9 @@ webix.ready(function() {
         }
     })
 });
+var record = [
+    {nomitem:"1",description:"1",prix:"1",taille:"1",couleur:"1",visibilite:"1",etat:"1"}
+];
 
 webix.ready(function() {
     webix.ui({
@@ -246,20 +250,19 @@ webix.ready(function() {
         left: 400, top: 150,
         body: {
             view: "form",elements:[
-                {"label": "Nom", "view": "text", name: "nom", id:"nomModif", "height": 38, placeholder:"Taper ici le nom de l'article"},
-                {"label": "Description", "view": "text", name: "description", id:"descriptionModif", "height": 38, placeholder:"Taper ici la description de l'article"},
-                {"label": "Prix", "view": "text", name: "prix", id:"prixModif", "height": 38, placeholder:"Taper ici le prix de l'article"},
-                {"label": "Taille", "view": "text", name: "taille", id:"tailleModif", "height": 38, placeholder:"Taper ici la taille de l'article"},
-                {"label": "Couleur", "view": "text", name: "couleur", id:"couleurModif", "height": 38, placeholder:"Taper ici la couleur de l'article"},
-                {"label": "Visibilité", "view": "text", name: "visibilite", id:"visibiliteModif", "height": 38, placeholder:"Taper ici la visibilite de l'article"},
-                {"label": "État", "view": "text", name: "etat", id:"etatModif", "height": 38, placeholder:"Taper ici l'etat de l'article"},
-                {"label": "Quantite", "view": "text", name: "quantite", id:"quantiteModif", "height": 38, placeholder:"Taper ici la quantite de l'article"},
+                {"label": "Nom", "view": "text", name: "nom", id:"nomModif", "height": 38, value: "test"},
+                {"label": "Description", "view": "text", name: "description", id:"descriptionModif", "height": 38, value: "test"},
+                {"label": "Prix", "view": "text", name: "prix", id:"prixModif", "height": 38, value: "test"},
+                {"label": "Taille", "view": "text", name: "taille", id:"tailleModif", "height": 38, value: "test"},
+                {"label": "Couleur", "view": "text", name: "couleur", id:"couleurModif", "height": 38, value: "test"},
+                {"label": "Visibilité", "view": "text", name: "visibilite", id:"visibiliteModif", "height": 38, value: "test"},
+                {"label": "État", "view": "text", name: "etat", id:"etatModif", "height": 38, value: "test"},
+                {"label": "Quantite", "view": "text", name: "quantite", id:"quantiteModif", "height": 38},
                 {
                     "label": "Modifier article",
                     "view": "button",
                     "height": 38,
                     click: function (id){
-                        var record = $$("commandeTable").getItem(id);
                         const xhr = new XMLHttpRequest();
                         xhr.open('POST', 'http://localhost:8080/exemple-1/api/produit/modifierProduit');
                         var data = {
@@ -291,6 +294,28 @@ webix.ready(function() {
     })
 });
 
+webix.ready(function() {
+    webix.ui({
+        view: "window",
+        id: "window_command",
+        move: true,
+        head: {
+            view:"toolbar", cols:[
+                { width:4 },
+                { view:"label", label: "Modifier" },
+                { view:"button", label: "Fermer", autowidth: true, align: 'right', click:function(){ $$('window_command').hide(); }}
+            ]
+        },
+        left: 400, top: 150,
+        body: {
+            view: "datatable",
+            data: Commande_data,
+            autoheight: true,
+            autowidth:true
+        }
+    })
+});
+
 var ModifId;
 
 const modifId = (id) => {
@@ -302,4 +327,20 @@ const getId = () =>{
     console.log(ModifId);
     return ModifId;
 
+}
+
+
+const modifData = (id) =>{
+    const xhr = new XMLHttpRequest();
+    var value1= $$("inventaireTable").getItem(id);
+    xhr.open('POST', 'http://localhost:8080/exemple-1/api/produit/getProduit');
+    var data = value1.idproduit;
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    console.log(data);
+    var datatexte = ('idProduit='+data)
+    xhr.send(datatexte);
+    xhr.onload = () =>{
+        record =  JSON.parse(xhr.response);
+        console.log(record);
+    };
 }

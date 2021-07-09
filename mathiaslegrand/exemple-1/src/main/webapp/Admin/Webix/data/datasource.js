@@ -58,7 +58,6 @@ async function fetchGetCommande() {
             date: data[i].date,
             listeItem: currentListeItem
         });
-
     }
     $$("commandeTable").parse(Commande_data);
 }
@@ -83,4 +82,3 @@ async function fetchGetInventaire() {
     $$("inventaireTable").parse(Inventaire_data);
     console.log(Inventaire_data);
 }
-
