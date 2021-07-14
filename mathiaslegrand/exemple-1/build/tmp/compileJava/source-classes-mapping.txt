@@ -44,17 +44,19 @@ ca/usherbrooke/gegi/server/business/Item_Commander.java
  ca.usherbrooke.gegi.server.business.Item_Commander
 ca/usherbrooke/gegi/server/presentation/ProduitService.java
  ca.usherbrooke.gegi.server.presentation.ProduitService
+ca/usherbrooke/gegi/server/business/BooleanMat.java
+ ca.usherbrooke.gegi.server.business.BooleanMat
 ca/usherbrooke/gegi/server/business/Panier.java
  ca.usherbrooke.gegi.server.business.Panier
 ca/usherbrooke/gegi/server/business/ItemPanier.java
  ca.usherbrooke.gegi.server.business.ItemPanier
 ca/usherbrooke/gegi/server/business/BuilderCommande.java
  ca.usherbrooke.gegi.server.business.BuilderCommande
-ca/usherbrooke/gegi/server/presentation/PanierService.java
- ca.usherbrooke.gegi.server.presentation.PanierService
+ca/usherbrooke/gegi/server/presentation/DataBase.java
+ ca.usherbrooke.gegi.server.presentation.DataBase
 ca/usherbrooke/gegi/server/business/builderProduit.java
  ca.usherbrooke.gegi.server.business.builderProduit
 ca/usherbrooke/gegi/server/business/Item_CommanderTest.java
  ca.usherbrooke.gegi.server.business.Item_CommanderTest
-ca/usherbrooke/gegi/server/presentation/DataBase.java
- ca.usherbrooke.gegi.server.presentation.DataBase
+ca/usherbrooke/gegi/server/presentation/PanierService.java
+ ca.usherbrooke.gegi.server.presentation.PanierService

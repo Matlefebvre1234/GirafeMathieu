@@ -420,7 +420,7 @@ public class DataBase {
             while(rs.next())
             {
                 Item_Commander item = new Item_Commander();
-                item.setDate(rs.getDate(1).toString());
+                item.setDate(rs.getDate(1));
                 item.setId_item_commander(rs.getInt(2));
                 item.setIdproduit(rs.getInt(3));
                 item.setQuantite(rs.getInt(4));

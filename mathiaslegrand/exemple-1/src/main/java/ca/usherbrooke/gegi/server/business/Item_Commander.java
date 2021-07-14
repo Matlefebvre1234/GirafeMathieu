@@ -11,7 +11,7 @@ import java.util.Date;
 public class Item_Commander {
 
     private int id_item_commander;
-    private String date;
+    private Date date;
     private int quantite;
     private float prixtotal;
     private int id_commande;

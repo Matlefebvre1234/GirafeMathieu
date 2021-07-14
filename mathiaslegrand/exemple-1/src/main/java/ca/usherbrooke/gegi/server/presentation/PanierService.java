@@ -60,8 +60,6 @@ public class PanierService {
 
     /**
      * Cette fonction permet d'ajouter des item au panier
-     * @param quantite
-     * @param idproduit
      */
     @POST
     @Path("/ajouterItemPanier")
@@ -69,7 +67,12 @@ public class PanierService {
 
         Principal principal = httpServletRequest.getUserPrincipal();
 
-        Panier panier = getPanier(principal.getName());
+        Panier panier = null;
+        try {
+            panier = getPanier(principal.getName());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         System.out.println("idProduit: " + idProduit);
         System.out.println("quantite: " + quantite);
