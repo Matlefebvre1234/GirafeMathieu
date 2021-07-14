@@ -28,7 +28,6 @@ async function fetchGetCommande() {
     let response = await fetch("http://localhost:8080/exemple-1/api/commande/commande")
     let data = await response.json();
 
-
     $$("commandeTable").clearAll()
     Commande_data = [];
 
@@ -59,7 +58,6 @@ async function fetchGetCommande() {
             date: data[i].date,
             listeItem: currentListeItem
         });
-
     }
     $$("commandeTable").parse(Commande_data);
 }
@@ -84,4 +82,3 @@ async function fetchGetInventaire() {
     $$("inventaireTable").parse(Inventaire_data);
     console.log(Inventaire_data);
 }
-

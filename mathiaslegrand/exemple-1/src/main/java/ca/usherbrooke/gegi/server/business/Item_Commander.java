@@ -135,7 +135,7 @@ public class Item_Commander {
      * Cette fonction change la date de la commande
      * @param date
      */
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -143,7 +143,8 @@ public class Item_Commander {
      * Cette fonction retourne la date de la commande
      * @return
      */
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
+
 }

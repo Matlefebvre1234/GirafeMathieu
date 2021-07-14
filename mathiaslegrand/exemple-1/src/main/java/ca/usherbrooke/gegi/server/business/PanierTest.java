@@ -44,7 +44,6 @@ class PanierTest {
         panier.setItems(items);
         Assertions.assertEquals(items,panier.getItems());
     }
-
     @Test
     void getItems() {
         ArrayList<ItemPanier> items = new ArrayList<>();

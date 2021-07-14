@@ -57,7 +57,7 @@ public class CommandeService {
         return index+1;
     }
 
-    /**
+    /** Microservice
      * Methode qui permet de retourner la liste des produits contenus dans la base de donnees,
      * ainsi que leurs informations. En plus de mettre les informations dans la classe commande
      * @return liste des produits
@@ -93,7 +93,7 @@ public class CommandeService {
         return maliste;
     }
 
-    /**
+    /** Microservice
      * Cette fonction permet de d'associer les informations sur les commandes et les items commandes
      * present dans la base de donnees et les associe au code Java(de commande)
      * @return
@@ -134,7 +134,6 @@ public class CommandeService {
         //
         index=0;
 
-
         /**
          * Cette Query permet de donner les informations necessaire a la classe Commande comme l'id de la commande, la date de la commande...
          */
@@ -157,6 +156,10 @@ public class CommandeService {
          * Cette fonction permet d'ajouter l'id de l'etat de la commande a la classe commande
          */
         index=0;
+
+        /**
+         * Cette fonction permet d'ajouter l'id de l'etat de la commande a la classe commande
+         */
         try{
             Connection conn3 = connect();
             Statement stmt3 = conn3.createStatement();
@@ -173,8 +176,8 @@ public class CommandeService {
         return maliste;
     }
 
-    /**
-     * TODO
+    /** Microservice
+     * Cette fonction permet d'aller chercher des items commander avec l'aide de la database
      * @return
      */
     @GET
@@ -185,9 +188,8 @@ public class CommandeService {
         return database.getItem_Commander();
     }
 
-
     /**
-     * TODO
+     * Cette fonction permet d'aller chercher des commandes avec l'aide de la base de donnee
      * @return
      */
     @GET
@@ -200,20 +202,25 @@ public class CommandeService {
         return database.getCommande();
     }
 
-
     /**
-     * TODO
+     * Cette fonction permet de commander des items, d'introduire ces commandes dans la base de donnes et
+     * de relier webix
      * @param idProduit
      * @param quantite
      */
     @POST
     @Path("/commander_item")
-    public void commanderItem(@FormParam("id") int idProduit, @FormParam("quantite") int quantite){
+    @Produces("application/json")
+    public ArrayList<Integer> commanderItem(@FormParam("id") int idProduit, @FormParam("quantite") int quantite, @FormParam("taille") String taille){
         DataBase dataBase = DataBase.getInstance();
         Principal principal = httpServletRequest.getUserPrincipal();
         Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
+        int reste = dataBase.CommanderItem(idProduit, quantite, taille, principal.getName());
 
-        dataBase.CommanderItem(idProduit, quantite, principal.getName());
+        ArrayList<Integer> liste = new ArrayList<>();
+        liste.add(reste);
+
+        return liste;
     }
 }
 

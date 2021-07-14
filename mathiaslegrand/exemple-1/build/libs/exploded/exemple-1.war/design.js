@@ -1,7 +1,8 @@
 
 webix.ready(function(){
-	//webix.html.addCss($$("agegTitre").$view, "red");
-	webix.ui({
+
+	webix.ui(
+		{
 		view:"scrollview",
 		id:"scrollview",
 		enable: true,
@@ -53,7 +54,7 @@ webix.ready(function(){
 					xCount:3,
 					scroll: "y",
 					select:true,
-					url : "http://localhost:8080/exemple-1/api/produit/listeproduits",
+					url : "http://localhost:8080/exemple-1/api/produit/listeproduitsdistinct",
 					type: {
 						height: 200,
 						width:"auto"
@@ -141,3 +142,20 @@ const sendData = (cipVal) => {
 		console.log(responseData);
 	});
 };
+
+fetchisAdmin();
+async function fetchisAdmin()
+{
+	let response2 = await fetch("http://localhost:8080/exemple-1/api/isAdmin");
+	let data2 = await response2.json();
+	if(data2[0].mybool== true)
+	{
+		let gestionAdmin = document.getElementById("gestionAdmin");
+		gestionAdmin.style.display = "block";
+	}
+	else
+	{
+		let gestionAdmin = document.getElementById("gestionAdmin");
+		gestionAdmin.style.display = "none";
+	}
+}

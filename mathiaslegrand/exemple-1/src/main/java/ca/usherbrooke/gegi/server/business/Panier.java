@@ -31,6 +31,7 @@ public class Panier {
         return cip;
     }
 
+
     /**
      * Cette fonction change l'id du panier
      * @param idPanier
@@ -78,5 +79,4 @@ public class Panier {
     public void removeItem(ItemPanier item) {
         items.remove(item);
     }
-
 }

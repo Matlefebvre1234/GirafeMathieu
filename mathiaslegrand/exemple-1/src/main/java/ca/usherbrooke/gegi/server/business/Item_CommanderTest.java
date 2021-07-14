@@ -162,15 +162,15 @@ class Item_CommanderTest {
     void getDate(){
         Date date = new Date(5,6,7);
         Item_Commander item_commander = new Item_Commander();
-        item_commander.setDate("date");
-        Assertions.assertEquals("date",item_commander.getDate());
+        item_commander.setDate(date);
+        Assertions.assertEquals(date,item_commander.getDate());
     }
 
     @Test
     void setDate(){
-
+        Date date = new Date(5,6,7);
         Item_Commander item_commander = new Item_Commander();
-        item_commander.setDate("date");
-        Assertions.assertEquals("date",item_commander.getDate());
+        item_commander.setDate(date);
+        Assertions.assertEquals(date,item_commander.getDate());
     }
 }

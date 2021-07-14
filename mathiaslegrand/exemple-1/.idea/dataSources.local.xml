@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-211.7142.45">
-    <data-source name="s3iprojet04@zeus.gel.usherbrooke.ca" uuid="0889b738-dcbe-4291-8cdb-815a684a3637">
+<<<<<<< HEAD
+    <data-source name="s3iprojet04@zeus.gel.usherbrooke.ca [2]" uuid="3c510779-c1e6-403f-97c6-418fb65fd51c">
+=======
+    <data-source name="s3iprojet04@zeus.gel.usherbrooke.ca" uuid="7d7c31f2-1e03-4303-adc0-62bf5fc98bae">
+>>>>>>> main3.0
       <database-info product="PostgreSQL" version="9.6.22" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" dbms="POSTGRES" exact-version="9.6.22" exact-driver-version="42.2">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
       <user-name>s3iprojet04</user-name>
       <schema-mapping>
         <introspection-scope>
