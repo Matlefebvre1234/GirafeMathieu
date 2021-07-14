@@ -26,7 +26,9 @@ webix.ready(function () {
 
             var item = panier.items;
             var arrayProduit = [];
-
+            var total = 0;
+            var  quantites= [] ;
+            var listePrix = [];
 
              for(var i = 0; i < item.length; i++){
 
@@ -36,9 +38,14 @@ webix.ready(function () {
                      var nomItem = produit.nomitem;
                      var taille = produit.taille;
                      var prix = produit.prix;
-                     var total = item.quantite * produit.prix;
+                     //console.log(total)
+                     total = total + item[i].quantite * produit.prix;
                      var photo = produit["arrayPhoto"];
                  }
+
+                 quantites.push(quantite);
+                 listePrix.push(prix);
+
 
                  arrayProduit.push({
                      "height": 100,
@@ -50,42 +57,50 @@ webix.ready(function () {
                          },
                          {"label": "Produit: " + nomItem, "view": "label", "height": 0, "borderless": 0},
                          {"label": "Taille: " + taille, "view": "label", "height": 0, "borderless": 0},
-                         {"label": "Prix Unitaire: " + prix, "view": "label", "height": 0, "borderless": 0},
-                         {"label": "Quantité: " + quantite, "view": "label", "height": 0, "borderless": 0, id:"quantite"},
+                         {"label": "Prix Unitaire: " + listePrix[i], "view": "label", "height": 0, "borderless": 0},
+                         {"label": "Quantité: " + quantites[i], "view": "label", "height": 0, "borderless": 0, id:"quantite" + i},
                          {
                              "height": 48,
                              "rows": [
-                                 {"label": "+", "view": "button", "height": 0,
-                                     click: function plus() {
+                                 {"label": "+", "view": "button", "height": 0, id :"p" + i,
+                                     click: function plus(id)
                                          {
-                                             quantite++;
-                                             $$("quantite").setValue("Quantite" + ": " + quantite);
-                                             total = quantite*prix;
+
+                                             var bonID = id.substring(1);
+                                             quantites[bonID] += 1;
+                                             var qte  = "quantite" + bonID;
+                                             console.log(quantites[bonID]);
+                                             $$(qte).setValue("Quantite" + ": " + quantites[bonID]);
+
+                                             total = total + listePrix[bonID];
+
                                              $$("TOT").setValue(total+"$");
-
-
                                          }
-                                     }
                                  },
-                                 {"label": "-", "view": "button", "height": 0,
-                                     click: function moins() {
+                                 {"label": "-", "view": "button", "height": 0, id:"m"+i,
+                                     click: function moins(id) {
                                          {
-                                             quantite--;
-                                             if(quantite<0){
-                                                 quantite=0;
+                                             var bonID = id.substring(1);
+                                             quantites[bonID] -= 1;
+
+                                             var vieuxTotal = total;
+                                             total -= listePrix[bonID];
+
+                                             if(quantites[bonID]  < 0){
+
+                                                 quantites[bonID]=0;
+
+                                                 total = vieuxTotal;
                                              }
-                                             $$("quantite").setValue("Quantite" + ": " + quantite);
-                                             total = quantite*prix;
-                                             $$("TOT").setValue(total+"$");
+                                             var qte  = "quantite" + bonID;
+                                             $$(qte).setValue("Quantite" + ": " + quantites[bonID]);
+                                             $$("TOT").setValue(total + "$");
 
-
-                                         }
                                      }
-                                 }
+                                 }}
 
                              ]
                          }]});
-
              }
 
 
@@ -104,12 +119,6 @@ webix.ready(function () {
                             {"label": total + "$","view": "label", "height": 0, "borderless": 0, id: "TOT"}
                         ]
                     },
-                    {
-                        "view": "template",
-                        "template": "You can place any widget here..",
-                        "role": "placeholder",
-                        "height": 308
-                    }
         ],
         "css": "text-align"
     }]});

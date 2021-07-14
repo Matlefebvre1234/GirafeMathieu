@@ -725,47 +725,31 @@ public class DataBase {
     }
 
     public Panier getPanierFromCIP(String cip) throws SQLException {
-        System.out.println("Avant Query");
         String SQL = "SELECT produit.nomitem, produit.taille, produit.prix, item_panier.quantite, item_panier.idpanier " +
                 "FROM produit, item_panier, panier  " +
                 "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND panier.cip=?";
 
 
-        String URL ="SELECT produit_photo.url "+
+        String URL ="SELECT produit_photo.url, produit.nomitem "+
                     "FROM produit, item_panier, panier, produit_photo "+
                     "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND produit_photo.idproduit = produit.idproduit AND panier.cip=?";
         Panier panier = new Panier();
 
         ArrayList<ItemPanier> itemArray = new ArrayList<>();
-        ArrayList<String> arrayPhoto = new ArrayList<>();
+
 
         try(Connection conn = connect();
             PreparedStatement stmt = conn.prepareStatement(SQL)){
+
             stmt.setString(1,cip);
             ResultSet rs = stmt.executeQuery();
 
-
+            System.out.println("Avant Query");
             while(rs.next()){
                 ItemPanier item = new ItemPanier();
                 Produit produit = new Produit();
-                try(Connection conn2 = connect();
-                    PreparedStatement stmt2 = conn2.prepareStatement(URL)) {
-                    System.out.println("Apres Query");
-                    stmt2.setString(1,cip);
-                    ResultSet rs2 = stmt2.executeQuery();
-
-                    while(rs2.next()) {
-
-                        arrayPhoto.add(rs2.getString(1));
-                    }
-
-                    }catch (SQLException e)
-                    {
-                        System.out.println(e.getMessage());
-                    }
-                produit.setArrayPhoto(arrayPhoto);
+                System.out.println("Apres Query");
                 String nomItem = rs.getString(1);
-                System.out.println(nomItem);
                 produit.setNomitem(nomItem);
                 produit.setTaille(rs.getString(2));
                 produit.setPrix(rs.getInt(3));
@@ -773,16 +757,33 @@ public class DataBase {
                 item.setProduit(produit);
                 panier.setIdPanier(rs.getInt(5));
                 itemArray.add(item);
-            }
-
+                }
         } catch (SQLException ex){
             return panier;
         }
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(URL)) {
+            stmt2.setString(1,cip);
+            ResultSet rs2 = stmt2.executeQuery();
+
+            while(rs2.next()) {
+                for(int i = 0; i < itemArray.toArray().length; i++){
+                    System.out.println(rs2.getString(2));
+                    System.out.println(itemArray.get(i).getProduit().getNomitem());
+                    if(rs2.getString(2).equals(itemArray.get(i).getProduit().getNomitem())){
+                        System.out.println("Allo");
+
+                        itemArray.get(i).getProduit().addPhoto(rs2.getString(1));
+                    }
+
+                }
+            }
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
         panier.setCip(cip);
         panier.setItems(itemArray);
-
-
-
         return panier;
     }
 }
