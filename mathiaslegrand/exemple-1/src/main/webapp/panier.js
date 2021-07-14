@@ -49,6 +49,7 @@ webix.ready(function () {
 
                  arrayProduit.push({
                      "height": 100,
+                     id: "rangee" + i,
                      "cols": [
                          {
                              css: "images",
@@ -94,13 +95,30 @@ webix.ready(function () {
                                              }
                                              var qte  = "quantite" + bonID;
                                              $$(qte).setValue("Quantite" + ": " + quantites[bonID]);
+
                                              $$("TOT").setValue(total + "$");
 
                                      }
                                  }}
 
                              ]
-                         }]});
+                         },
+                         {"label": "Retirer l'article",
+                             "view": "button",
+                             "height": 48,
+                             id: "r" + i,
+                         click: function retirerArticle(id) {
+                             var bonID = id.substring(1);
+                             console.log(bonID);
+                             console.log(arrayProduit);
+                             arrayProduit.splice(bonID, 1);
+                             console.log(arrayProduit);
+                            $$("layout").removeView("rangee" + bonID);
+                            total -= quantites[bonID] *  listePrix[bonID];
+                            $$("TOT").setValue(total + "$");
+
+                         }}
+                     ]});
              }
 
 
@@ -112,13 +130,66 @@ webix.ready(function () {
                     {"label": "Menu Panier", "view": "label", "height": 75, "borderless": 0},
                     {"label": "Votre Panier", "view": "label", "height": 47, "borderless": 0},
 
-                    {"rows": arrayProduit},{
+                    {   id : "layout",
+                        "rows": arrayProduit},{
                         "height": 63,
                         "cols": [
                             {"label": "Total:", "view": "label", "height": 0, "css": "a"},
                             {"label": total + "$","view": "label", "height": 0, "borderless": 0, id: "TOT"}
                         ]
                     },
+                    {
+                        view:"button",
+                        id:"my_button",
+                        value:"Commander",
+                        css:"webix_primary",
+                        inputWidth:200,
+                        click: function (){
+                            var data = {id:queryString, quantite:$$("quantiteProduit").getText(), taille:$$("choixtaille").getText()}
+                            console.log(data.quantite);
+                            if(data.quantite == "" || data.taille == "")
+                            {
+                                webix.alert({
+                                    titre: "Panier",
+                                    text: "Il faut choisir une taille et un quantité!"
+                                });
+                            }
+
+                            else{
+                                var resultat
+                                const xhr = new XMLHttpRequest();
+                                xhr.open('POST', 'http://localhost:8080/exemple-1/api/commande/commander_item');
+
+                                console.log(data.taille)
+                                console.log(data.quantite)
+                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                                var datatexte = ('id='+data.id + '&quantite='+data.quantite + '&taille='+data.taille)
+                                xhr.send(datatexte);
+                                xhr.onload = () =>{
+                                    console.log(xhr.response);
+
+                                    resultat = xhr.response
+                                    resultat = JSON.parse(resultat)
+                                    console.log(resultat)
+                                    var reste = +resultat[0] + +data.quantite;
+
+                                    if(resultat[0] >= 0){
+                                        webix.alert({
+                                            titre: "Commande",
+                                            text: "La commande a ete enregistree!"
+                                        });
+                                    }
+
+                                    else{
+                                        webix.alert({
+                                            titre: "Commande",
+                                            text: "Trop grande quantité, il ne reste que " + reste + " items"
+                                        });
+                                    }
+                                };
+                            }
+                        }
+                    }
         ],
         "css": "text-align"
     }]});
