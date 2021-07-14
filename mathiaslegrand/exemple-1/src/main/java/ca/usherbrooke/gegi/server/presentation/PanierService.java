@@ -5,6 +5,7 @@ import ca.usherbrooke.gegi.server.business.Panier;
 import ca.usherbrooke.gegi.server.business.Produit;
 
 import javax.ws.rs.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Path("/Panier")
@@ -13,11 +14,10 @@ public class PanierService {
     @POST
     @Path("/getPanier")
     @Produces("application/json")
-    public Panier getPanier(@FormParam("cip") String cip)
-    {
+    public Panier getPanier(@FormParam("cip") String cip) throws SQLException {
         DataBase database = DataBase.getInstance();
         Panier panier;
-        panier = database.getPanier(cip);
+        panier = database.getPanierFromCIP(cip);
         return panier;
     }
 

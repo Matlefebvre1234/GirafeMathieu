@@ -1,10 +1,9 @@
 package ca.usherbrooke.gegi.server.business;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
 
 class CommandeTest {
 
@@ -25,29 +24,29 @@ class CommandeTest {
     @Test
     void getPrix_total() {
         Commande commande = new Commande();
-        commande.setPrix_total(2000);
-        Assertions.assertEquals(2000,commande.getPrix_total());
+        commande.setPrixTotal(2000);
+        Assertions.assertEquals(2000,commande.getPrixTotal());
     }
 
     @Test
     void setPrix_total() {
         Commande commande = new Commande();
-        commande.setPrix_total(2000);
-        Assertions.assertEquals(2000,commande.getPrix_total());
+        commande.setPrixTotal(2000);
+        Assertions.assertEquals(2000,commande.getPrixTotal());
     }
 
     @Test
     void getId_commande() {
         Commande commande = new Commande();
-        commande.setId_commande(2000);
-        Assertions.assertEquals(2000,commande.getId_commande());
+        commande.setIdCommande(2000);
+        Assertions.assertEquals(2000,commande.getIdCommande());
     }
 
     @Test
     void setId_commande() {
         Commande commande = new Commande();
-        commande.setId_commande(2000);
-        Assertions.assertEquals(2000,commande.getId_commande());
+        commande.setIdCommande(2000);
+        Assertions.assertEquals(2000,commande.getIdCommande());
     }
 
     @Test
@@ -67,14 +66,30 @@ class CommandeTest {
     @Test
     void getId_etat_commande() {
         Commande commande = new Commande();
-        commande.setId_etat_commande(2);
-        Assertions.assertEquals(2,commande.getId_etat_commande());
+        commande.setIdEtatCommande(2);
+        Assertions.assertEquals(2,commande.getIdEtatCommande());
     }
 
     @Test
     void setId_etat_commande() {
         Commande commande = new Commande();
-        commande.setId_etat_commande(2);
-        Assertions.assertEquals(2,commande.getId_etat_commande());
+        commande.setIdEtatCommande(2);
+        Assertions.assertEquals(2,commande.getIdEtatCommande());
     }
+
+    @Test
+    void setListeItem() {
+        Commande commande = new Commande();
+        ArrayList<Item_Commander> arrayList = new ArrayList<>();
+        commande.setListeItem(arrayList);
+        Assertions.assertEquals(arrayList,commande.getListeItem());
+    }
+    @Test
+    void getListeItem() {
+        Commande commande = new Commande();
+        ArrayList<Item_Commander> arrayList = new ArrayList<>();
+        commande.setListeItem(arrayList);
+        Assertions.assertEquals(arrayList,commande.getListeItem());
+    }
+
 }

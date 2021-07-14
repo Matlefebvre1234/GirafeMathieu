@@ -1,16 +1,11 @@
 package ca.usherbrooke.gegi.server.presentation;
 
 import ca.usherbrooke.gegi.server.business.*;
-import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.core.Context;
-import javax.xml.crypto.Data;
-import java.security.Principal;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Contient toutes les methodes qui communiquent avec la base de donnees
@@ -34,6 +29,10 @@ public class DataBase {
 
     }
 
+    /**
+     * Cette fonction retourne une instance de la database
+     * @return
+     */
     public static DataBase getInstance()
     {
         if(instance == null)
@@ -44,7 +43,11 @@ public class DataBase {
         else return instance;
     }
 
-
+    /**
+     * Cette fonction permet de donner des droits d'administration a des cip et de le modifier dans la database
+     * @param cip
+     * @return
+     */
     public boolean isAdmin(String cip)
     {
         String SQL = "SELECT id_fonction from Client WHERE cip = ?" ;
@@ -63,6 +66,11 @@ public class DataBase {
         }
         return false;
     }
+
+    /**
+     * Cette fonction permet d'inserer des clients dans la database
+     * @param etudiant
+     */
     public void insertEtudiantDB(Etudiant etudiant){
         String SQL = "INSERT INTO client(cip, courriel, nom, adresse, prenom, id_fonction)" + " VALUES(?,?,?,?,?,?)" ;
 
@@ -82,7 +90,11 @@ public class DataBase {
         }
     }
 
-
+    /**
+     * Cette fonction permet d'ajouter des images a des produits dans la database.
+     * @param url
+     * @param idProduit
+     */
     public void insertImageProduitDb(String url, int idProduit)
     {
         String SQL = "INSERT INTO produit_photo(id_photo, url, idproduit)" + " VALUES(?,?,?)";
@@ -102,7 +114,18 @@ public class DataBase {
         }
     }
 
-
+    /**
+     * Cette fonction permet d'ajouter des produits dans la database.
+     * @param nom
+     * @param description
+     * @param taille
+     * @param prix
+     * @param couleur
+     * @param visibilite
+     * @param etat
+     * @param url
+     * @param quantite
+     */
     public void insertProduitDB(String nom, String description, String taille, float prix, String couleur, int visibilite, int etat, String url, int quantite) {
         String SQL = "INSERT INTO produit(nomitem, idproduit, description, prix, taille, couleur, visibilite_site, id_etat)" + " VALUES(?,?,?,?,?,?,?,?)";
 
@@ -131,6 +154,10 @@ public class DataBase {
     }
 
 
+    /**
+     * Cette fonction permet de donner le numero de l'index de la dernier photo
+     * @return
+     */
     public int getLastIndexPhoto(){
         int index = 0;
 
@@ -149,6 +176,11 @@ public class DataBase {
         return index+1;
 
     }
+
+    /**
+     * Cette fonction permet de donner le numero de l'index de la dernier photo
+     * @return
+     */
     public int getLastIndex(){
         int index = 0;
 
@@ -290,7 +322,7 @@ public class DataBase {
             while(rs.next())
             {
                 Item_Commander item = new Item_Commander();
-                item.setDate(rs.getDate(1));
+                item.setDate(rs.getDate(1).toString());
                 item.setId_item_commander(rs.getInt(2));
                 item.setIdproduit(rs.getInt(3));
                 item.setQuantite(rs.getInt(4));
@@ -402,7 +434,7 @@ public class DataBase {
                 for(int i =0;i<malisteCommande.size();i++)
                 {
 
-                    if(malisteCommande.get(i).getId_commande() == rs.getInt(1))
+                    if(malisteCommande.get(i).getIdCommande() == rs.getInt(1))
                     {
                         indexTemp = i;
                     }
@@ -692,5 +724,68 @@ public class DataBase {
 
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
+    }
+
+    public Panier getPanierFromCIP(String cip) throws SQLException {
+        String SQL = "SELECT produit.nomitem, produit.taille, produit.prix, item_panier.quantite, item_panier.idpanier " +
+                "FROM produit, item_panier, panier  " +
+                "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND panier.cip=?";
+
+
+        String URL ="SELECT produit_photo.url, produit.nomitem "+
+                    "FROM produit, item_panier, panier, produit_photo "+
+                    "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND produit_photo.idproduit = produit.idproduit AND panier.cip=?";
+        Panier panier = new Panier();
+
+        ArrayList<ItemPanier> itemArray = new ArrayList<>();
+
+
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setString(1,cip);
+            ResultSet rs = stmt.executeQuery();
+
+            System.out.println("Avant Query");
+            while(rs.next()){
+                ItemPanier item = new ItemPanier();
+                Produit produit = new Produit();
+                System.out.println("Apres Query");
+                String nomItem = rs.getString(1);
+                produit.setNomitem(nomItem);
+                produit.setTaille(rs.getString(2));
+                produit.setPrix(rs.getInt(3));
+                item.setQuantite(rs.getInt(4));
+                item.setProduit(produit);
+                panier.setIdPanier(rs.getInt(5));
+                itemArray.add(item);
+                }
+        } catch (SQLException ex){
+            return panier;
+        }
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(URL)) {
+            stmt2.setString(1,cip);
+            ResultSet rs2 = stmt2.executeQuery();
+
+            while(rs2.next()) {
+                for(int i = 0; i < itemArray.toArray().length; i++){
+                    System.out.println(rs2.getString(2));
+                    System.out.println(itemArray.get(i).getProduit().getNomitem());
+                    if(rs2.getString(2).equals(itemArray.get(i).getProduit().getNomitem())){
+                        System.out.println("Allo");
+
+                        itemArray.get(i).getProduit().addPhoto(rs2.getString(1));
+                    }
+
+                }
+            }
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        panier.setCip(cip);
+        panier.setItems(itemArray);
+        return panier;
     }
 }

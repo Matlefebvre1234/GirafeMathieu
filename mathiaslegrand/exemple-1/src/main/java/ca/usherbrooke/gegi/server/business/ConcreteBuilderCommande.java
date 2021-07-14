@@ -1,6 +1,5 @@
 package ca.usherbrooke.gegi.server.business;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -41,11 +40,11 @@ public class ConcreteBuilderCommande implements BuilderCommande{
     @Override
     public Commande construireCommande(int idCcommande, String cip, Date date, int prixTotal, int idEtatCommande, ArrayList<Item_Commander> liste) {
         resultat = new Commande();
-        resultat.setId_commande(idCcommande);
+        resultat.setIdCommande(idCcommande);
         resultat.setCip(cip);
-        resultat.setDate(date);
-        resultat.setPrix_total(prixTotal);
-        resultat.setId_etat_commande(idEtatCommande);
+        resultat.setDate(date.toString());
+        resultat.setPrixTotal(prixTotal);
+        resultat.setIdEtatCommande(idEtatCommande);
         resultat.setListeItem(liste);
         return resultat;
     }

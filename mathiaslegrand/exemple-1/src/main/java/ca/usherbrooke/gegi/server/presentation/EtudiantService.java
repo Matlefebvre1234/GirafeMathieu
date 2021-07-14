@@ -82,6 +82,7 @@ public class EtudiantService {
     @Path("getUtilisateur")
     @Produces("application/json")
     public Etudiant getUtilisateur() {
+        System.out.println("Allo");
         Principal principal = httpServletRequest.getUserPrincipal();
         Map<String, Object> details = (Map<String, Object>) ((AttributePrincipalImpl)principal).getAttributes();
         Etudiant etudiant = new Etudiant();
@@ -89,6 +90,7 @@ public class EtudiantService {
         etudiant.setNom((String)details.get("nomFamille"));
         etudiant.setPrenom((String)details.get("prenom"));
         etudiant.setCourriel((String)details.get("courriel"));
+        System.out.println("Goodbye");
         return etudiant;
     }
 
