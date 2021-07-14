@@ -42,7 +42,7 @@ webix.ready(function () {
                      total = total + item[i].quantite * produit.prix;
                      var photo = produit["arrayPhoto"];
                  }
-
+                 console.log(photo[0]);
                  quantites.push(quantite);
                  listePrix.push(prix);
 

@@ -992,7 +992,6 @@ public class DataBase {
                     System.out.println(rs2.getString(2));
                     System.out.println(itemArray.get(i).getProduit().getNomitem());
                     if(rs2.getString(2).equals(itemArray.get(i).getProduit().getNomitem())){
-                        System.out.println("Allo");
 
                         itemArray.get(i).getProduit().addPhoto(rs2.getString(1));
                     }
