@@ -157,15 +157,17 @@ webix.ready(function () {
                         css:"webix_primary",
                         inputWidth:200,
                         click: function (){
-
-
                                 for(var j = 0; j < listeProduits.length; j++){
                                     var compteur = 0;
                                     var resultat
                                     var data = {id:listeProduits[j], quantite:quantites[j], taille:listeTailles[j]}
-                                    console.log(data.quantite);
+
+                                    console.log("j"+ j);
+                                    console.log("Compteur:" +  compteur);
+                                    console.log("id:"+data.id);
 
                                     const xhr4 = new XMLHttpRequest();
+                                    const xhr5 = new XMLHttpRequest();
                                     xhr4.open('POST', 'http://localhost:8080/exemple-1/api/commande/commander_item');
 
                                     console.log(data.taille)
@@ -174,8 +176,8 @@ webix.ready(function () {
                                     var datatexte = ('id='+data.id + '&quantite='+data.quantite + '&taille='+data.taille)
                                     xhr4.send(datatexte);
                                     xhr4.onload = () =>{
+
                                         resultat = xhr4.response
-                                        console.log(xhr4.response);
 
                                         resultat = JSON.parse(resultat)
 
@@ -188,18 +190,17 @@ webix.ready(function () {
                                             $$("layout").removeView("rangee" + compteur);
                                             total -= quantites[compteur] *  listePrix[compteur];
                                             $$("TOT").setValue(total + "$");
+                                            compteur++;
 
-                                            const xhr5 = new XMLHttpRequest();
                                             xhr5.open('POST', 'http://localhost:8080/exemple-1/api/Panier/retirerItemPanier');
                                             var data = {id: listeProduits[compteur]};
                                             xhr5.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                                             var datatexte = ('id=' + data.id);
                                             xhr5.send(datatexte);
-                                            compteur++;
+
                                             webix.alert({
                                                 titre: "Commande",
                                                 text: "La commande a ete enregistree!"
-
                                             });
                                         }
 
