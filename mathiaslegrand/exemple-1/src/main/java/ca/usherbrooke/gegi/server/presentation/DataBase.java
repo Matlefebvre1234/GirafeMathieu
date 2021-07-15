@@ -1,16 +1,11 @@
 package ca.usherbrooke.gegi.server.presentation;
 
 import ca.usherbrooke.gegi.server.business.*;
-import org.jasig.cas.client.authentication.AttributePrincipalImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.core.Context;
-import javax.xml.crypto.Data;
-import java.security.Principal;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Contient toutes les methodes qui communiquent avec la base de donnees
@@ -553,7 +548,7 @@ public class DataBase {
                 for(int i =0;i<malisteCommande.size();i++)
                 {
 
-                    if(malisteCommande.get(i).getId_commande() == rs.getInt(1))
+                    if(malisteCommande.get(i).getIdCommande() == rs.getInt(1))
                     {
                         indexTemp = i;
                     }
@@ -648,10 +643,11 @@ public class DataBase {
             stmt.setString(1, cip);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            panier.setIdPanier(rs.getInt(1));
+            int idPanier = rs.getInt(1);
+            System.out.println("L'id est" + idPanier);
+            panier.setIdPanier(idPanier);
 
         }
-
         catch (SQLException ex){
             System.out.println(ex.getMessage());
             System.out.println("Pas de panier au nom");
@@ -948,5 +944,85 @@ public class DataBase {
      */
     public Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
+    }
+
+
+    public Panier getPanierFromCIP(String cip) throws SQLException {
+
+        String SQL = "SELECT produit.nomitem, produit.taille, produit.prix, item_panier.quantite, item_panier.idpanier, produit.idproduit " +
+                "FROM produit, item_panier, panier  " +
+                "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND panier.cip=?";
+
+
+        String URL ="SELECT produit_photo.url, produit.nomitem "+
+                    "FROM produit, item_panier, panier, produit_photo "+
+                    "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND produit_photo.idproduit = produit.idproduit AND panier.cip=?";
+        Panier panier = new Panier();
+
+        ArrayList<ItemPanier> itemArray = new ArrayList<>();
+
+
+        try(Connection conn = connect();
+            PreparedStatement stmt = conn.prepareStatement(SQL)){
+
+            stmt.setString(1,cip);
+            ResultSet rs = stmt.executeQuery();
+
+            System.out.println("Avant Query");
+            while(rs.next()){
+                ItemPanier item = new ItemPanier();
+                Produit produit = new Produit();
+                System.out.println("Apres Query");
+                String nomItem = rs.getString(1);
+                produit.setNomitem(nomItem);
+                produit.setTaille(rs.getString(2));
+                produit.setPrix(rs.getInt(3));
+                produit.setIdproduit(rs.getInt(6));
+                item.setQuantite(rs.getInt(4));
+                item.setProduit(produit);
+                panier.setIdPanier(rs.getInt(5));
+                itemArray.add(item);
+                }
+        } catch (SQLException ex){
+            return panier;
+        }
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(URL)) {
+            stmt2.setString(1,cip);
+            ResultSet rs2 = stmt2.executeQuery();
+
+            while(rs2.next()) {
+                for(int i = 0; i < itemArray.toArray().length; i++){
+                    System.out.println(rs2.getString(2));
+                    System.out.println(itemArray.get(i).getProduit().getNomitem());
+                    if(rs2.getString(2).equals(itemArray.get(i).getProduit().getNomitem())){
+
+                        itemArray.get(i).getProduit().addPhoto(rs2.getString(1));
+                    }
+
+                }
+            }
+        }catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        panier.setCip(cip);
+        panier.setItems(itemArray);
+        return panier;
+    }
+
+    public void retirerItemPanier(int idProduit, int idPanier) {
+        String SQL2 = "DELETE FROM item_panier WHERE idproduit = ? AND idPanier = ?";
+
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
+
+            stmt2.setInt(1, idProduit);
+            stmt2.setInt(2, idPanier);
+
+            stmt2.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 }

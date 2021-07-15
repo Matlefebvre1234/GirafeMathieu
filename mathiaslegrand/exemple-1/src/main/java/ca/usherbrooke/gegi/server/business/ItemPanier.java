@@ -1,5 +1,9 @@
 package ca.usherbrooke.gegi.server.business;
+import ca.usherbrooke.gegi.server.presentation.DataBase;
+import javax.ws.rs.*;
+import java.sql.SQLException;
 
+@Path("/ItemPanier")
 public class ItemPanier {
     int quantite;
     int idItemPanier;
@@ -59,4 +63,21 @@ public class ItemPanier {
     public int getIdItemPanier() {
         return idItemPanier;
     }
+
+    @GET
+    @Path("/addQuantite")
+    @Produces("application/JSON")
+    public int addQuantite(int x){return quantite+1;}
+
+    @GET
+    @Path("/removeQuantite")
+    @Produces("application/JSON")
+    public int removeQuantite(int x){
+        quantite-=1;
+        if(quantite<0){
+            quantite=0;
+        }
+        return quantite;
+    }
+
 }

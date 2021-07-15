@@ -20,7 +20,7 @@ import java.util.Map;
  * @see DataBase
  */
 
-/**
+/**Microservice
  * Methode qui permet d'aller chercher l'index d'identification le plus gros dans les commandes
  */
 @Path("/commande")
@@ -77,11 +77,11 @@ public class CommandeService {
             while (rs.next()) {
 
                 maliste.add(new Commande());
-                maliste.get(index).setDate(rs.getDate(1));
-                maliste.get(index).setId_commande(rs.getInt(2));
-                maliste.get(index).setPrix_total(rs.getInt(3));
+                maliste.get(index).setDate(rs.getDate(1).toString());
+                maliste.get(index).setIdCommande(rs.getInt(2));
+                maliste.get(index).setPrixTotal(rs.getInt(3));
                 maliste.get(index).setCip(rs.getString(4));
-                maliste.get(index).setId_etat_commande(rs.getInt(5));
+                maliste.get(index).setIdEtatCommande(rs.getInt(5));
 
                 index++;
             }
@@ -117,10 +117,10 @@ public class CommandeService {
             Connection conn = connect();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(SQL);
-
+            //
             while (rs.next()) {
                 maliste.add(new Commande());
-                maliste.get(index).setPrix_total(rs.getInt(1));
+                maliste.get(index).setPrixTotal(rs.getInt(1));
                 //maliste.get(index).setId_commande(rs2.getInt(2));
                 //maliste.get(index).setDate(rs2.getDate(1));
                 //maliste.get(index).setId_etat_commande(rs2.getInt(5));
@@ -131,6 +131,7 @@ public class CommandeService {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        //
         index=0;
 
         /**
@@ -141,15 +142,19 @@ public class CommandeService {
             Statement stmt2 = conn2.createStatement();
             ResultSet rs2 = stmt2.executeQuery(SQL2);
             while (rs2.next()) {
-                maliste.get(index).setId_commande(rs2.getInt(2));
-                maliste.get(index).setDate(rs2.getDate(1));
-                maliste.get(index).setId_etat_commande(rs2.getInt(5));
+                maliste.get(index).setIdCommande(rs2.getInt(2));
+                maliste.get(index).setDate(rs2.getDate(1).toString());
+                maliste.get(index).setIdEtatCommande(rs2.getInt(5));
                 maliste.get(index).setCip(rs2.getString(4));
                 index++;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        /**
+         * Cette fonction permet d'ajouter l'id de l'etat de la commande a la classe commande
+         */
         index=0;
 
         /**
@@ -160,7 +165,7 @@ public class CommandeService {
             Statement stmt3 = conn3.createStatement();
             ResultSet rs3 = stmt3.executeQuery(SQL3);
             while (rs3.next()) {
-                maliste.get(index).setId_etat_commande(rs3.getInt(2));
+                maliste.get(index).setIdEtatCommande(rs3.getInt(2));
 
                 index++;
             }

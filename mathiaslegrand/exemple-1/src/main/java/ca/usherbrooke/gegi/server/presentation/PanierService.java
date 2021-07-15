@@ -9,6 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.xml.crypto.Data;
 import java.security.Principal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Path("/Panier")
@@ -25,11 +26,11 @@ public class PanierService {
     @POST
     @Path("/getPanier")
     @Produces("application/json")
-    public Panier getPanier(@FormParam("cip") String cip)
-    {
+    public Panier getPanier(@FormParam("cip") String cip) throws SQLException {
         DataBase database = DataBase.getInstance();
         Panier panier;
-        panier = database.getPanier(cip);
+        panier = database.getPanierFromCIP(cip);
+        System.out.println(panier.getIdPanier());
         return panier;
     }
 
@@ -60,8 +61,6 @@ public class PanierService {
 
     /**
      * Cette fonction permet d'ajouter des item au panier
-     * @param quantite
-     * @param idproduit
      */
     @POST
     @Path("/ajouterItemPanier")
@@ -69,7 +68,16 @@ public class PanierService {
 
         Principal principal = httpServletRequest.getUserPrincipal();
 
-        Panier panier = getPanier(principal.getName());
+        Panier panier = null;
+        try {
+            panier = getPanier(principal.getName());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        if(panier.getIdPanier() != getPanierBackEnd(principal.getName()).getIdPanier()){
+            panier = getPanierBackEnd(principal.getName());
+        }
 
         System.out.println("idProduit: " + idProduit);
         System.out.println("quantite: " + quantite);
@@ -80,4 +88,27 @@ public class PanierService {
         database.ajouterItemPanier(idProduit, quantite, panier.getIdPanier(), taille);
 
     }
+
+    /**
+     * Cette fonction permet de retirer des item du panier
+     */
+    @POST
+    @Path("/retirerItemPanier")
+    public void retirerItemPanier(@FormParam("id") int idProduit){
+
+        Principal principal = httpServletRequest.getUserPrincipal();
+
+        Panier panier = null;
+        try {
+            panier = getPanier(principal.getName());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+        DataBase database = DataBase.getInstance();
+        database.retirerItemPanier(idProduit, panier.getIdPanier());
+
+    }
+
 }
