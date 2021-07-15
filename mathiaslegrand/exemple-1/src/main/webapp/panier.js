@@ -30,6 +30,7 @@ webix.ready(function () {
             var  quantites= [] ;
             var listePrix = [];
             var listeProduits = [];
+            var listeTailles = []
 
              for(var i = 0; i < item.length; i++){
 
@@ -37,6 +38,7 @@ webix.ready(function () {
                      var produit = item[i].produit;
                      var quantite = item[i].quantite;
                      var idProduit = produit.idproduit;
+                     var taille = produit.taille;
                      var nomItem = produit.nomitem;
                      var taille = produit.taille;
                      var prix = produit.prix;
@@ -48,6 +50,7 @@ webix.ready(function () {
                  quantites.push(quantite);
                  listePrix.push(prix);
                  listeProduits.push(idProduit);
+                 listeTailles.push(taille);
 
                  arrayProduit.push({
                      "height": 100,
@@ -154,49 +157,57 @@ webix.ready(function () {
                         css:"webix_primary",
                         inputWidth:200,
                         click: function (){
-                            var data = {id:queryString, quantite:$$("quantiteProduit").getText(), taille:$$("choixtaille").getText()}
-                            console.log(data.quantite);
-                            if(data.quantite == "" || data.taille == "")
-                            {
-                                webix.alert({
-                                    titre: "Panier",
-                                    text: "Il faut choisir une taille et un quantité!"
-                                });
-                            }
 
-                            else{
-                                var resultat
-                                const xhr = new XMLHttpRequest();
-                                xhr.open('POST', 'http://localhost:8080/exemple-1/api/commande/commander_item');
 
-                                console.log(data.taille)
-                                console.log(data.quantite)
-                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-                                var datatexte = ('id='+data.id + '&quantite='+data.quantite + '&taille='+data.taille)
-                                xhr.send(datatexte);
-                                xhr.onload = () =>{
-                                    console.log(xhr.response);
+                                for(var j = 0; j < listeProduits.length; j++){
+                                    var resultat
+                                    var data = {id:listeProduits[j], quantite:quantites[j], taille:listeTailles[j]}
+                                    console.log(data.quantite);
 
-                                    resultat = xhr.response
-                                    resultat = JSON.parse(resultat)
-                                    console.log(resultat)
-                                    var reste = +resultat[0] + +data.quantite;
+                                    const xhr4 = new XMLHttpRequest();
+                                    xhr4.open('POST', 'http://localhost:8080/exemple-1/api/commande/commander_item');
 
-                                    if(resultat[0] >= 0){
-                                        webix.alert({
-                                            titre: "Commande",
-                                            text: "La commande a ete enregistree!"
-                                        });
-                                    }
+                                    console.log(data.taille)
+                                    console.log(data.quantite)
+                                    xhr4.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                                    var datatexte = ('id='+data.id + '&quantite='+data.quantite + '&taille='+data.taille)
+                                    xhr4.send(datatexte);
+                                    xhr4.onload = () =>{
+                                        console.log(xhr.response);
 
-                                    else{
-                                        webix.alert({
-                                            titre: "Commande",
-                                            text: "Trop grande quantité, il ne reste que " + reste + " items"
-                                        });
-                                    }
-                                };
-                            }
+                                        resultat = xhr.response
+                                        resultat = JSON.parse(resultat)
+                                        console.log(resultat)
+                                        var reste = resultat[0] + quantites[j];
+
+                                        if(resultat[0] >= 0){
+                                            arrayProduit.splice(j, 1);
+                                            console.log(arrayProduit);
+                                            $$("layout").removeView("rangee" + j);
+                                            total -= quantites[j] *  listePrix[j];
+                                            $$("TOT").setValue(total + "$");
+
+                                            const xhr5 = new XMLHttpRequest();
+                                            xhr5.open('POST', 'http://localhost:8080/exemple-1/api/Panier/retirerItemPanier');
+                                            var data = {id: listeProduits[bonID]};
+                                            xhr5.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                            var datatexte = ('id=' + data.id);
+                                            xhr5.send(datatexte);
+
+                                            webix.alert({
+                                                titre: "Commande",
+                                                text: "La commande a ete enregistree!"
+
+                                            });
+                                        }
+
+                                        else{
+                                            webix.alert({
+                                                titre: "Commande",
+                                                text: "Trop grande quantité, il ne reste que " + reste + " items"
+                                            });
+                                        }};
+                                }
                         }
                     }
         ],

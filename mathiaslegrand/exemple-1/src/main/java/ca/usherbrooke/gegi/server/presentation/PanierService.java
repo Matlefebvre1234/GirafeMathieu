@@ -30,6 +30,7 @@ public class PanierService {
         DataBase database = DataBase.getInstance();
         Panier panier;
         panier = database.getPanierFromCIP(cip);
+        System.out.println(panier.getIdPanier());
         return panier;
     }
 
@@ -72,6 +73,10 @@ public class PanierService {
             panier = getPanier(principal.getName());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+
+        if(panier.getIdPanier() != getPanierBackEnd(principal.getName()).getIdPanier()){
+            panier = getPanierBackEnd(principal.getName());
         }
 
         System.out.println("idProduit: " + idProduit);

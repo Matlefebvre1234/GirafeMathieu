@@ -643,10 +643,11 @@ public class DataBase {
             stmt.setString(1, cip);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            panier.setIdPanier(rs.getInt(1));
+            int idPanier = rs.getInt(1);
+            System.out.println("L'id est" + idPanier);
+            panier.setIdPanier(idPanier);
 
         }
-
         catch (SQLException ex){
             System.out.println(ex.getMessage());
             System.out.println("Pas de panier au nom");
@@ -945,7 +946,9 @@ public class DataBase {
         return DriverManager.getConnection("jdbc:postgresql://zeus.gel.usherbrooke.ca:5432/s3iprojet04", "s3iprojet04", "s3iprojet");
     }
 
+
     public Panier getPanierFromCIP(String cip) throws SQLException {
+
         String SQL = "SELECT produit.nomitem, produit.taille, produit.prix, item_panier.quantite, item_panier.idpanier, produit.idproduit " +
                 "FROM produit, item_panier, panier  " +
                 "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND panier.cip=?";
