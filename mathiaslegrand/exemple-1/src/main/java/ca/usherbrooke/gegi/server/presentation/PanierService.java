@@ -83,4 +83,27 @@ public class PanierService {
         database.ajouterItemPanier(idProduit, quantite, panier.getIdPanier(), taille);
 
     }
+
+    /**
+     * Cette fonction permet d'ajouter des item au panier
+     */
+    @POST
+    @Path("/ajouterItemPanier")
+    public void retirerItemPanier(@FormParam("id") int idProduit){
+
+        Principal principal = httpServletRequest.getUserPrincipal();
+
+        Panier panier = null;
+        try {
+            panier = getPanier(principal.getName());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+        DataBase database = DataBase.getInstance();
+        database.retirerItemPanier(idProduit, panier.getIdPanier());
+
+    }
+
 }

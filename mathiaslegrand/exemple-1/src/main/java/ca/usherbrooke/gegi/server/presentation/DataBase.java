@@ -1006,4 +1006,19 @@ public class DataBase {
         panier.setItems(itemArray);
         return panier;
     }
+
+    public void retirerItemPanier(int idProduit, int idPanier) {
+        String SQL2 = "DELETE FROM item_panier WHERE id_produit = ? AND idPanier = ?";
+
+        try(Connection conn2 = connect();
+            PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
+
+            stmt2.setInt(1, idProduit);
+            stmt2.setInt(2, idPanier);
+
+            stmt2.executeUpdate();
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 }
