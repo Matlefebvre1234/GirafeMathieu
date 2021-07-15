@@ -230,11 +230,7 @@ webix.ready(function () {
     function img(obj) {
         return '<img src="' + obj.src + '" alt="centered image" class = "carousel_image"/>'
     }
-],
-    "css": "text-align"
 
-
-    });
     fetchisAdmin();
 
 })
@@ -256,4 +252,3 @@ async function fetchisAdmin()
 }
 
 
-})
