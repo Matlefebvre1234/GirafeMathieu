@@ -50,13 +50,13 @@ ca/usherbrooke/gegi/server/business/Panier.java
  ca.usherbrooke.gegi.server.business.Panier
 ca/usherbrooke/gegi/server/presentation/ProduitService.java
  ca.usherbrooke.gegi.server.presentation.ProduitService
-ca/usherbrooke/gegi/server/presentation/PanierService.java
- ca.usherbrooke.gegi.server.presentation.PanierService
+ca/usherbrooke/gegi/server/presentation/EtudiantService.java
+ ca.usherbrooke.gegi.server.presentation.EtudiantService
 ca/usherbrooke/gegi/server/presentation/CommandeService.java
  ca.usherbrooke.gegi.server.presentation.CommandeService
 ca/usherbrooke/gegi/server/presentation/InventaireService.java
  ca.usherbrooke.gegi.server.presentation.InventaireService
 ca/usherbrooke/gegi/server/presentation/DataBase.java
  ca.usherbrooke.gegi.server.presentation.DataBase
-ca/usherbrooke/gegi/server/presentation/EtudiantService.java
- ca.usherbrooke.gegi.server.presentation.EtudiantService
+ca/usherbrooke/gegi/server/presentation/PanierService.java
+ ca.usherbrooke.gegi.server.presentation.PanierService

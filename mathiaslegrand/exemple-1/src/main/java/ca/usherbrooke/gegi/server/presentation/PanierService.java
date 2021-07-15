@@ -85,10 +85,10 @@ public class PanierService {
     }
 
     /**
-     * Cette fonction permet d'ajouter des item au panier
+     * Cette fonction permet de retirer des item du panier
      */
     @POST
-    @Path("/ajouterItemPanier")
+    @Path("/retirerItemPanier")
     public void retirerItemPanier(@FormParam("id") int idProduit){
 
         Principal principal = httpServletRequest.getUserPrincipal();

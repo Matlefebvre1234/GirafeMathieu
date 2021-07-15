@@ -946,7 +946,7 @@ public class DataBase {
     }
 
     public Panier getPanierFromCIP(String cip) throws SQLException {
-        String SQL = "SELECT produit.nomitem, produit.taille, produit.prix, item_panier.quantite, item_panier.idpanier " +
+        String SQL = "SELECT produit.nomitem, produit.taille, produit.prix, item_panier.quantite, item_panier.idpanier, produit.idproduit " +
                 "FROM produit, item_panier, panier  " +
                 "WHERE item_panier.idproduit= produit.idproduit AND panier.idpanier = item_panier.idpanier AND panier.cip=?";
 
@@ -974,6 +974,7 @@ public class DataBase {
                 produit.setNomitem(nomItem);
                 produit.setTaille(rs.getString(2));
                 produit.setPrix(rs.getInt(3));
+                produit.setIdproduit(rs.getInt(6));
                 item.setQuantite(rs.getInt(4));
                 item.setProduit(produit);
                 panier.setIdPanier(rs.getInt(5));

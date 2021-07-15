@@ -29,12 +29,14 @@ webix.ready(function () {
             var total = 0;
             var  quantites= [] ;
             var listePrix = [];
+            var listeProduits = [];
 
              for(var i = 0; i < item.length; i++){
 
                  if(item!=null){
                      var produit = item[i].produit;
                      var quantite = item[i].quantite;
+                     var idProduit = produit.idproduit;
                      var nomItem = produit.nomitem;
                      var taille = produit.taille;
                      var prix = produit.prix;
@@ -45,7 +47,7 @@ webix.ready(function () {
                  console.log(photo[0]);
                  quantites.push(quantite);
                  listePrix.push(prix);
-
+                 listeProduits.push(idProduit);
 
                  arrayProduit.push({
                      "height": 100,
@@ -116,6 +118,13 @@ webix.ready(function () {
                             $$("layout").removeView("rangee" + bonID);
                             total -= quantites[bonID] *  listePrix[bonID];
                             $$("TOT").setValue(total + "$");
+
+                             const xhr3 = new XMLHttpRequest();
+                             xhr3.open('POST', 'http://localhost:8080/exemple-1/api/Panier/retirerItemPanier');
+                             var data = {id: listeProduits[bonID]};
+                             xhr3.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                             var datatexte = ('id=' + data.id);
+                             xhr3.send(datatexte);
 
                          }}
                      ]});
