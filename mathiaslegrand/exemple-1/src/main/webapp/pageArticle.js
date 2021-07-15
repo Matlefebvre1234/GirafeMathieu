@@ -270,6 +270,8 @@ webix.ready( function () {
         }
     };
 
+    fetchisAdmin();
+
 })
 
 
@@ -302,3 +304,19 @@ function sendData(cipVal, url){
         console.log(responseData);
     });
 };
+
+async function fetchisAdmin()
+{
+    let response2 = await fetch("http://localhost:8080/exemple-1/api/isAdmin");
+    let data2 = await response2.json();
+    if(data2[0].mybool== true)
+    {
+        let gestionAdmin = document.getElementById("gestionAdmin");
+        gestionAdmin.style.display = "block";
+    }
+    else
+    {
+        let gestionAdmin = document.getElementById("gestionAdmin");
+        gestionAdmin.style.display = "none";
+    }
+}

@@ -229,5 +229,30 @@ webix.ready(function () {
     function img(obj) {
         return '<img src="' + obj.src + '" alt="centered image" class = "carousel_image"/>'
     }
+],
+    "css": "text-align"
+
+
+    });
+    fetchisAdmin();
+
+})
+
+async function fetchisAdmin()
+{
+    let response2 = await fetch("http://localhost:8080/exemple-1/api/isAdmin");
+    let data2 = await response2.json();
+    if(data2[0].mybool== true)
+    {
+        let gestionAdmin = document.getElementById("gestionAdmin");
+        gestionAdmin.style.display = "block";
+    }
+    else
+    {
+        let gestionAdmin = document.getElementById("gestionAdmin");
+        gestionAdmin.style.display = "none";
+    }
+}
+
 
 })
