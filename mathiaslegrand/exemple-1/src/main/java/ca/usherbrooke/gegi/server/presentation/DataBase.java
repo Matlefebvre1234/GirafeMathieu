@@ -1008,7 +1008,7 @@ public class DataBase {
     }
 
     public void retirerItemPanier(int idProduit, int idPanier) {
-        String SQL2 = "DELETE FROM item_panier WHERE id_produit = ? AND idPanier = ?";
+        String SQL2 = "DELETE FROM item_panier WHERE idproduit = ? AND idPanier = ?";
 
         try(Connection conn2 = connect();
             PreparedStatement stmt2 = conn2.prepareStatement(SQL2)){
