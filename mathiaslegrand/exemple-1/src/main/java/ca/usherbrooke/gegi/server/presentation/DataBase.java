@@ -562,6 +562,7 @@ public class DataBase {
                 item.setPrixtotal(rs.getInt(8));
                 item.setId_commande(rs.getInt(1));
                 item.setId_etat_commade(rs.getInt(9));
+                item.setIdproduit(rs.getInt(10));
                 Produit p = productbuilder.construireProduitLogique(rs.getInt(10), rs.getString(11),0,0, rs.getInt(14));
                 p.setCouleur(rs.getString(13));
                 p.setTaille(rs.getString(12));

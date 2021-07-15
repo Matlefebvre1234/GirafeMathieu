@@ -30,8 +30,6 @@ async function fetchGetCommande() {
 
     $$("commandeTable").clearAll()
     Commande_data = [];
-
-    console.log("FEtchmat");
     console.log(data);
     for (let i = 0; i < data.length; i++) {
 
@@ -61,8 +59,7 @@ async function fetchGetCommande() {
             listeItem: currentListeItem
         });
     }
-    console.log("MAt :");
-    console.log(Commande_data);
+   // console.log(Commande_data);
     $$("commandeTable").parse(Commande_data);
     //console.log(Commande_data);
 }
@@ -129,6 +126,7 @@ const modifDataCommand = (id) =>{
     $$("dataviewCommand").clearAll();
     var record = $$("commandeTable").getItem(id);
     Command_datatable = record.listeItem;
+    console.log("truc a charle");
     console.log(Command_datatable);
     $$("dataviewCommand").parse(Command_datatable);
 
