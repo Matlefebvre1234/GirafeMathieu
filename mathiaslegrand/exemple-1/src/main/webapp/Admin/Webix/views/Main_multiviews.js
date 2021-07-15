@@ -127,7 +127,7 @@ var Commande = {
     "columns": [
         { "id": "id_commande","header":[{ text: "#" },{ content: "textFilter" }], "autowidth": true, "sort": "int" },
         { "id": "prix_total","header":[{ text: "PrixTotal" }],autowidth: true, sort: "int" },
-        { "id": "cipCommande", "header": "Cip", "sort": "string" },
+        { "id": "cip", "header": "Cip", "sort": "string" },
         { "id": "id_etat_commande", "header": "id_etat_commande", "sort": "int",width: 150 },
         { "id": "date", "header": "Date", "sort": "date",fillspace: true },
         { id:"trash", header:"", template:"{common.trashIcon()}"},

@@ -19,15 +19,28 @@
       font-size: 5em;
       font-style: normal;
     }
+
+    .titre2 .webix_el_box{
+      font-size: 30px;
+    }
+
     .carousel_image{
       display: block;
       margin-left: auto;
       margin-right: auto;
       border-style: solid;
       border-color: black;
-      width: 75%;
+      width: 50%;
       height: 100%;
     }
+    .image_article{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 60%;
+      height: 60%;
+    }
+
     ul {
       list-style-type: none;
       margin: 0;
@@ -83,12 +96,12 @@
 
 <ul>
   <lo><img src='Admin/Webix/ressource/UniSherbIcon.png' style='height:45px'></lo>
-  <li><a href="index.html">Accueil</a></li>
+  <li><a href="#accueil">Accueil</a></li>
   <li><a href="https://www.ageg.ca/">Nouvelles</a></li>
-  <li><a href="#collection">Collection</a></li>
+  <li><a class="active" href="#collection">Collection</a></li>
   <li><a href="#precommande">Precommande</a></li>
-  <li><a href="#panier">Panier</a></li>
-  <la><a href="#gestionAdmin">Gestion Admin</a></la>
+  <li><a href="panier.html">Panier</a></li>
+  <la><a id ="gestionAdmin" href="admin.html">Gestion Admin</a></la>
 
 </ul>
 

@@ -31,7 +31,8 @@ async function fetchGetCommande() {
     $$("commandeTable").clearAll()
     Commande_data = [];
 
-
+    console.log("FEtchmat");
+    console.log(data);
     for (let i = 0; i < data.length; i++) {
 
         let currentListeItem = [];
@@ -51,15 +52,16 @@ async function fetchGetCommande() {
 
         }
         Commande_data.push({
-            id_commande: data[i].id_commande,
-            prix_total: data[i].prix_total,
+            id_commande: data[i].idCommande,
+            prix_total: data[i].prixTotal,
             cip: data[i].cip,
-            id_etat_commande: data[i].id_etat_commande,
+            id_etat_commande: data[i].idEtatCommande,
             date: data[i].date,
             listeItem: currentListeItem
         });
-
     }
+    console.log("MAt :");
+    console.log(Commande_data);
     $$("commandeTable").parse(Commande_data);
 }
 async function fetchGetInventaire() {
@@ -83,4 +85,3 @@ async function fetchGetInventaire() {
     $$("inventaireTable").parse(Inventaire_data);
     console.log(Inventaire_data);
 }
-
