@@ -31,7 +31,8 @@ async function fetchGetCommande() {
     $$("commandeTable").clearAll()
     Commande_data = [];
 
-
+    console.log("FEtchmat");
+    console.log(data);
     for (let i = 0; i < data.length; i++) {
 
         let currentListeItem = [];
@@ -50,16 +51,20 @@ async function fetchGetCommande() {
             })
 
         }
+
         Commande_data.push({
-            id_commande: data[i].id_commande,
-            prix_total: data[i].prix_total,
+            id_commande: data[i].idCommande,
+            prix_total: data[i].prixTotal,
             cip: data[i].cip,
-            id_etat_commande: data[i].id_etat_commande,
+            id_etat_commande: data[i].idEtatCommande,
             date: data[i].date,
             listeItem: currentListeItem
         });
     }
+    console.log("MAt :");
+    console.log(Commande_data);
     $$("commandeTable").parse(Commande_data);
+    //console.log(Commande_data);
 }
 async function fetchGetInventaire() {
     let response = await fetch("http://localhost:8080/exemple-1/api/produit/inventaire")
@@ -78,7 +83,54 @@ async function fetchGetInventaire() {
         });
     }
 
-    console.log(Inventaire_data[1].nomitem,);
+
     $$("inventaireTable").parse(Inventaire_data);
-    console.log(Inventaire_data);
+    //console.log(Inventaire_data[1].nomitem,);
+    //console.log(Inventaire_data);
 }
+
+var Admin_data = [
+    {
+        cipAdmin : "test",
+        nomFamille : "test",
+        prenom : "test",
+        courriel : "test@courriel.com"
+    }
+]
+
+async function fetchGetAdmin() {
+    let response = await fetch("http://localhost:8080/exemple-1/api/produit/isAdmin")
+    let data = await response.json();
+/* Probleme avec la commande pour get les admin
+    - a regler si possible
+    -isAdmin est vraiment pas clair
+
+    console.log(data);
+
+    $$("adminTable").clearall();
+    Admin_data = [];
+    for(let i =0; i<data.length;i++)
+    {
+        Admin_data.push({
+            cip: data[i].cip,
+            nom: data[i].nom,
+            prenom: data[i].prenom,
+            courriel: data[i].courriel
+        })
+    }
+
+ */
+}
+
+var Command_datatable = [
+]
+
+const modifDataCommand = (id) =>{
+    $$("dataviewCommand").clearAll();
+    var record = $$("commandeTable").getItem(id);
+    Command_datatable = record.listeItem;
+    console.log(Command_datatable);
+    $$("dataviewCommand").parse(Command_datatable);
+
+    $$("window_command").show();
+};

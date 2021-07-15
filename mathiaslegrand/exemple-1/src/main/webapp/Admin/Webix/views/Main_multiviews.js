@@ -51,21 +51,28 @@ var retirerAdmin = {
     ]
 }
 
+var refresh_admin = {
+    cols: [
+        {view: "button", label: "Refresh admin", id: "refreshAdmin",type: "icon", icon:"wxi-sync", width: 200, align: "left", click: fetchGetAdmin}
+    ]
+}
+
 var datatableAdmin = {
     cols: [
-        {
-        "colums":[
-            { "id": "cipAdmin", "header": [{ text: "Cip" }, { content: "textFilter" }], autowidth: true, sort: "string" },
-            { "id": "Prenom", "header": [{ text: "Prenom" }, { content: "textFilter" }], "fillspace": true, sort: "string" },
-            { "id": "nomFamille", "header": [{ text: "NomFamille" }, { content: "textFilter" }], autowidth: true, sort: "string" },
-            { "id": "courriel", "header": [{ text: "courriel" }, { content: "textFilter" }], autowidth: true, sort: "string" }
-        ],
-            view: "datatable",
-            id: "adminTable",
-            scroll: false,
-            select:true
-        }
-    ]
+            {
+                "colums": [
+                    {"id": "cipAdmin", "header": [{text: "Cip"}, {content: "textFilter"}], autowidth: true},
+                    {"id": "Prenom", "header": [{text: "Prenom"}, {content: "textFilter"}], "fillspace": true},
+                    {"id": "nomFamille", "header": [{text: "NomFamille"}, {content: "textFilter"}], autowidth: true},
+                    {"id": "courriel", "header": [{text: "courriel"}, {content: "textFilter"}], autowidth: true}
+                ],
+                view: "datatable",
+                id: "adminTable",
+                data: Admin_data,
+                scroll: false,
+                select: true
+            }
+        ]
 }
 
 var Inventaire = {
@@ -76,7 +83,6 @@ var Inventaire = {
                 { "id": "idproduit", "header": [{ text: "#" }], autowidth:true, "sort": "int" },
                 { "id": "nomitem", "header": [{ text: "Nom" }, { content: "textFilter" }], "fillspace": true, sort: "string" },
                 { "id": "quantite", "header": [{ text: "Quantite" }], sort: "string", autowidth:true },
-              //  { "id": "ModifTime", "header": [{ text: "Temps" }], "sort": "string", autowidth:true },
                 { "id": "prix", "header": [{ text: "Prix Unitaire" }], "sort": "string", autowidth:true },
                 { id:"trash", header:"Supprimer", template:"{common.trashIcon()}"},
                { id:"", template:"<input class='viewbtn' type='button' value='View'>", css:"padding_less", width:100 },
@@ -127,11 +133,11 @@ var Commande = {
     "columns": [
         { "id": "id_commande","header":[{ text: "#" },{ content: "textFilter" }], "autowidth": true, "sort": "int" },
         { "id": "prix_total","header":[{ text: "PrixTotal" }],autowidth: true, sort: "int" },
-        { "id": "cipCommande", "header": "Cip", "sort": "string" },
+        { "id": "cip", "header": "Cip", "sort": "string" },
         { "id": "id_etat_commande", "header": "id_etat_commande", "sort": "int",width: 150 },
         { "id": "date", "header": "Date", "sort": "date",fillspace: true },
         { id:"trash", header:"", template:"{common.trashIcon()}"},
-        { id:"", template:"<input class='viewbtn2' type='button' value='View'>", css:"padding_less", width:100 }
+        { id:"", template:"<input class='viewbtn' type='button' value='View'>", css:"padding_less", width:100 }
     ],
     "view": "datatable",
     id: "commandeTable",
@@ -250,18 +256,19 @@ webix.ready(function() {
         left: 400, top: 150,
         body: {
             view: "form",elements:[
-                {"label": "Nom", "view": "text", name: "nom", id:"nomModif", "height": 38, value: "test"},
-                {"label": "Description", "view": "text", name: "description", id:"descriptionModif", "height": 38, value: "test"},
-                {"label": "Prix", "view": "text", name: "prix", id:"prixModif", "height": 38, value: "test"},
-                {"label": "Taille", "view": "text", name: "taille", id:"tailleModif", "height": 38, value: "test"},
-                {"label": "Couleur", "view": "text", name: "couleur", id:"couleurModif", "height": 38, value: "test"},
-                {"label": "Visibilité", "view": "text", name: "visibilite", id:"visibiliteModif", "height": 38, value: "test"},
-                {"label": "État", "view": "text", name: "etat", id:"etatModif", "height": 38, value: "test"},
+                {"label": "Nom", "view": "text",type: "text", name: "nom", id:"nomModif", "height": 38},
+                {"label": "Description", "view": "text", name: "description", id:"descriptionModif", "height": 38},
+                {"label": "Prix", "view": "text", name: "prix", id:"prixModif", "height": 38},
+                {"label": "Taille", "view": "text", name: "taille", id:"tailleModif", "height": 38},
+                {"label": "Couleur", "view": "text", name: "couleur", id:"couleurModif", "height": 38},
+                {"label": "Visibilité", "view": "text", name: "visibilite", id:"visibiliteModif", "height": 38},
+                {"label": "État", "view": "text", name: "etat", id:"etatModif", "height": 38},
                 {"label": "Quantite", "view": "text", name: "quantite", id:"quantiteModif", "height": 38},
                 {
                     "label": "Modifier article",
                     "view": "button",
                     "height": 38,
+                    id:"formModif",
                     click: function (id){
                         const xhr = new XMLHttpRequest();
                         xhr.open('POST', 'http://localhost:8080/exemple-1/api/produit/modifierProduit');
@@ -308,10 +315,17 @@ webix.ready(function() {
         },
         left: 400, top: 150,
         body: {
-            view: "datatable",
-            data: Commande_data,
-            autoheight: true,
-            autowidth:true
+            "columns": [
+                { "id": "idproduit", "header": [{ text: "#" }], autowidth:true, "sort": "int" },
+                { "id": "quantite", "header": [{ text: "Quantite" }], autowidth:true, sort: "int" },
+                { "id": "prixtotal", "header": [{ text: "Prix Total" }], sort: "int", autowidth:true }
+            ],
+                    view: "datatable",
+                    id: "dataviewCommand",
+                    data: Command_datatable,
+                    autoheight: true,
+                    autowidth:true,
+                    css: "webix_dark"
         }
     })
 });
@@ -339,8 +353,17 @@ const modifData = (id) =>{
     console.log(data);
     var datatexte = ('idProduit='+data)
     xhr.send(datatexte);
+
     xhr.onload = () =>{
         record =  JSON.parse(xhr.response);
         console.log(record);
     };
+    $$("nomModif").setValue(record.nomitem);
+    $$("descriptionModif").setValue(record.description);
+    $$("prixModif").setValue(record.prix);
+    $$("tailleModif").setValue(record.taille);
+    $$("couleurModif").setValue(record.couleur);
+
+    $$("window_modif").show();
 }
+

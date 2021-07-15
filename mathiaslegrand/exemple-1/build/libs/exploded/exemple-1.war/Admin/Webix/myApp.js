@@ -29,9 +29,10 @@ webix.ready(function() {
                             {
                             view: "multiview",
                                 cells: [
-                                    { id: "Inventaire", "rows": [ajouterAdmin,Inventaire_buttons,Inventaire] },
-                                    { id: "Precommande", "rows": [Precommande] },
-                                    { id: "Commande", "rows": [Commande] },
+                                    { id: "Admin", padding: 30,"rows": [ajouterAdmin, retirerAdmin, datatableAdmin] },
+                                    { id: "Inventaire", "rows": [Inventaire_buttons,Inventaire] },
+                                    { id: "Precommande", "rows": [Precommande_buttons, Precommande] },
+                                    { id: "Commande", "rows": [Commande_buttons,Commande] },
                                     { id: "Log", "rows": [log] }
                                 ]
                             }
@@ -41,7 +42,27 @@ webix.ready(function() {
         ]
 
     });
+    $$("inventaireTable").on_click.viewbtn=function(e, id, trg){
+        var value1= $$("inventaireTable").getItem(id);
+        var value = value1["idproduit"];
+        var queryString = "?" + value;
+        window.location.href = "pageArticles.html" + queryString;
+    };
+    $$("inventaireTable").on_click.modifbtn=function(e, id, trg){
+        var value1= $$("inventaireTable").getItem(id);
+        fetchGetInventaire();
+        modifData(id);
+        modifId(value1.idproduit);
+        $$("window_modif").show();
+    };
+    $$("commandeTable").on_click.viewbtn2=function(e, id, trg){
+        var value1 = $$("commandeTable").getItem(id);
+        fetchGetCommande();
+        console.log(Commande_data);
+        $$("window_command").show();
+    };
 });
+
 
 const sendHttpRequest = (method, url, data) => {
     const promise = new Promise((resolve, reject) => {
