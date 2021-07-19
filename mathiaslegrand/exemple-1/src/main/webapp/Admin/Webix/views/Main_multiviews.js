@@ -353,9 +353,8 @@ const modifData = (id) =>{
     console.log(data);
     var datatexte = ('idProduit='+data)
     xhr.send(datatexte);
-
     xhr.onload = () =>{
-        record =  JSON.parse(xhr.response);
+        record = JSON.parse(xhr.response);
         console.log(record);
     };
     $$("nomModif").setValue(record.nomitem);

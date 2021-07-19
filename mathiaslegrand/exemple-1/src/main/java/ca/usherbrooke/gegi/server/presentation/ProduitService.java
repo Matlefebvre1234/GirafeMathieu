@@ -77,7 +77,7 @@ public class ProduitService extends Application {
     @POST
     @Path("/getProduit")
     @Produces("application/json")
-    public Produit getProduit(@FormParam("cip") int idProduit)
+    public Produit getProduit(@FormParam("idProduit") int idProduit)
     {
         DataBase database = DataBase.getInstance();
         return database.getProduit(idProduit);
