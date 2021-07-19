@@ -38,7 +38,7 @@ var retirerAdmin = {
                         xhr.send(datatexte);
                         xhr.onload = () =>{
                             console.log(xhr.response);
-                            if(xhr.response == "true")
+                            if(xhr.response == "false")
                             {
                                 alert("Admin ajouté");
                             }
