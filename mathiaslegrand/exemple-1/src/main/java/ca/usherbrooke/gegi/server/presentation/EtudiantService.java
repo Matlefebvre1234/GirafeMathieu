@@ -174,15 +174,5 @@ public class EtudiantService {
         database.insertProduitDB( nom,description,taille,prix,couleur,visibilite, etat,url, quantite);
     }
 
-    /**Microservice
-     * Cette fonction permet de retirer un produit de la base de donnee par l'interface graphique =
-     * @param idproduit
-     */
-    @POST
-    @Path("remove_produit")
-    public void removeProduitDB(@FormParam("idproduit") int idproduit) {
-        DataBase dataBase = DataBase.getInstance();
-        dataBase.removeProduitDB(idproduit);
 
-    }
 }

@@ -99,5 +99,16 @@ public class ProduitService extends Application {
         DataBase database = DataBase.getInstance();
         return database.getTailleProduit(idProduit);
     }
-    
+
+    /**Microservice
+     * Cette fonction permet de retirer un produit de la base de donnee par l'interface graphique =
+     * @param idproduit
+     */
+    @POST
+    @Path("remove_produit")
+    public void removeProduitDB(@FormParam("idproduit") int idproduit) {
+        DataBase dataBase = DataBase.getInstance();
+        dataBase.removeProduitDB(idproduit);
+
+    }
 }

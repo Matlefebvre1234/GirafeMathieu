@@ -30,22 +30,7 @@ var retirerAdmin = {
                 {"view": "text", "placeholder": "Type here...", "label": "Cip", name: "cip", id:"cipRetirer", "labelWidth": 100, width: 400},
                 {"label": "Retirer Admin", "view": "button", "height": 38, width: 200, align: "right",
                     click: function (){
-                        const xhr = new XMLHttpRequest();
-                        xhr.open('POST', 'http://localhost:8080/exemple-1/api/remove_admin');
-                        var data = {cip:$$("cipRetirer").getValue()}
-                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-                        var datatexte = ('cip='+data.cip)
-                        xhr.send(datatexte);
-                        xhr.onload = () =>{
-                            console.log(xhr.response);
-                            if(xhr.response == "true")
-                            {
-                                alert("Admin ajouté");
-                            }
-                            else {
-                                alert(" erreur de connetion");
-                            }
-                        };
+                        sameCip($$("cipRetirer").getValue());
                     }
                 }
     ]
@@ -94,15 +79,26 @@ var Inventaire = {
             scroll: false,
             select:true,
             onClick:{
+
                 "wxi-trash":function(event, id, node){
+                    window.confirm({
+                        title: "Supprimer acticle",
+                        text: "desoler, la fonctionnalite n'est pas finaliser pour le moment"
+                    })
+                    /*
                     var record = $$("inventaireTable").getItem(id);
                     console.log(record.idproduit);
                     const xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'http://localhost:8080/exemple-1/api/remove_produit');
+                    xhr.open('POST', 'http://localhost:8080/exemple-1/api/produit/remove_produit');
                     var data = record.idproduit;
                     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
                     var datatexte = ('idproduit='+data)
                     xhr.send(datatexte);
+
+                    xhr.onload= () =>{
+                        console.log(xhr.response);
+                    }
+                     */
                 }
             }
         }
@@ -144,14 +140,18 @@ var Commande = {
     data: Commande_data,
     onClick:{
         "wxi-trash":function(event, id, node){
-            var record = $$("commandeTable").getItem(id);
-            console.log(record.id_commande);
-            const xhr = new XMLHttpRequest();
+            window.confirm({
+                    title: "Supprimer acticle",
+                    text: "desoler, la fonctionnalite n'est pas finaliser pour le moment"
+                })
+            //var record = $$("commandeTable").getItem(id);
+            //console.log(record.id_commande);
+            //const xhr = new XMLHttpRequest();
             //xhr.open('POST', 'http://localhost:8080/exemple-1/api/????);
-            var data = record.id_commande;
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-            var datatexte = ('idproduit='+data)
-            xhr.send(datatexte);
+            //var data = record.id_commande;
+            //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            //var datatexte = ('idproduit='+data)
+            //xhr.send(datatexte);
         }
     }
 }
@@ -210,24 +210,36 @@ webix.ready(function() {
                     "view": "button",
                     "height": 38,
                     click: function (){
+                        webix.confirm({
+                            title: "Ajouter article",
+                            text: "Voulez-vous vraiment ajouter cette article"
+                        })
+                            .then(function(){
+                                const xhr = new XMLHttpRequest();
+                                xhr.open('POST', 'http://localhost:8080/exemple-1/api/insert_produit');
+                                var data = {nom:$$("nom").getValue(),
+                                    description:$$("description").getValue(),
+                                    prix:$$("prix").getValue(),
+                                    taille:$$("taille").getValue(),
+                                    couleur:$$("couleur").getValue(),
+                                    visibilite:$$("visibilite").getValue(),
+                                    etat:$$("etat").getValue(),
+                                    url:$$("url").getValue(),
+                                    quantite:$$("quantite").getValue()}
+                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                                var datatexte = ('nom='+data.nom + '&description='+data.description + '&prix='+data.prix + '&taille='+data.taille + '&couleur='+data.couleur + '&visibilite='+data.visibilite + '&etat='+data.etat+ '&url='+data.url + '&quantite='+data.quantite);
+                                xhr.send(datatexte);
+                                xhr.onload = () =>{
+                                    console.log(xhr.response);
+                                };
+                                webix.message("Vous avez bien modifier l'article")
+                                $$('window_form').hide();
+                            })
+                            .fail(function(){
+                                webix.message("Vous avez annuler l'ajout de l'article")
+                                $$('window_form').hide();
+                            })
 
-                        const xhr = new XMLHttpRequest();
-                        xhr.open('POST', 'http://localhost:8080/exemple-1/api/insert_produit');
-                        var data = {nom:$$("nom").getValue(),
-                            description:$$("description").getValue(),
-                            prix:$$("prix").getValue(),
-                            taille:$$("taille").getValue(),
-                            couleur:$$("couleur").getValue(),
-                            visibilite:$$("visibilite").getValue(),
-                            etat:$$("etat").getValue(),
-                            url:$$("url").getValue(),
-                            quantite:$$("quantite").getValue()}
-                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-                        var datatexte = ('nom='+data.nom + '&description='+data.description + '&prix='+data.prix + '&taille='+data.taille + '&couleur='+data.couleur + '&visibilite='+data.visibilite + '&etat='+data.etat+ '&url='+data.url + '&quantite='+data.quantite);
-                        xhr.send(datatexte);
-                        xhr.onload = () =>{
-                            console.log(xhr.response);
-                        };
 
                     }
                 }
@@ -270,26 +282,38 @@ webix.ready(function() {
                     "height": 38,
                     id:"formModif",
                     click: function (id){
-                        const xhr = new XMLHttpRequest();
-                        xhr.open('POST', 'http://localhost:8080/exemple-1/api/produit/modifierProduit');
-                        var data = {
-                            idproduit:$$("id"),
-                            nom:$$("nomModif").getValue(),
-                            description:$$("descriptionModif").getValue(),
-                            prix:$$("prixModif").getValue(),
-                            taille:$$("tailleModif").getValue(),
-                            couleur:$$("couleurModif").getValue(),
-                            visibilite:$$("visibiliteModif").getValue(),
-                            etat:$$("etatModif").getValue(),
-                            quantite:$$("quantiteModif").getValue()}
-                        console.log(data);
-                        data.idproduit = getId();
-                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-                        var datatexte = ('id='+data.idproduit + '&nom='+data.nom + '&description='+data.description + '&prix='+data.prix + '&taille='+data.taille + '&couleur='+data.couleur + '&visibilite='+data.visibilite + '&etat='+data.etat + '&quantite='+data.quantite);
-                        xhr.send(datatexte);
-                        xhr.onload = () =>{
-                            console.log(xhr.response);
-                        };
+                        webix.confirm({
+                          title:"Modifier Article",
+                          test:"Voulez-vous vraiment modifier cette article ?",
+                        })
+                            .then(function(result){
+                                const xhr = new XMLHttpRequest();
+                                xhr.open('POST', 'http://localhost:8080/exemple-1/api/produit/modifierProduit');
+                                var data = {
+                                    idproduit:$$("id"),
+                                    nom:$$("nomModif").getValue(),
+                                    description:$$("descriptionModif").getValue(),
+                                    prix:$$("prixModif").getValue(),
+                                    taille:$$("tailleModif").getValue(),
+                                    couleur:$$("couleurModif").getValue(),
+                                    visibilite:$$("visibiliteModif").getValue(),
+                                    etat:$$("etatModif").getValue(),
+                                    quantite:$$("quantiteModif").getValue()}
+                                console.log(data);
+                                data.idproduit = getId();
+                                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+                                var datatexte = ('id='+data.idproduit + '&nom='+data.nom + '&description='+data.description + '&prix='+data.prix + '&taille='+data.taille + '&couleur='+data.couleur + '&visibilite='+data.visibilite + '&etat='+data.etat + '&quantite='+data.quantite);
+                                xhr.send(datatexte);
+                                xhr.onload = () =>{
+                                    console.log(xhr.response);
+                                };
+                                $$('window_modif').hide();
+                        })
+                            .fail(function(){
+                                webix.message("Vous avez annuler la modification de l'article");
+                                $$('window_modif').hide();
+                            });
+
                     }
                 }
             ],
@@ -366,3 +390,21 @@ const modifData = (id) =>{
     $$("window_modif").show();
 }
 
+async function sameCip(cip){
+    let response = await fetch("http://localhost:8080/exemple-1/api/getUtilisateur")
+    let dataCip = await response.json();
+    if(cip == dataCip.cip){
+        alert("vous ne pouvez pas vous retirer !")
+    }else {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:8080/exemple-1/api/remove_admin');
+        var data = {cip: $$("cipRetirer").getValue()}
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+        var datatexte = ('cip=' + data.cip)
+        xhr.send(datatexte);
+        xhr.onload = () => {
+            console.log(xhr.response);
+            alert("L'admin a ete retirer")
+        };
+    }
+}
