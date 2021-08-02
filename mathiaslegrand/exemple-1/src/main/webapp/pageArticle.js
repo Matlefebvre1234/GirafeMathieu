@@ -17,9 +17,9 @@ webix.ready( function () {
     var temporaire;
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8080/exemple-1/api/produit/getProduit');
-    var data = {cip: queryString}
+    var data = {idProduit: queryString}
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    var datatexte = ('cip=' + data.cip)
+    var datatexte = ('idProduit=' + data.idProduit)
     xhr.send(datatexte);
     xhr.onload =  () => {
         intermediaire =  xhr.response;
@@ -218,7 +218,6 @@ webix.ready( function () {
                                                 }
                                             }
                                         },
-
                                         {
                                             view:"button",
                                             id:"boutonPanier",
@@ -297,7 +296,7 @@ const sendHttpRequest  = (method, url, data) =>{
     xhr.send(JSON.stringify(data));
 };
 
-function sendData(cipVal, url){
+function sendData(cipval, url){
     sendHttpRequest('POST', url, {
         cip: cipVal
     }).then(responseData => {

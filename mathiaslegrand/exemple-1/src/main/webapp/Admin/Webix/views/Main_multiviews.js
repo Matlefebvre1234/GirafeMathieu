@@ -241,6 +241,7 @@ webix.ready(function() {
                             })
 
 
+
                     }
                 }
             ],
@@ -375,7 +376,7 @@ const modifData = (id) =>{
     var data = value1.idproduit;
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     console.log(data);
-    var datatexte = ('idProduit='+data)
+    var datatexte = ('idProduit='+data);
     xhr.send(datatexte);
     xhr.onload = () =>{
         record = JSON.parse(xhr.response);
